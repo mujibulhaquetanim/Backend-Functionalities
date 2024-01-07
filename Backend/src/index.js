@@ -2,7 +2,7 @@ import express from "express";
 //const fetch= require(src/api/fetch)
 const app = express();
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000; //process.env.PORT not working directly
 
 app.get('/', (req,res)=>{
     res.send('Server is Ready')
