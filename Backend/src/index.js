@@ -1,8 +1,11 @@
 import express from "express";
+import dotenv from "dotenv"
 //const fetch= require(src/api/fetch)
 const app = express();
-
-const port = process.env.PORT || 8000; //process.env.PORT not working directly
+dotenv.config({
+    path: './env'
+})
+const port = process.env.PORT;
 
 app.get('/', (req,res)=>{
     res.send('Server is Ready')
