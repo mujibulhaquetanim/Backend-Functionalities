@@ -1,0 +1,28 @@
+{
+  "name": "movies_api",
+  "version": "1.0.0",
+  "description": "public api for movies",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mujibulhaquetanim/Backend-Functionalities.git"
+  },
+  "keywords": [
+    "backend",
+    "api"
+  ],
+  "author": "Mujibai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mujibulhaquetanim/Backend-Functionalities/issues"
+  },
+  "homepage": "https://github.com/mujibulhaquetanim/Backend-Functionalities#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
+  }
+}
