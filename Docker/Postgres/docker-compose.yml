@@ -4,17 +4,16 @@ services:
     image: postgres
     restart: always
     ports:
-    - "5432:5432"
-  volumes:
-    - ./pgdata:/var/lib/postgresql/data
-  environment:
-   - POSTGRES_DB=MujibAI
-   - POSTGRES_USER=postgres
-   - POSTGRES_PASSWORD=mujibai
+      - "5432:5432"
+    volumes:
+      - Database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=MujibAI
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mujibai
 
   adminer:
     image: adminer
     restart: always
     ports:
       - "8080:8080"
-    
