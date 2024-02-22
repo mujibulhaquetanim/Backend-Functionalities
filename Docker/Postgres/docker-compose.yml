@@ -8,8 +8,8 @@ services:
     volumes:
       - Database:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=MujibAI
-      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=mujibai
       - POSTGRES_PASSWORD=mujibai
 
   adminer:
@@ -17,3 +17,7 @@ services:
     restart: always
     ports:
       - "8080:8080"
+
+volumes:
+  Database:
+    driver: local
