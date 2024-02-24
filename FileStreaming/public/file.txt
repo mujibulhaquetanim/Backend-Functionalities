@@ -1,0 +1,31 @@
+Video summary [00:00:00][^1^][1] - [00:09:10][^2^][2]:
+
+Part 1 of the video talks about the concept and use of streams in Node.js. It explains how streams can help with memory efficiency and performance when reading and writing large files. It also shows an example of how to create a read stream and pipe it to the response object.
+
+**Highlights**:
++ [00:00:05][^3^][3] **The problem of reading large files without streams**
+    * Memory consumption spikes up and server can crash
+    * Example of reading a 400 MB text file and sending it to the browser
++ [00:05:50][^4^][4] **The solution of using streams to read and write files**
+    * Streams are like pipelines that transfer data in chunks
+    * Example of creating a read stream and piping it to the response
+    * Memory consumption stays constant and server does not crash
+
+Video summary [00:09:34][^1^][1] - [00:15:22][^2^][2]:
+
+Part 2 of the video talks about how to use streams in Node.js to optimize memory usage and performance. It covers the concepts of readable, writable, and duplex streams, and how to use the built-in zlib module to compress a file using streams.
+
+**Highlights**:
++ [00:09:34][^3^][3] **The problem of loading large files into memory**
+    * Explains the transfer-encoding: chunked header
+    * Shows the memory consumption of reading, zipping, and writing a file
+    * Suggests using streams to avoid loading the whole file at once
++ [00:12:25][^4^][4] **The solution of using streams in Node.js**
+    * Imports the fs and zlib modules
+    * Creates a readable stream to read the sample.txt file
+    * Pipes the output to a zlib stream to compress it
+    * Pipes the output to a writable stream to write the sample.zip file
++ [00:14:29][^5^][5] **The benefits of using streams in Node.js**
+    * Demonstrates the reduced memory usage and faster execution time
+    * Recommends reading the official documentation on streams
+    * Concludes the video by summarizing the main points
