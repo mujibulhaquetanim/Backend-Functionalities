@@ -10,7 +10,7 @@ const PORT = 8000;
 app.use(status());
 
 app.get('/', (_, res) => {
-    res.send("try '/normal' for normal data read\ntry '/stream' for stream read");
+    res.send(`try '/normal' for normal data read\ntry '/stream' for stream read ${process.pid}`);
 });
 app.get('/normal', normalRead);
 app.get('/stream', stream);
