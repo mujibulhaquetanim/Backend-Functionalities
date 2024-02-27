@@ -153,3 +153,7 @@ The rest of the video shows how to implement the cluster module in Node.js and h
     * Adds a listener for the exit event of the workers
     * Runs the server and refreshes the browser
     * Observes the different process ids and load balancing
+
+#below text is coming from append:
+Today's Date is: 27
+Today's Date is: 27

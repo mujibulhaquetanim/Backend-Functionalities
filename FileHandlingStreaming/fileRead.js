@@ -17,5 +17,7 @@ const gzip = ((_, res) => {
     fs.createReadStream("./public/file.txt").pipe(zlib.createGzip().pipe(fs.createWriteStream("./public/file.zip")));
     res.end("gzip completed with the name of 'file.zip'");
 })
+ 
+
 
 module.exports = { normalRead, stream, gzip };
