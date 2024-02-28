@@ -14,5 +14,9 @@ fs.stat("./public/file.txt", (error, stats) => {
     }
 });
 
+//synchronous filesystem call:
+const readFileInSync= fs.readFileSync("./public/sample.txt", "utf8")
+console.log('Synchronous file read: '+readFileInSync);
+
 fs.appendFileSync("./public/file.txt", `Today's Date is: ${new Date().getDate().toLocaleString()}\n`);
 
