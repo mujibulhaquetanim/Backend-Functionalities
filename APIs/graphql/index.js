@@ -22,6 +22,7 @@ async function startServer() {
             id: ID!
             title: String!
             completed: Boolean!
+            user: User
         }
         type Query{
             getTodos: [Todo],
@@ -29,6 +30,11 @@ async function startServer() {
             getUserId(id: ID!): User
         }`,
         resolvers: {
+            Todo: {
+                user: async (todo)=> (await fetch(`https://jsonplaceholder.typicode.com/users/${todo.id}`)
+                .then(response => response.json())
+                .then(json => json))
+            },
             Query: {
                 getTodos: async () => (
                     await fetch('https://jsonplaceholder.typicode.com/todos')
