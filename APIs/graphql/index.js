@@ -31,7 +31,7 @@ async function startServer() {
         }`,
         resolvers: {
             Todo: {
-                user: async (todo)=> (await fetch(`https://jsonplaceholder.typicode.com/users/${todo.id}`)
+                user: async (todo)=> (await fetch(`https://jsonplaceholder.typicode.com/users/${todo.userId}`)
                 .then(response => response.json())
                 .then(json => json))
             },
@@ -60,7 +60,7 @@ async function startServer() {
 
     app.use("/graphql", expressMiddleware(server));
 
-    app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`http://localhost:${PORT}/graphql`));
 
 }
 
