@@ -1,6 +1,5 @@
-import Router from "express";
-
-const router = Router();
+import Express from "express";
+const router = Express.Router();
 
 router.route('/').get((req, res) => {
     res.status(200).send('Welcome to the User Authentication Project');
@@ -14,5 +13,4 @@ router.route('/login').get((req, res) => {
     res.status(200).send('Welcome to the User Login page');
 });
 
-module.exports = router;
-
+export default router;
