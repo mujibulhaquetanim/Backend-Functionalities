@@ -3,6 +3,7 @@ import authRouter from "./server/router/auth-Router.js";
 
 const app = Express();
 
+app.use(Express.json());
 app.use("/api/auth", authRouter);
 
 app.get('/',(req,res)=>{

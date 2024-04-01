@@ -4,8 +4,8 @@ const router = Express.Router();
 
 router.route('/').get(home);
 
-router.route('/register').get(register);;
+router.route('/register').post(register);;
 
-router.route('/login').get(login);
+router.route('/login').post(login);
 
 export default router;
