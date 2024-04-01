@@ -1,16 +1,11 @@
 import Express from "express";
+import {home, login, register} from "../controllers/auth-controllers.js";
 const router = Express.Router();
 
-router.route('/').get((req, res) => {
-    res.status(200).send('Welcome to the User Authentication Project');
-});
+router.route('/').get(home);
 
-router.route('/register').get((req, res) => {
-    res.status(200).send('Welcome to the User Registration page');
-});
+router.route('/register').get(register);;
 
-router.route('/login').get((req, res) => {
-    res.status(200).send('Welcome to the User Login page');
-});
+router.route('/login').get(login);
 
 export default router;
