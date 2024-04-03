@@ -14,7 +14,7 @@ const register = async (req, res) => {
 
         const userExist = await User.findOne({ email });
         if (userExist) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: `${username} already exits` });
         }
 
         await User.create({ username, email, password, phone });
