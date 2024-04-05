@@ -1,4 +1,5 @@
 import { User } from "../models/userSchema.model.js";
+import bcrypt from "bcrypt"
 
 const home = async (req, res) => {
     try {
@@ -9,12 +10,12 @@ const home = async (req, res) => {
 };
 
 const register = async (req, res) => {
-    
+
     try {
         const { username, email, password, phone } = req.body;
 
         const userExist = await User.findOne({ email });
-
+        
         if (userExist) {
             return res.status(400).json({ message: `${username} already exits` });
         }
@@ -33,9 +34,30 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        res.status(200).json({ message: 'Welcome to the User Login page' + req.body });
+
+        const { email, password } = req.body;
+
+        const userExist = await User.findOne({ email });
+        // console.log(userExist);
+
+        if (!userExist) {
+            return res.status(400).json({ message: "Invalid Credentials" });
+        }
+        const user = await bcrypt.compare(password, userExist.password);
+        // console.log(user);
+
+        if (user) {
+            res.status(200).json({
+                message: `logged in successfully`,
+                token: await userExist.generateToken(),
+                id: userExist._id.toString()
+            });
+        } else {
+            res.status(400).json({ message: "Invalid username or password" });
+        }
+
     } catch (error) {
-        res.status(400).json({ message: 'Page not found: ' + error.message });
+        res.status(400).json("Internal Server Error");
     }
 };
 
