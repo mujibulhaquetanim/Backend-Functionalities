@@ -1,5 +1,4 @@
 import { User } from "../models/userSchema.model.js";
-import bcrypt from "bcrypt"
 
 const home = async (req, res) => {
     try {
@@ -15,7 +14,7 @@ const register = async (req, res) => {
         const { username, email, password, phone } = req.body;
 
         const userExist = await User.findOne({ email });
-        
+
         if (userExist) {
             return res.status(400).json({ message: `${username} already exits` });
         }
@@ -43,8 +42,7 @@ const login = async (req, res) => {
         if (!userExist) {
             return res.status(400).json({ message: "Invalid Credentials" });
         }
-        const user = await bcrypt.compare(password, userExist.password);
-        // console.log(user);
+        const user = await userExist.comparePassword(password);
 
         if (user) {
             res.status(200).json({
