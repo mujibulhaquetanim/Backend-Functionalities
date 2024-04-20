@@ -3,7 +3,9 @@ import { DB_NAME } from "./databaseName.js";
 
 const connectDB = async (req, res) => {
     try {
-        await mongoose.connect(`${process.env.MONGO_URI}/${DB_NAME}`);
+        await mongoose.connect(process.env.MONGO_LOCAL, {
+            dbName: DB_NAME
+        });
         console.log("Connected to Database");
     } catch (error) {
         console.error("Error connecting to the database: ", error);
@@ -11,4 +13,4 @@ const connectDB = async (req, res) => {
     }
 }
 
-export { connectDB};
+export { connectDB };
