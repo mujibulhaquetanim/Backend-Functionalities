@@ -7,8 +7,8 @@ app.use(cors());
 
 const PORT = 8000;
 
-app.get('/', (req, res) =>{
-    res.send('Server is Ready')
+app.get('/api', (req, res) =>{
+    res.json({success: true});
 })
 
 app.listen(PORT,()=>{
