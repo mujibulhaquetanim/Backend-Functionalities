@@ -14,6 +14,18 @@
     ></script>
   </head>
   <body>
-    <p>{{name}}</p>
+    <p class='text-center text-bold fs-1 fw-bold'>{{name}}</p>
+    <table class="table table-bordered">
+      <tr>
+        <th>Cat Name:</th>
+        <th>Cat Category:</th>
+      </tr>
+      {% for cat in cats %}
+      <tr>
+        <td>{{cat.name}}</td>
+        <td>{{cat.category}}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>

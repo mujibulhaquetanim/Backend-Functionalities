@@ -5,6 +5,12 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
+cats = [
+  { "name": 'Tom', "category": 'domestic' },
+  { "name": 'Whiskers', "category": 'wild' },
+];
+
+
 @app.get('/')
 async def name(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request, "name":"Jinja2Project from Backend"})
+    return templates.TemplateResponse("home.html", {"request": request, "name":"Jinja2Project from Backend", "cats":cats})
