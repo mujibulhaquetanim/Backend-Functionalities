@@ -1,7 +1,7 @@
 const express = require('express');
-const { normalRead, stream, gzip} = require('./api/fileRead');
+const { normalRead, stream, gzip} = require('./api/stream/fileRead');
 const status = require("express-status-monitor");
-const childProcess = require('./api/childProcess');
+const childProcess = require('./api/child_process/childProcess');
 
 const app = express();
 const PORT = 8000;
