@@ -5,8 +5,14 @@ const PORT = 8000;
 
 app.set("view engine", "ejs");
 
+let languages = ["c", "js", "py", "go"];
+
 app.get('/', (req, res) => {
-    res.render("index", {});
+    res.render("index", { pageTitle: "Home Page", progLang: languages });
+});
+
+app.get('/contact', (req, res) => {
+    res.render("contact", { pageTitle: "Contact Page" });
 });
 
 app.listen(PORT, () => {
