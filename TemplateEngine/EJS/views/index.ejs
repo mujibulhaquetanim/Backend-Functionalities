@@ -15,13 +15,18 @@
       </nav>
     </header>
     <main>
+
       <h1>Home Page</h1>
+      <form action="/" method="post">
+        <input type="text" placeholder="Enter a Programming language name" name="progLang">
+        <button type="submit">Add it</button>
+      </form>
+
       <ul>
         <%if(progLang.length>0){%>
-        <li><%=progLang[0]%></li>
-        <li><%=progLang[1]%></li>
-        <li><%=progLang[2]%></li>
-        <li><%=progLang[3]%></li>
+          <%for(let i=0;i<progLang.length;i++){%>
+        <li><%=progLang[i]%></li>
+        <%}%>
         <%}else{%>
         <p>No Data available</p>
         <%}%>

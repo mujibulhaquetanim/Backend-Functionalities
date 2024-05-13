@@ -8,7 +8,10 @@ app.set("view engine", "ejs");
 let languages = ["c", "js", "py", "go"];
 
 app.get('/', (req, res) => {
-    res.render("index", { pageTitle: "Home Page", progLang: languages });
+    res.status("index", { pageTitle: "Home Page", progLang: languages });
+});
+app.post('/', (req, res) => {
+    res.status(201).send("new lang created");
 });
 
 app.get('/contact', (req, res) => {
