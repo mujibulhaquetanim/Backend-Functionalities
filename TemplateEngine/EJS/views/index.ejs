@@ -17,10 +17,14 @@
     <main>
       <h1>Home Page</h1>
       <ul>
+        <%if(progLang.length>0){%>
         <li><%=progLang[0]%></li>
         <li><%=progLang[1]%></li>
         <li><%=progLang[2]%></li>
         <li><%=progLang[3]%></li>
+        <%}else{%>
+        <p>No Data available</p>
+        <%}%>
       </ul>
     </main>
     <footer>
