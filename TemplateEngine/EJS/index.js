@@ -9,14 +9,14 @@ app.set("view engine", "ejs");
 let languages = ["c", "js", "py", "go"];
 
 app.get('/', (req, res) => {
-    res.status("index", { pageTitle: "Home Page", progLang: languages });
+    res.render("index", { pageTitle: "Home Page", progLang: languages });
 });
 app.post('/', (req, res) => {
     const progLang = req.body.progLang;
     console.log(progLang);
 
     languages.push(progLang);
-    
+
     res.redirect("/")
 });
 
