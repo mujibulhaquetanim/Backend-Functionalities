@@ -1,0 +1,77 @@
+/* Centering text and headers */
+.center, .header {
+    text-align: center;
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Increase letter spacing */
+  }
+  
+  /* Styling the unordered list */
+  .ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px; /* Add space below the list */
+  }
+  
+  /* Styling list items */
+  .li {
+    margin: 0;
+    padding: 10px 0; /* Add vertical padding */
+    border-bottom: 1px solid #ccc; /* Add bottom border */
+  }
+  
+  /* Main content styling */
+  .main {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333; /* Set text color */
+    max-width: 800px; /* Limit maximum width */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding */
+    background-color: #f8f8f8; /* Add background color */
+    border-radius: 5px; /* Add border radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  }
+  
+  /* Root element (optional) */
+  .root {
+    font-family: Arial, sans-serif; /* Set font family */
+  }
+  
+  /* Styling links */
+  a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Adding box-sizing for better layout */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Styling buttons */
+  button {
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smooth effect */
+  }
+  
+  button:hover {
+    background-color: #005fa3;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    /* Styles for smaller screens */
+    .main {
+      font-size: 14px;
+      padding: 10px; /* Reduce padding on smaller screens */
+    }
+  }

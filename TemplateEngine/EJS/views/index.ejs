@@ -1,5 +1,5 @@
 <%-include("layouts/header")%>
-    <main>
+    <main class="main">
 
       <h1>Home Page</h1>
       <form action="/" method="post">
@@ -7,13 +7,13 @@
         <button type="submit">Add it</button>
       </form>
 
-      <ul>
+      <ul class="ul">
         <%if(progLang.length>0){%>
           <%for(let i=0;i<progLang.length;i++){%>
-        <li><%=progLang[i]%></li>
+        <li class="li"><%=progLang[i]%></li>
         <%}%>
         <%}else{%>
-        <p>No Data available</p>
+        <p class="p">No Data available</p>
         <%}%>
       </ul>
     </main>
