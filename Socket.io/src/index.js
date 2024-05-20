@@ -1,9 +1,15 @@
 import http from 'http';
 import express from 'express';
 import path from 'path';
+import {Server} from 'socket.io';
 
 const app = express();
 const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket)=>{
+    console.log('new user has connected',socket.id);
+})
 
 app.use(express.static(path.resolve("./public")));
 
