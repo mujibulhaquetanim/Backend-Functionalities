@@ -16,9 +16,11 @@
         const sendBtn= document.getElementById('send');
         const messageInput= document.getElementById('message');
 
+        socket.on('message', (msg)=>console.log(msg));
+
         sendBtn.addEventListener('click', (e)=>{
             const msg = messageInput.value;
-            console.log(msg);
+            socket.emit("usr-msg", msg);
         })
     </script>
 </body>
