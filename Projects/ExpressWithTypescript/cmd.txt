@@ -1,0 +1,5 @@
+pnpm i -D typescript
+npx tsc --init //to generate tsconfig file.
+npx tsc --build
+pnpm i -D ts-node
+pnpm i -D @types/express
