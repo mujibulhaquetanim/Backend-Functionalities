@@ -1,8 +1,11 @@
     import express from 'express';
+    import usersRouters from './routes/users';
 
     const app = express();
 
-    app.get('/', (req, res)=>{
+    app.use('/api/users',usersRouters);
+
+    app.get('/', (_, res)=>{
         res.send("Welcome to TS-Express App");
     })
 
