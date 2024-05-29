@@ -1,16 +1,17 @@
 {
-  "name": "books",
+  "name": "Proxy",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.2"
