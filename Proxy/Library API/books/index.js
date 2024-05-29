@@ -6,6 +6,10 @@ app.get('/',(_,res)=>{
     res.send('Response from Books');
 })
 
+app.get('/fiction',(_,res)=>{
+    res.send('Response from Fiction');
+})
+
 app.listen(3001,()=>{
     console.log('listening on http://127.0.0.1:3001');
 })
