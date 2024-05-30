@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bullmq": "^5.7.9",
-    "ioredis": "^5.4.1"
+    "bullmq": "^5.7.14"
   }
 }
