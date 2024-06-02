@@ -1,4 +1,4 @@
-## the difference between `const fs = require('node:fs')` and `const fs = require('node:fs').promises`.
+# The difference between `const fs = require('node:fs')` and `const fs = require('node:fs').promises`.
 
 1. **`require('node:fs')`**:
     - When you use `require('node:fs')`, you are importing the Node.js built-in `fs` module.
@@ -12,7 +12,7 @@
     - Instead of using callbacks, you can use `async/await` syntax to work with promises.
     - For example, `fs.promises.readFile()` and `fs.promises.writeFile()` return promises that resolve with the result of the operation.
 
-3. **When to Use Each**:
+ ## When to Use Each:
     - Most of the time, you can use only the `fs.promises` interface and do:
       ```javascript
       const fsp = require('fs').promises;
@@ -24,9 +24,9 @@
       ```
     - Keep in mind that `fs.promises` is not a complete replacement for `fs`. It's an alternate (promise-based) interface for some (but not all) of the methods in the `fs` module¹.
 
->In summary, if you prefer working with promises and `async/await`, use `fs.promises`. Otherwise, stick with the regular `fs` module. Both have their use cases, and you can choose based on your coding style and requirements. 😊
+>In summary, if you prefer working with promises and `async/await`, use `fs.promises`. Otherwise, stick with the regular `fs` module as it uses callbacks.
 
-### Certainly! Let's look at code examples for both `const fs = require('node:fs')` and `const fs = require('node:fs').promises`.
+## Code examples for both `const fs = require('node:fs')` and `const fs = require('node:fs').promises`:
 
 1. **Using `require('node:fs')` (Callback Style)**:
    ```javascript
@@ -60,5 +60,3 @@
    ```
    
    >In the second example, we use `async/await` to work with promises returned by `fs.promises.readFile()`. This approach can make your code cleaner and easier to reason about.
-
-Remember that you can choose the style that best fits your coding preferences and requirements. Both methods achieve the same goal, but one uses callbacks while the other uses promises. 😊
