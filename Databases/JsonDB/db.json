@@ -1,1 +1,32 @@
-[{"id":5,"title":"The Lord of the Rings","author":"J. R. R. Tolkien","year":1954}]
+[
+  {
+    "id": 1,
+    "title": "The Lord of the Rings",
+    "author": "J. R. R. Tolkien",
+    "year": 1954
+  },
+  {
+    "id": 2,
+    "title": "The Return of the King",
+    "author": "J. R. R. Tolkien",
+    "year": 1955
+  },
+  {
+    "id": 3,
+    "title": "The Two Towers",
+    "author": "J. R. R. Tolkien",
+    "year": 1954
+  },
+  {
+    "id": 4,
+    "title": "The Fellowship of the Ring",
+    "author": "J. R. R. Tolkien",
+    "year": 1954
+  },
+  {
+    "id": 5,
+    "title": "The Hobbit",
+    "author": "J. R. R. Tolkien",
+    "year": 1937
+  }
+]
