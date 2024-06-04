@@ -18,6 +18,14 @@ app.get('/getcookie', (req, res) => {
     res.send(req.cookies);
 });
 
+app.get('/cookievalidator', (req, res) => {
+    if (req.cookies.name === 'mujibai' && req.cookies.name==='mujibai') {
+        return res.send(req.headers.cookie);
+    } else {
+        return res.send('cookie is not valid');
+    }
+});
+
 app.listen(3000, () => {
     console.log('server at http://127.0.0.1:3000');
 });
