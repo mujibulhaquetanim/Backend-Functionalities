@@ -1,8 +1,10 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.get('/', (_, res) => {
@@ -11,10 +13,11 @@ app.get('/', (_, res) => {
 });
 
 app.get('/getcookie', (req, res) => {
-    console.log(req.headers.cookie);
-    res.send(req.headers.cookie);
+    console.log('without using cookie parser: ', req.headers.cookie);
+    console.log(req.cookies);
+    res.send(req.cookies);
 });
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log('server at http://127.0.0.1:3000');
 });
