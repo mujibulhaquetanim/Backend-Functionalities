@@ -1,4 +1,4 @@
-import express from express;
+import express from 'express';
 import session from 'express-session';
 import router from './routes/routes.mjs';
 
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to session server');
 })
 
-app.get('/session', router);
+app.use('/session', router);
 
 app.listen(3000, () => {
     console.log('listening on http://127.0.0.1:3000');
