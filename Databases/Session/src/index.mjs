@@ -1,8 +1,14 @@
 import express from express;
+import session from 'express-session';
 import router from './routes/routes.mjs';
 
 const app = express();
 
+app.use(session({
+    secret: 'meow meow',
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
