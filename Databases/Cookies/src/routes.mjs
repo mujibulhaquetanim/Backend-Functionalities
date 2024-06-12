@@ -10,13 +10,15 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/setcookie').get((_, res) => {
-    res.cookie('name', 'mujibai', { maxAge: 900000, httpOnly: true });
+    res.cookie('name', 'mujibai', { maxAge: 900000, signed: true, httpOnly: true });
     res.status(201).send('cookie set');
 });
 
 router.route('/getcookie').get((req, res) => {
     console.log('without using cookie parser: ', req.headers.cookie);
     console.log(req.cookies);
+    console.log('with using cookie parser: ', req.signedCookies);
+    console.log('with using cookie parser, fetching key: ', req.signedCookies.name);
     res.send(req.cookies);
 });
 
@@ -38,8 +40,8 @@ export default router;
 // Show 9 more frames
 // Show less
 
-//         [NEW] Explain Console errors by using Copilot in Edge: click 
-//          to explain an error. 
+//         [NEW] Explain Console errors by using Copilot in Edge: click
+//          to explain an error.
 //         Learn more
 //         Don't show again
 // quillbot-content.js:795  [Deprecation] -ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2020/09/17/styling-for-windows-high-contrast-with-new-standards-for-forced-colors/ for tips on updating to the new Forced Colors Mode standard.
