@@ -2,11 +2,15 @@ import {createLogger,transports,format} from 'winston';
 
 export const logger = createLogger({
     transports:[
-        new transports.Console({
+        // new transports.Console({
+        //     level: 'info',
+        //     format: format.combine(format.timestamp(),format.simple())
+        // }),
+        new transports.File({
+            filename: 'server-infos.log',
             level: 'info',
-            // format: format.combine(format.timestamp(),format.json())
-            format: format.combine(format.timestamp(),format.simple())
-        }), 
+            format: format.combine(format.timestamp(),format.json())
+        })
     ]
 })
 
