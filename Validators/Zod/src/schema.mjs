@@ -6,4 +6,7 @@ const UserSchema = z.object({
     password: z.string().min(6),
 });
 
-export default UserSchema;
+User.parse({ username: "Ludwig" });
+
+type User = z.infer<typeof User>;
+console.log(User);
