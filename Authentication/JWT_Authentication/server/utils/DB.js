@@ -3,7 +3,7 @@ import { DB_NAME } from "./databaseName.js";
 
 const connectDB = async (req, res) => {
     try {
-        await mongoose.connect(process.env.MONGO_LOCAL, {
+        await mongoose.connect(process.env.MONGO_URI, {
             dbName: DB_NAME
         });
         console.log("Connected to Database");
