@@ -1,12 +1,11 @@
 {
-  "name": "passport_js",
+  "name": "passport-auth",
   "version": "1.0.0",
-  "description": "",
+  "description": "A basic Express server setup using TypeScript, Passport, express-session and Cookie-Parser",
   "main": "dist/index.js",
-  "type":"module",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon dist/index.js",
+    "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "keywords": [],
@@ -16,7 +15,6 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "nodemon": "^3.1.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   },
@@ -24,7 +22,9 @@
     "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.10",
-    "ts-node": "^10.9.2",
+    "@types/passport": "^1.0.16",
+    "@types/passport-local": "^1.0.38",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.3"
   }
 }
