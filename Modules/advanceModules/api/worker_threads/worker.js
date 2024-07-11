@@ -1,8 +1,8 @@
-const parentPort = require('worker_threads').parentPort;
+const { parentPort } = require("worker_threads");
 
-result = 0;
-for(let i = 0; i < 1000000; i++) {
-    result += i;
+let result = 0;
+for (let i = 0; i < 10000000000; i++) {
+    result++;
 }
 
 parentPort.postMessage(result);

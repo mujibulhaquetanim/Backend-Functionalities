@@ -1,7 +1,7 @@
-const Worker = require('worker_threads');
+const { Worker } = require('worker_threads');
 
-function worker(_,res) {
-    const worker = new Worker("worker.js")
+function worker (_, res) {
+    const worker = new Worker("./api/worker_threads/worker.js");
     worker.on('message', (result) => {
         res.send(`result from Worker thread is: ${result}`);
     })
@@ -10,4 +10,5 @@ function worker(_,res) {
     })
 
 }
-exports = { worker }
+
+module.exports = { worker }
