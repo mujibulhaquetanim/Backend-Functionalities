@@ -1,4 +1,4 @@
-class CrudRedis {
+export class CrudRedis {
 
     constructor(connection) {
         this.client = connection
