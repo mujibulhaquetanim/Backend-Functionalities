@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import redisConnection from '../db/redisConnect.mjs';
+import { redisService } from '../services/redisServices.mjs';
 import { CrudRedis } from '../controller/crud_Controller.mjs';
 
 const redis = new CrudRedis(redisConnection);
