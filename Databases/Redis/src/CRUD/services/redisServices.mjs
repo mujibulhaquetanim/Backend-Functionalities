@@ -88,4 +88,76 @@ export class redisService {
             throw new Error(`failed to expire key ${key} with error ${error}`)
         }
     }
+
+    //set multiple key value
+    async setMultipleKeyValue(keyValueObject) {
+        try {
+            await this.client.mset(keyValueObject)
+        } catch (error) {
+            throw new Error(`failed to set multiple key value with error ${error}`)
+        }
+    }
+
+    //get multiple key value
+    async getMultipleKeyValue(keyArray) {
+        try {
+            return await this.client.mget(keyArray)
+        } catch (error) {
+            throw new Error(`failed to get multiple key value with error ${error}`)
+        }
+    }
+
+    //delete multiple key value
+    async deleteMultipleKeyValue(keyArray) {
+        try {
+            await this.client.del(keyArray)
+        } catch (error) {
+            throw new Error(`failed to delete multiple key value with error ${error}`)
+        }
+    }
+
+    //delete all keys
+    async deleteAllKeys() {
+        try {
+            await this.client.flushdb()
+        } catch (error) {
+            throw new Error(`failed to delete all keys with error ${error}`)
+        }
+    }
+
+    //get all keys
+    async getAllKeys() {
+        try {
+            return await this.client.keys('*')
+        } catch (error) {
+            throw new Error(`failed to get all keys with error ${error}`)
+        }
+    }
+
+    //get all values
+    async getAllValues() {
+        try {
+            return await this.client.keys('*')
+        } catch (error) {
+            throw new Error(`failed to get all values with error ${error}`)
+        }
+    }
+
+    //get all keys and values
+    async getAllKeysAndValues() {
+        try {
+            return await this.client.keys('*')
+        } catch (error) {
+            throw new Error(`failed to get all keys and values with error ${error}`)
+        }
+    }
+
+    //close redis connection
+    async closeRedisConnection() {
+        try {
+            await this.client.quit()
+        } catch (error) {
+            throw new Error(`failed to close redis connection ${error}`)
+        }
+    }
 }
