@@ -1,4 +1,4 @@
-import { redisService } from "../services/redisServices.mjs"
+import { RedisService } from "../services/redisServices.mjs"
 
 export class CrudController {
 
