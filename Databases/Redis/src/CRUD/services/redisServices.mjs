@@ -1,4 +1,4 @@
-export class redisService {
+export class RedisService {
     constructor(client) {
         this.client = client
     }
@@ -27,15 +27,6 @@ export class redisService {
             return await this.client.configGet()
         } catch (error) {
             throw new Error(`failed to get redis server config ${error}`)
-        }
-    }
-
-    //set redis server config
-    async setRedisServerConfig() {
-        try {
-            return await this.client.configSet()
-        } catch (error) {
-            throw new Error(`failed to set redis server config ${error}`)
         }
     }
 
