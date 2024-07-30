@@ -24,39 +24,39 @@ router.route('/config').get(() => redisController.getRedisServerConfig(req, res)
 
 //CRUD operations:
 //set key value
-router.route('/set').post(() => CrudController.setKeyValue(req, res));
+router.route('/set').post(() => redisController.setKeyValue(req, res));
 
 //get key value
-router.route('/get').get(() => CrudController.getKeyValue(req, res));
+router.route('/get').get(() => redisController.getKeyValue(req, res));
 
 //delete key value
-router.route('/delete').delete(() => CrudController.deleteKeyValue(req, res));
+router.route('/delete').delete(() => redisController.deleteKeyValue(req, res));
 
 //update key value
-router.route('/update').put(() => CrudController.updateKeyValue(req, res));
+router.route('/update').put(() => redisController.updateKeyValue(req, res));
 
 //expire key value
-router.route('/expire').post(() => CrudController.expireKeyValue(req, res));
+router.route('/expire').post(() => redisController.expireKeyValue(req, res));
 
 //set multiple key value
-router.route('/setMultiple').post(() => CrudController.setMultipleKeyValue(req, res));
+router.route('/setMultiple').post(() => redisController.setMultipleKeyValue(req, res));
 
 //get multiple key value
-router.route('/getMultiple').get(() => CrudController.getMultipleKeyValue(req, res));
+router.route('/getMultiple').get(() => redisController.getMultipleKeyValue(req, res));
 
 //delete multiple key value
-router.route('/deleteMultiple').delete(() => CrudController.deleteMultipleKeyValue(req, res));
+router.route('/deleteMultiple').delete(() => redisController.deleteMultipleKeyValue(req, res));
 
 //delete all keys
-router.route('/deleteAll').delete(() => CrudController.deleteAllKeys(req, res));
+router.route('/deleteAll').delete(() => redisController.deleteAllKeys(req, res));
 
 //get all keys
-router.route('/getAll').get(() => CrudController.getAllKeys(req, res));
+router.route('/getAll').get(() => redisController.getAllKeys(req, res));
 
 //get all values
-router.route('/getAllValues').get(() => CrudController.getAllValues(req, res));
+router.route('/getAllValues').get(() => redisController.getAllValues(req, res));
 
 //get all keys and values
-router.route('/getAllKeysAndValues').get(() => CrudController.getAllKeysAndValues(req, res));
+router.route('/getAllKeysAndValues').get(() => redisController.getAllKeysAndValues(req, res));
 
 export default router;
