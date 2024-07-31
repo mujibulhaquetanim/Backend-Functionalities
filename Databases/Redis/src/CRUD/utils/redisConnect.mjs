@@ -2,7 +2,8 @@ import dotenv from 'dotenv';
 import { Redis } from 'ioredis';
 
 dotenv.config(
-    { path: './src/CRUD/.env' }
+    // { path: './src/CRUD/.env' }
+    {debug: true} //added for debugging
 );
 
 const RedisConnection = new Redis({
