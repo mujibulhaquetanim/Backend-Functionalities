@@ -1,11 +1,10 @@
 {
-  "name": "Swagger",
+  "name": "swaggerYml",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "swagger": "node ./swagger.js",
-    "start": "nodemon app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -13,10 +12,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.3",
-    "swagger-autogen": "^2.23.7"
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   }
 }
