@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS bookDB;
+
+CREATE TABLE IF NOT EXISTS books (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    Author: Firstname Lastname(100) NOT NULL,
+    year VARCHAR(4) NOT NULL
+)
