@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 //return all the books
 async function getBooks(req, res) {
     try {
@@ -8,14 +10,14 @@ async function getBooks(req, res) {
 }
 
 //get a book by id
-async function getBookId(req,res) {
+async function getBookId(req, res) {
     try {
         const { id } = req.params;
-        res.status(200).json({"msg":`book with id:${id} is available`});
+        res.status(200).json({ "msg": `book with id:${id} is available` });
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
 
     }
 }
 
-module.exports = { getBooks,getBookId };
+export { getBooks, getBookId }

@@ -19,4 +19,4 @@ async function putBooks(req,res){
     }
 }
 
-module.exports={deleteBooks, putBooks};
+export {deleteBooks,putBooks}

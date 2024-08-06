@@ -8,4 +8,4 @@ async function createCollection(req, res) {
     }
 }
 
-module.exports = { createCollection };
+export { createCollection }
