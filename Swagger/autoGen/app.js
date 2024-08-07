@@ -1,6 +1,6 @@
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-output.json');
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger-output.json';
 
 const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
