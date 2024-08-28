@@ -29,7 +29,7 @@ app.get('/', (_, res: Response) => {
 });
 
 app.post('/api/auth',passport.authenticate('local'), (req, res) => {
-    
+    res.sendStatus(200);
 })
 
 app.listen(3000, () => {

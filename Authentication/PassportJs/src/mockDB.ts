@@ -1,4 +1,12 @@
-export const MockData = [
+interface User{
+    id: number,
+    name: string,
+    email: string,
+    password: string,
+    isAdmin: boolean
+}
+
+export const MockData: User[] = [
     {
         id:1,
         name: "admin",
