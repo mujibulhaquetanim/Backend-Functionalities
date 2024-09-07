@@ -26,7 +26,8 @@ passport.deserializeUser((id, done) => {
 
 export default passport.use(
   new Strategy(
-    { usernameField: "email", passwordField: "password" },
+    // { usernameField: "emailField", passwordField: "password" },
+    //without usernameField and passwordField, use username and password in the body instead of email and password. but if you want to give a different name for username and password, use the values of usernameField and passwordField. i.e. emailField and passwordField.
     (email: string, password: string, done) => {
       try {
         const findUser = MockData.find((user) => user.email === email);
