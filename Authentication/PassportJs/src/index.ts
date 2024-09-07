@@ -32,6 +32,14 @@ app.post('/api/auth',passport.authenticate('local'), (req, res) => {
     res.sendStatus(200);
 })
 
+app.get("/api/auth/status" ,(request, response)=> {
+    if(!request.user) {
+        return response.sendStatus(401);
+    }
+    
+    return response.json(request.user);
+})
+
 app.listen(3000, () => {
     console.log('listening on http://127.0.0.1:3000');
 });
