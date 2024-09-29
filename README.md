@@ -1,7 +1,7 @@
 # Full-Stack Development Repository
 
 Welcome to my All-in-One repository for Backend Functionalities! This repository serves as a collection of templates, projects, and utilities that I continuously work on, covering various aspects of web development, APIs, databases, DevOps, and more. Below is a breakdown of the key topics and subtopics within this repository.
-=> **Plese give a Star if you find it helpful** 🙂
+> **Plese give a Star if you find it helpful** 🙂
 
 ## Table of Contents
 
@@ -102,7 +102,7 @@ Setups for monitoring system performance, health checks, and alerts using tools 
 
 ## Payment Gateways
 
-Integrating payment systems (such as Stripe, PayPal) with secure and compliant practices.
+Integrating payment systems (such as Stripe, PayPal, local payment system) with secure and compliant practices.
 
 ## Projects
 
@@ -133,7 +133,7 @@ API documentation using Swagger for automatically generating interactive API doc
 
 Usage of server-side template engines for rendering dynamic HTML pages.
 
-### Subtopics
+#### Subtopics
 
 - **[EJS](#ejs)**: Embedded JavaScript template engine for rendering HTML on the server-side.
 - **[Jinja](#jinja)**: A Python-based template engine, integrated into the server-side with tools like Flask and Django.
@@ -159,19 +159,21 @@ To get started with the repository:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/mujibulhaquetanim/Backend-Functionalities.git```
-2. Run a Specific Project or Template, go to the directory:
+   git clone https://github.com/mujibulhaquetanim/Backend-Functionalities.git
+2. To run a Specific Project or Template, go to the directory:
 
     ```bash
-    cd project-name```
+    cd project-name
 3. Install Dependencies:
 
     ```bash
-    pnpm install```
+    pnpm install
 4. Run the project:
 
-    ```bash
-    pnpm run dev```
+   ```bash
+    pnpm run dev
+
+>Although most of the project script use `dev` or `start`, if that doesn't work, go to the package.json file of that project and see the script for running the project.
 
 ---
 
@@ -184,4 +186,4 @@ Feel free to contribute by submitting a pull request or opening an issue. Please
 This repository is licensed under the MIT License.
 
 ---
-Happy coding! If you have any questions or suggestions, feel free to reach out.
+>Happy coding! If you have any questions or suggestions, feel free to reach out.
