@@ -1,6 +1,6 @@
 import Express from 'express';
-import authRouter from "./server/router/auth-Router.js";
-import { connectDB } from './server/utils/DB.js';
+import authRouter from "./router/auth-Router.js";
+import { connectDB } from './utils/DB.js';
 import dotenv from "dotenv";
 
 dotenv.config({

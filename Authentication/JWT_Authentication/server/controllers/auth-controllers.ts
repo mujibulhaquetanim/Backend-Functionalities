@@ -1,14 +1,15 @@
-import { User } from "../models/userSchema.model.js";
+import { Request, Response } from "express";
+import { User } from "../models/userSchema.model.ts";
 
-const home = async (req, res) => {
+const home = async (req: Request, res: Response) => {
     try {
         res.status(200).json({ message: 'Welcome to the User Auth page' });
     } catch (error) {
-        res.status(400).json({ message: 'Page not found: ' + error.message });
+        res.status(400).json({ message: 'Page not found: ' + error?.message });
     }
 };
 
-const register = async (req, res) => {
+const register = async (req: Request, res: Response) => {
 
     try {
         const { username, email, password, phone } = req.body;
@@ -27,11 +28,11 @@ const register = async (req, res) => {
             id: userCreated._id.toString()
         });
     } catch (error) {
-        res.status(400).json({ message: 'Page not found: ' + error.message });
+        res.status(400).json({ message: 'Page not found: ' + error?.message });
     }
 };
 
-const login = async (req, res) => {
+const login = async (req:Request, res:Response) => {
     try {
 
         const { email, password } = req.body;
