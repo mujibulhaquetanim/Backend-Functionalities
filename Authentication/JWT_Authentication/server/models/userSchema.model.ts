@@ -33,7 +33,7 @@ userSchema.pre("save", async function (next) {
 
     try {
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(user.password, salt);
+        const hashedPassword = await bcrypt.hash(user.password!, salt);
 
         user.password = hashedPassword;
     } catch (error) {
@@ -41,7 +41,7 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-userSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password: string) {
     // console.log(this);
     return bcrypt.compare(password, this.password)
 };
@@ -53,7 +53,7 @@ userSchema.methods.generateToken = async function () {
             email: this.email,
             isAdmin: this.isAdmin
         },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET!,
             {
                 expiresIn: "30d"
             })

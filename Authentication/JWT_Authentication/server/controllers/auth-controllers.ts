@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "../models/userSchema.model.ts";
+import { User } from "../models/userSchema.model";
 
 const home = async (req: Request, res: Response) => {
     try {
