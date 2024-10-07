@@ -1,63 +1,67 @@
 import { Request, Response } from "express";
 import { User } from "../models/userSchema.model";
+import { UserDocument } from "../models/userSchema.model";
+import { Types } from "mongoose";
 
-const home = async (req: Request, res: Response) => {
+// Define the home controller
+//Promise<void> is used to indicate that the function will return a Promise that resolves to void (there is no value to return)
+const home = async (req: Request, res: Response): Promise<void> => {
     try {
         res.status(200).json({ message: 'Welcome to the User Auth page' });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: 'Page not found: ' + error?.message });
     }
 };
 
-const register = async (req: Request, res: Response) => {
-
+const register = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { username, email, password, phone } = req.body;
+        const { userName, email, password, phone } = req.body;
 
-        const userExist = await User.findOne({ email });
+        const userExist = await User.findOne({ email }) as UserDocument;
 
         if (userExist) {
-            return res.status(400).json({ message: `${username} already exits` });
+            res.status(400).json({ message: `${userName} already exists` });
+            return;
         }
 
-        const userCreated = await User.create({ username, email, password, phone });
+        const userCreated = await User.create({ userName, email, password, phone }) as UserDocument;
 
         res.status(200).json({
-            message: `new user name: ${username} created successfully`,
+            message: `new user name: ${userName} created successfully`,
             token: await userCreated.generateToken(),
-            id: userCreated._id.toString()
+            id: (userCreated._id as Types.ObjectId).toString(),  // Cast to ObjectId
         });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: 'Page not found: ' + error?.message });
     }
 };
 
-const login = async (req:Request, res:Response) => {
+const login = async (req: Request, res: Response): Promise<void> => {
     try {
-
         const { email, password } = req.body;
 
-        const userExist = await User.findOne({ email });
-        // console.log(userExist);
+        const userExist = await User.findOne({ email }) as UserDocument;
 
         if (!userExist) {
-            return res.status(400).json({ message: "Invalid Credentials" });
+            res.status(400).json({ message: "Invalid Credentials" });
+            return;
         }
-        const user = await userExist.comparePassword(password);
 
-        if (user) {
+        const isPasswordValid = await userExist.comparePassword(password);
+
+        if (isPasswordValid) {
             res.status(200).json({
-                message: `logged in successfully`,
+                message: `Logged in successfully`,
                 token: await userExist.generateToken(),
-                id: userExist._id.toString()
+                id: (userExist._id as Types.ObjectId).toString(),  // Cast to ObjectId
             });
         } else {
             res.status(400).json({ message: "Invalid username or password" });
         }
-
-    } catch (error) {
-        res.status(400).json("Internal Server Error");
+    } catch (error: any) {
+        res.status(500).json("Internal Server Error");
     }
 };
 
-export { home, register, login }
+
+export { home, register, login };
