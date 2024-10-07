@@ -1,65 +1,92 @@
-import mongoose from "mongoose";
+// userSchema.model.ts
+import mongoose, { Document, Model, Types } from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
-const userSchema = new mongoose.Schema({
+// Define the UserDocument interface and export it
+// Document is a type that represents a single document in MongoDB (like a table) which contains the fields defined in the schema and the methods defined in the model like find, findOne, etc. so that we can use it in the controller and it is a intersection of Document and user interface
+export interface UserDocument extends Document {
+    _id: Types.ObjectId; //returns an object id by mongoose when it creates a new document
+    userName: string;
+    email: string;
+    password: string;
+    phone: string;
+    isAdmin: boolean;
+    comparePassword(password: string): Promise<boolean>;
+    generateToken(): Promise<string>;
+}
+
+// Define the schema
+const userSchema = new mongoose.Schema<UserDocument>({
     userName: {
         type: String,
-        require: true
+        required: true,
     },
     email: {
         type: String,
-        require: true
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
-        require: true
+        required: true,
     },
     phone: {
         type: String,
-        require: true
+        required: true,
     },
     isAdmin: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
+// Hash the password before saving the user
 userSchema.pre("save", async function (next) {
-    // console.log("pre method", this)
+    const user = this as UserDocument;
 
-    const user = this;
-    if (!user.isModified("password")) { next(); };
+    if (!user.isModified("password")) {
+        return next();
+    }
 
     try {
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(user.password!, salt);
-
-        user.password = hashedPassword;
-    } catch (error) {
-        next(error);
+        user.password = await bcrypt.hash(user.password, salt);
+        next();
+    } catch (error: unknown) { // Explicitly typing the error
+        next(error as Error); // Cast to Error type
     }
-})
+});
 
-userSchema.methods.comparePassword = async function (password: string) {
-    // console.log(this);
-    return bcrypt.compare(password, this.password)
+// Method to compare passwords
+// comparePassword is a method that compares the provided password with the hashed password stored in the database
+// it returns a Promise<boolean> that resolves to true if the passwords match and false otherwise
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
+    const user = this as UserDocument;
+    return bcrypt.compare(password, user.password);
 };
 
-userSchema.methods.generateToken = async function () {
-    try {
-        return jwt.sign({
-            userId: this._id.toString(),
-            email: this.email,
-            isAdmin: this.isAdmin
+// Method to generate JWT token
+// generateToken is a method that generates a JWT token for the user with the userId, email, and isAdmin properties of the user document itself and returns a Promise<string> that resolves to the token
+userSchema.methods.generateToken = async function (): Promise<string> {
+    const user = this as UserDocument;
+    if (!process.env.JWT_SECRET) {
+        throw new Error("JWT_SECRET is not defined in environment variables");
+    }
+
+    return jwt.sign(
+        {
+            //toString() is used to convert the _id property of the user document to a string which is an object that needs to be converted to a string in order to be included in the token
+            userId: user._id.toString(),
+            email: user.email,
+            isAdmin: user.isAdmin,
         },
-            process.env.JWT_SECRET!,
-            {
-                expiresIn: "30d"
-            })
-    } catch (error) {
-        console.error(error);
-    }
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "30d",
+        }
+    );
 };
 
-export const User = new mongoose.model("User", userSchema);
+// Define the User model and export it
+export const User: Model<UserDocument> = mongoose.model<UserDocument>("User", userSchema);
