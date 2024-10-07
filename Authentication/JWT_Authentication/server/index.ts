@@ -12,7 +12,7 @@ const app = Express();
 app.use(Express.json());
 app.use("/api/auth", authRouter);
 
-app.get('/', (_, res) => {
+app.get('/', (_, res: Express.Response) => {
     res.send("api server is alive");
 })
 connectDB().then(() => {

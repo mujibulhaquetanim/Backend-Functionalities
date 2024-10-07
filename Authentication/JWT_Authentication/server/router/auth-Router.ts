@@ -1,5 +1,5 @@
 import Express from "express";
-import {home, login, register} from "../controllers/auth-controllers.js";
+import {home, login, register} from "../controllers/auth-controllers";
 const router = Express.Router();
 
 router.route('/').get(home);
