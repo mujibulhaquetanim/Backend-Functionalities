@@ -9,7 +9,7 @@ const RegisterSchema = z.object({
     }).trim().email({
         message: 'Invalid email'
     }),
-    username: z.string({
+    userName: z.string({
         required_error: 'Username is required'
     }).trim().min(3, 'Username must be at least 3 characters'),
     password: z.string({
