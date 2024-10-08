@@ -15,7 +15,8 @@ const home = async (req: Request, res: Response): Promise<void> => {
 
 const register = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { userName, email, password, phone } = req.body;
+        const { name, email, userName, password, phone } = req.body;
+        console.log(req.body)
 
         const userExist = await User.findOne({ email }) as UserDocument;
 
@@ -24,7 +25,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        const userCreated = await User.create({ userName, email, password, phone }) as UserDocument;
+        const userCreated = await User.create({ name, email, userName, password, phone }) as UserDocument;
 
         res.status(200).json({
             message: `new user name: ${userName} created successfully`,

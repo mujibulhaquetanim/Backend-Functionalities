@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 // Document is a type that represents a single document in MongoDB (like a table) which contains the fields defined in the schema and the methods defined in the model like find, findOne, etc. so that we can use it in the controller and it is a intersection of Document and user interface
 export interface UserDocument extends Document {
     _id: Types.ObjectId; //returns an object id by mongoose when it creates a new document
+    name: string;
     userName: string;
     email: string;
     password: string;
@@ -18,6 +19,10 @@ export interface UserDocument extends Document {
 
 // Define the schema
 const userSchema = new mongoose.Schema<UserDocument>({
+    name: {
+        type: String,
+        required: true,
+    },
     userName: {
         type: String,
         required: true,
