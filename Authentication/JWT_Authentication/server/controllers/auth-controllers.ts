@@ -49,11 +49,12 @@ const login = async (req: Request, res: Response): Promise<void> => {
         }
 
         const isPasswordValid = await userExist.comparePassword(password);
+        const token = await userExist.generateToken();
 
         if (isPasswordValid) {
-            res.status(200).json({
+            res.status(200).cookie("token", token, { httpOnly: true, secure: true }).json({
                 message: `Logged in successfully`,
-                token: await userExist.generateToken(),
+                token: token,
                 id: (userExist._id as Types.ObjectId).toString(),  // Cast to ObjectId
             });
         } else {
@@ -63,6 +64,5 @@ const login = async (req: Request, res: Response): Promise<void> => {
         res.status(500).json("Internal Server Error");
     }
 };
-
 
 export { home, register, login };
