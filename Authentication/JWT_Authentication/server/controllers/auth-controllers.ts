@@ -65,4 +65,12 @@ const login = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export { home, register, login };
+const logout = async (req: Request, res: Response): Promise<void> => {
+    try {
+        res.status(200).clearCookie("token").json({ message: "Logged out successfully" });
+    } catch (error: any) {
+        res.status(500).json("Internal Server Error");
+    }
+}
+
+export { home, register, login, logout };

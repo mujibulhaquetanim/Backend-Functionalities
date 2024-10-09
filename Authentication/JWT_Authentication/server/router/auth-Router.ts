@@ -1,5 +1,5 @@
 import Express from "express";
-import { home, login, register } from "../controllers/auth-controllers";
+import { home, login, logout, register } from "../controllers/auth-controllers";
 import validate from "../middlewares/validate-middleware";
 import { RegisterSchema, LoginSchema } from "../Validators/auth-validators";
 
@@ -12,5 +12,7 @@ router.route('/register').post(validate(RegisterSchema), register);
 
 // Add validation middleware for login
 router.route('/login').post(validate(LoginSchema), login); 
+
+router.route('/logout').get(logout);
 
 export default router;
