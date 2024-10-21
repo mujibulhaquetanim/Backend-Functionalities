@@ -18,5 +18,14 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false,
     "strict": true
+  },
+  "watchOptions": {
+    //use dynamic priority polling instead of system's native events for file changes
+    "watchFile": "dynamicPriorityPolling",
+    "watchDirectory": "dynamicPriorityPolling",
+    "excludeDirectories": [
+      "**/node_modules",
+      "dist"
+    ],
   }
 }
