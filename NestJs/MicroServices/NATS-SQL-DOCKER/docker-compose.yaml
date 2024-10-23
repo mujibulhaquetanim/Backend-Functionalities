@@ -22,3 +22,13 @@ services:
     image: nats
     ports:
       - 4222:4222
+  mysql:
+    image: mysql
+    ports:
+      - "3307:3307"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_42069
+      - MYSQL_DATABASE=micro_db
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testuser_42069
+      - MYSQL_TCP_PORT=3307
