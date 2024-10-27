@@ -6,7 +6,14 @@ const app = express();
 const t = initTRPC.create();
 
 const AppRouter = t.router({
-    hello: t.procedure.query(()=> "hello from trpc server")
+    hello: t.procedure.query(()=> "hello from trpc server"),
+    logToServer: t.procedure.input((v)=>{
+        if(typeof v === "string") return v;
+        throw new Error("invalid input");
+    }).mutation(req=>{
+        console.log('User Said: '+ req.input);
+        return true
+    })
 })
 
 app.use('/trpc', createExpressMiddleware({router: AppRouter}))
