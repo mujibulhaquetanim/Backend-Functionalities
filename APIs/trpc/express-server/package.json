@@ -13,8 +13,12 @@
     "@trpc/server": "^10.45.2",
     "@types/express": "^5.0.0",
     "@types/node": "^22.8.1",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17"
   }
 }
