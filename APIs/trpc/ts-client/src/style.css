@@ -41,6 +41,13 @@ h1 span{
   color: darkgreen;
 }
 
+#hello {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  font-weight: bold;
+  color: #646cff;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
