@@ -24,6 +24,8 @@ async function main(){
         }
     });
     
+    const result3 = await client.users.getUser.query();
+    console.log(result3);
 
 }
 

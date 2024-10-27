@@ -1,4 +1,5 @@
 import {t} from "../../trpc";
+import { UserRouter } from "./users";
 
 export const AppRouter = t.router({
     hello: t.procedure.query(()=> "hello from trpc server"),
@@ -8,5 +9,6 @@ export const AppRouter = t.router({
     }).mutation(req=>{
         console.log(req.input);
         return req.input
-    })
+    }),
+    users: UserRouter,
 })
