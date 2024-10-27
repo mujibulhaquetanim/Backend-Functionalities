@@ -13,8 +13,8 @@ const AppRouter = t.router({
         if(typeof v === "string") return v;
         throw new Error("invalid input");
     }).mutation(req=>{
-        console.log('User Said: '+ req.input);
-        return true
+        console.log(req.input);
+        return req.input
     })
 })
 
