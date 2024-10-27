@@ -24,7 +24,9 @@ async function main(){
         }
     });
     
-    const result3 = await client.users.getUser.query();
+    // const result3 = await client.users.getUser.query();
+    //without nested queries
+    const result3 = await client.getUser.query();
     console.log(result3);
 
 }

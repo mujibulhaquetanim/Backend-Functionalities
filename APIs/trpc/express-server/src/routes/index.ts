@@ -12,3 +12,5 @@ export const AppRouter = t.router({
     }),
     users: UserRouter,
 })
+
+export const mergedRouters = t.mergeRouters(AppRouter, UserRouter)
