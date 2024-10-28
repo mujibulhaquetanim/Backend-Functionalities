@@ -24,10 +24,12 @@ async function main(){
         }
     });
     
-    // const result3 = await client.users.getUser.query();
+    const result3 = await client.users.get.query({userId: '143'});
+    const result4 = await client.users.updateUser.mutate({userId: '143', name: 'Shraddha kapoor'});
     //without nested queries
-    const result3 = await client.getUser.query();
+    // const result3 = await client.getUser.query();
     console.log(result3);
+    console.log(result4);
 
 }
 
