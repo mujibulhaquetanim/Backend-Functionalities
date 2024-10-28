@@ -1,8 +1,11 @@
-import {createTRPCProxyClient, httpBatchLink} from '@trpc/client';
+import {createTRPCProxyClient, httpBatchLink, loggerLink} from '@trpc/client';
 import {AppRouter} from '../../express-server/src/index';
 
 const client = createTRPCProxyClient<AppRouter>({
-    links: [httpBatchLink({
+    links: [
+        loggerLink(), // loggerLink() will log all queries and mutations, it has to be above the url link otherwise it won't work as url is the end of the chain.
+        // httpLink()
+        httpBatchLink({
         url: 'http://localhost:3000/trpc',
     })]
 })
