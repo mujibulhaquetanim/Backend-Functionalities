@@ -1,7 +1,9 @@
 # Full-Stack Development Repository
 
 Welcome to my All-in-One repository for Backend Functionalities! This repository serves as a collection of templates, projects, and utilities that I continuously work on, covering various aspects of web development, APIs, databases, DevOps, and more. Below is a breakdown of the key topics and subtopics within this repository.
-> **Plese give a Star if you find it helpful** 🙂
+> **If you find this helpful, please consider giving it a star** 🙂
+
+- If you're solely interested in Golang or Python-based Backend, consider exploring the following: [GoLang](https://github.com/mujibulhaquetanim/GoLang.git) , [Python](https://github.com/mujibulhaquetanim/Project-Py.git)
 
 ## Table of Contents
 
@@ -48,11 +50,11 @@ Welcome to my All-in-One repository for Backend Functionalities! This repository
 
 ## APIs
 
-Includes various API designs, implementations, and tools. Emphasis on REST and GraphQL implementations, and includes best practices for secure, scalable API development.
+Includes various API designs, implementations, and tools. Emphasis on REST, tRPC, gRPC, and GraphQL implementations, and includes best practices for secure, scalable API development.
 
 ## Authentication
 
-Authentication techniques including JWT (JSON Web Tokens), OAuth, and session-based authentication. Explores authentication in microservices and multi-tenant applications.
+Authentication techniques include JWT (JSON Web Tokens), OAuth, and session-based authentication. Explores authentication in microservices and multi-tenant applications.
 
 ## Databases
 
