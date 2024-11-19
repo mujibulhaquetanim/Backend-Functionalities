@@ -9,4 +9,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  //GET /api/auth/protected -> require jwt token
+  @Get('protected')
+  getProtected(): string {
+    return 'Protected';
+  }
 }
