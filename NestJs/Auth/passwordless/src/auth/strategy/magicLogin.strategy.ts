@@ -1,8 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
-import { verify } from "crypto";
 import Strategy from "passport-magic-login"
-import { AuthService } from "./auth.service";
+import { AuthService } from "../auth.service";
 
 @Injectable()
 export class MagicLoginStrategy extends PassportStrategy(Strategy) {
@@ -14,7 +13,7 @@ export class MagicLoginStrategy extends PassportStrategy(Strategy) {
             secret: "aayin",
             jwtOptions: {expiresIn: "20m"},
             callbackUrl: "http://localhost:3000/api/auth/callback",
-            sendMagicLink: (email, link) => this.logger.debug(`Magic link sent to ${email}: ${link}`),
+            sendMagicLink: async (destination, href) => this.logger.debug(`Magic link sent to ${destination}: ${href}`),
             verify: async (payload, callback) => {
                 //it will be called when the magic link is clicked
                 callback(null, this.validate(payload))
@@ -22,7 +21,9 @@ export class MagicLoginStrategy extends PassportStrategy(Strategy) {
         })
     }
 
-    validate(payload){
-        //validate email
+    validate(payload: {destination: string}){
+        //validate email, user exists or not
+        const user = this.authService.validateUser(payload.destination);
+        return user
     }
 }
