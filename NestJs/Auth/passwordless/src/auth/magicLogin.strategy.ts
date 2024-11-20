@@ -6,9 +6,9 @@ import { AuthService } from "./auth.service";
 
 @Injectable()
 export class MagicLoginStrategy extends PassportStrategy(Strategy) {
-
     //instead of using SMTP,i am using a logger to send the magic link
     private readonly logger = new Logger(MagicLoginStrategy.name);
+
     constructor(private authService: AuthService){
         super({
             secret: "aayin",
@@ -16,6 +16,7 @@ export class MagicLoginStrategy extends PassportStrategy(Strategy) {
             callbackUrl: "http://localhost:3000/api/auth/callback",
             sendMagicLink: (email, link) => this.logger.debug(`Magic link sent to ${email}: ${link}`),
             verify: async (payload, callback) => {
+                //it will be called when the magic link is clicked
                 callback(null, this.validate(payload))
             }
         })
