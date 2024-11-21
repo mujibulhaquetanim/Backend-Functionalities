@@ -12,7 +12,7 @@ export class MagicLoginStrategy extends PassportStrategy(Strategy) {
         super({
             secret: "aayin",
             jwtOptions: {expiresIn: "20m"},
-            callbackUrl: "http://localhost:3000/api/auth/callback",
+            callbackUrl: "http://localhost:3000/api/auth/login/callback",
             sendMagicLink: async (destination, href) => this.logger.debug(`Magic link sent to ${destination}: ${href}`),
             verify: async (payload, callback) => {
                 //it will be called when the magic link is clicked
