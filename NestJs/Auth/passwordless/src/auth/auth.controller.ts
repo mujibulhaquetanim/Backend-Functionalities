@@ -20,6 +20,7 @@ export class AuthController {
     @Get('login/callback')
     async callback(@Req() req){
       //req.user contains the payload of the JWT
-      return req.user;
+      // return req.user; //it will return the user object
+      return this.authService.generateTokens(req.user)
     }
 }
