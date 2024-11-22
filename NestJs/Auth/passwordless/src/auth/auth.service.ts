@@ -16,6 +16,12 @@ export class AuthService {
 
   generateTokens(user: User) {
     //generate JWT
-    
+    const payload = {sub: user.id, email: user.email};
+    console.log(process.env['JWT_SECRET']);
+    console.log('JWT_SECRET in AuthModule:', process.env.JWT_SECRET);
+
+    return {
+      access_token: this.jwtService.sign(payload)
+    }
   }
 }
