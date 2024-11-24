@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { MagicLoginStrategy } from './strategy/magicLogin.strategy';
 import { loginDto } from './dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiHeader, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('api/auth')
 export class AuthController {
@@ -16,11 +17,12 @@ export class AuthController {
 
     //GET /api/auth/callback?token=token=some-token -> JWT access token
     //AuthGuard('magiclogin') added to protect the route from unauthorized access
+    @ApiTags('verifyMagicLink')
     @UseGuards(AuthGuard('magiclogin'))
+    @ApiQuery({ name: 'token', required: true, description: 'Magic link token' })
     @Get('login/callback')
-    async callback(@Req() req){
-      //req.user contains the payload of the JWT
-      // return req.user; //it will return the user object
-      return this.authService.generateTokens(req.user)
+    async callback(@Req() req) {
+      // req.user contains the payload of the JWT
+      return this.authService.generateTokens(req.user);
     }
 }
