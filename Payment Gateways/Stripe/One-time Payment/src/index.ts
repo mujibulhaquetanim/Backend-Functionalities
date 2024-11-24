@@ -1,7 +1,11 @@
 import express, { Request, Response } from "express";
+import Stripe from "stripe";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+
+const stripe = new Stripe(STRIPE_SECRET_KEY!)
 
 app.use(express.json());
 
