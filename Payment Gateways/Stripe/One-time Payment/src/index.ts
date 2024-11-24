@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import dotenv from "dotenv";
 import cors from "cors";
 dotenv.config({
-  path: './env'
+  path: './.env'
 });
 const app = express();
 
