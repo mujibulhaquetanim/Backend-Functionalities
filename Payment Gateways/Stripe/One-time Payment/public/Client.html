@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Time Payment</title>
+    <link rel="stylesheet" href="./Client.css">
+    <script type="module" defer src="./Client.ts"></script>
+  </head>
+  <body>
+    <div class="products">
+      <div class="product">
+        <h3>Product 1</h3>
+        <p>Price</p>
+        <button onclick="addToCart('1', 'Product 1', 100)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Product 2</h3>
+        <p>Price</p>
+        <button onclick="addToCart('2', 'Product 2', 200)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Product 3</h3>
+        <p>Price</p>
+        <button onclick="addToCart('3', 'Product 3', 300)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Product 4</h3>
+        <p>Price</p>
+        <button onclick="addToCart('4', 'Product 4', 400)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Product 5</h3>
+        <p>Price</p>
+        <button onclick="addToCart('5', 'Product 5', 500)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div id="cart">
+      <h2>Cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total: $<span id="cart-total">0</span></p>
+      <button onclick="checkout()" id="checkout-button">Checkout</button>
+    </div>
+
+    <form id="payment-form" style="display: none">
+      <div id="payment-element"></div>
+      <button id="submit">Pay Now</button>
+    </form>
+  </body>
+</html>
