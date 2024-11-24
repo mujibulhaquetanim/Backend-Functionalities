@@ -10,7 +10,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService, private readonly strategy: MagicLoginStrategy) {}
     //POST /api/auth/login {email} -> send magic link
     @Post('login')
-    async login(@Req() req, @Res() res, @Body(new ValidationPipe()) body: loginDto){
+    async login(@Req() req, @Res() res, @Body() body: loginDto){
       this.authService.validateUser(body.destination);
       return this.strategy.send(req, res)
     }
