@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/create-checkout-intent", async(req: Request, res: Response) => {
+app.post("/create-checkout-intent", async(req: Request, res: Response) => {
   try {
     const {items}: {items:CartItem[]} = req.body;
     const amount = items.reduce((acc:number, item:CartItem)=> acc + item.price*item.quantity, 0);
