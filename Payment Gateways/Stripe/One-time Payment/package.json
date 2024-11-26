@@ -2,9 +2,9 @@
   "name": "stripe-payment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp ./package.json ./dist",
     "start": "node public/dist/index.js",
     "dev": "ts-node src/index.ts"
   },
@@ -26,5 +26,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "stripe": "^17.3.1"
-  }
+  },
+  "sideEffects": false
 }
