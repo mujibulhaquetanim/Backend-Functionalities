@@ -3,49 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>One Time Payment</title>
-    <link rel="stylesheet" href="./Client.css">
-    <script type="module" defer src="./Client.ts"></script>
+    <link rel="stylesheet" href="./Client.css" />
   </head>
   <body>
     <div class="products">
       <div class="product">
+        <div class="dummyImg"></div>
         <h3>Product 1</h3>
-        <p>Price</p>
+        <p>Price: $100</p>
         <button onclick="addToCart('1', 'Product 1', 100)">Add to Cart</button>
       </div>
       <div class="product">
+        <div class="dummyImg"></div>
         <h3>Product 2</h3>
-        <p>Price</p>
+        <p>Price: $200</p>
         <button onclick="addToCart('2', 'Product 2', 200)">Add to Cart</button>
       </div>
       <div class="product">
+        <div class="dummyImg"></div>
         <h3>Product 3</h3>
-        <p>Price</p>
+        <p>Price: $300</p>
         <button onclick="addToCart('3', 'Product 3', 300)">Add to Cart</button>
       </div>
       <div class="product">
+        <div class="dummyImg"></div>
         <h3>Product 4</h3>
-        <p>Price</p>
+        <p>Price: $400</p>
         <button onclick="addToCart('4', 'Product 4', 400)">Add to Cart</button>
       </div>
       <div class="product">
+        <div class="dummyImg"></div>
         <h3>Product 5</h3>
-        <p>Price</p>
+        <p>Price: $500</p>
         <button onclick="addToCart('5', 'Product 5', 500)">Add to Cart</button>
       </div>
     </div>
 
-    <div id="cart">
-      <h2>Cart</h2>
-      <ul id="cart-items"></ul>
-      <p>Total: $<span id="cart-total">0</span></p>
-      <button onclick="checkout()" id="checkout-button">Checkout</button>
+    <div class="cartContainer">
+      <div id="cart">
+        <div class="dummyImg"></div>
+        <h2>Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0</span></p>
+        <button onclick="checkout()" id="checkout-button">Checkout</button>
+      </div>
     </div>
 
-    <form id="payment-form" style="display: none">
+    <form id="payment-form">
       <div id="payment-element"></div>
-      <button id="submit">Pay Now</button>
+      <button type="submit" id="submit">Pay Now</button>
     </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script defer type="module" src="./dist/Client.js"></script>
   </body>
 </html>

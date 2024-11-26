@@ -1,30 +1,90 @@
 .product {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 10px;
+  display: inline-block;
 }
-.products{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.product .dummyImg{
+  width: 200px;
+  height: 200px;
+  background-color: #ddd;
+}
+.products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cartContainer{
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #cart {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: inset;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: 700;
+}
+#cart button{
+  padding: 10px;
+  margin: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#cart h2{
+  text-align: center;
+}
+h2{
+  text-decoration: underline;
 }
 #payment-form {
-    margin: 20px;
+  margin: 20px;
+}
+#payment-form button{
+  margin: 14px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 #payment-message {
-    color: rgb(105, 115, 134);
-    font-size: 16px;
-    line-height: 20px;
-    padding-top: 12px;
-    text-align: center;
+  color: rgb(105, 115, 134);
+  font-size: 16px;
+  line-height: 20px;
+  padding-top: 12px;
+  text-align: center;
+}
+form {
+  display: none;
+}
+.success {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.successBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 4px darkgreen;
+  padding: 20px;
+  margin: 20px;
 }
