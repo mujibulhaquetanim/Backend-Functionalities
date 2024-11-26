@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
 const stripe = new Stripe(STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-10-28.acacia",
+  apiVersion: "2024-11-20.acacia",
 });
 
 app.use(cors());
