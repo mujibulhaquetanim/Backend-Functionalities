@@ -1,3 +1,4 @@
+import { Router, Request, Response } from 'express';
 
 // Payment Strategy Interface
 interface PaymentStrategy {
@@ -47,3 +48,35 @@ class PaymentProcessor {
         return strategy.processPayment(amount);
     }
 }
+
+// Create Express Router
+const router = Router();
+const paymentProcessor = new PaymentProcessor();
+
+// Register payment strategies with the processor instance
+paymentProcessor.registerStrategy('paypal', new PaypalStrategy());
+paymentProcessor.registerStrategy('stripe', new StripeStrategy());
+paymentProcessor.registerStrategy('razorpay', new RazorpayStrategy());
+
+// Payment endpoint
+router.post('/process-payment', async (req: Request, res: Response) => {
+    try {
+        const { amount, provider } = req.body;
+
+        if (!amount || !provider) {
+            return res.status(400).json({ error: 'Amount and provider are required' });
+        }
+
+        const result = await paymentProcessor.processPayment(provider, amount);
+        return res.json({ success: true, message: result });
+
+    } catch (error) {
+        return res.status(400).json({ 
+            success: false, 
+            message: error instanceof Error ? error.message : 'Payment processing failed' 
+        });
+    }
+});
+
+// Export router
+export default router;
