@@ -1,15 +1,16 @@
-const express = require('express');
+import express, { Response } from 'express';
+import needle from 'needle';
+
 const router = express.Router();
-const needle = require('needle');
 
 const API_KEY_NAME = process.env.API_KEY_NAME;
 const API_KEY_VALUE = process.env.API_KEY_VALUE;
 const API_KEY_URL = process.env.API_URL;
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res:Response) => {
     try {
         const params = new URLSearchParams({
-            [API_KEY_NAME]: API_KEY_VALUE
+            [API_KEY_NAME as string]: API_KEY_VALUE as string
         });
 
 
