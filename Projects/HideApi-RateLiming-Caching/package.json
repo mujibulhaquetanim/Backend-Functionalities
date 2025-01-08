@@ -1,5 +1,5 @@
 {
-  "name": "HideApi-RateLiming-Caching",
+  "name": "hideapis-rateliming-caching",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
     "apicache": "^1.6.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-rate-limit": "^7.2.0",
-    "needle": "^3.3.1"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "needle": "^3.3.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17"
   }
 }
