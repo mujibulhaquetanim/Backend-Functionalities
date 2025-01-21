@@ -10,3 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       String   @id @default(uuid())
+  serial   Int // Removed autoincrement() because SQLite does not support it on non-id fields
+  name     String
+  email    String   @unique
+  password String
+  gender   Gender?  @default(MALE)
+  joinedAt DateTime @default(now())
+  role     Role     @default(USER)
+  friends  Friendship[] // Changed to a relation to the Friendship model
+  jobId    Int? // Made jobId optional to match the optional relation field job
+  job      Field?   @relation("UserJob", fields: [jobId], references: [id]) // Added opposite relation field users in Field model
+}
+
+model Field {
+  id    Int    @id @default(autoincrement())
+  name  String
+  type  String
+  users User[] @relation("UserJob") // Added opposite relation field for job
+}
+
+model Friendship {
+  id        Int    @id @default(autoincrement())
+  userId    String
+  friendId  String
+  user      User   @relation("UserFriendships", fields: [userId], references: [id])
+  friend    User   @relation("FriendFriendships", fields: [friendId], references: [id])
+  userFriendships User[] @relation("UserFriendships")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
