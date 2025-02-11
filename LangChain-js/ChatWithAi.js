@@ -16,10 +16,13 @@ const getUserInput = async () => {
 }
 
 const main = async () => {
+    // answer variable to store user input
     let answer = ''
+    // loop until user types exit
     while (answer.toLowerCase() !== 'exit') {
-        const userInput = await getUserInput();
-        console.log(`Your entered: ${userInput}`);
+        // mutating the answer variable to store user input
+        answer = await getUserInput();
+        console.log(`Your entered: ${answer}`);
     }
     console.log('Bye!');
     rl.close();
