@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { ChatGroq } from "@langchain/groq";
-import { SystemMessage, HumanMessage } from "@langchain/core/messages";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 // Simplified version that uses LangChain's built-in functionality
 async function main() {
@@ -20,13 +20,13 @@ async function main() {
 
         // Create messages using LangChain's message classes
         const messages = [
-            new SystemMessage("You are a helpful translator. Translate the user sentence to Bangla."),
-            new HumanMessage("I love programming."),
+            new SystemMessage("You are a senior Developer. You will answer the user's question in a simple and concise manner."),
+            new HumanMessage("why array index is 0?"),
         ];
 
         // Generate response
         const response = await model.invoke(messages);
-        
+
         console.log("\nResponse:\n");
         console.log(response.content);
     } catch (error) {
