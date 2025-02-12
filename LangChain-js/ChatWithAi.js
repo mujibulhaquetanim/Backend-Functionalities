@@ -1,5 +1,6 @@
 import { configDotenv } from "dotenv";
 import { ChatGroq } from "@langchain/groq";
+import { HumanMessage, SystemMessage, AIMessage } from "@langchain/core/messages";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
@@ -14,4 +15,18 @@ const model = new ChatGroq({
 
 //createInterface instance created to listen the line event.
 const rl = createInterface({ input, output })
+
+//To keep the chat messages of system and human, array is initialized and system message is pushed to it using systemMessage method.
+const history = [];
+history.push(SystemMessage("You are a helpful Assistant. Answer the question in concise and precise way"))
+
+//user input taken and pushed it to the history array using humanMessage method of langchain.
+const prompt = async () => {
+    return new Promise((resolve) => {
+        rl.question("Tell me about RAG", (userInput) => {
+            history.push(HumanMessage(userInput));
+            resolve(userInput);
+        })
+    })
+}
 
