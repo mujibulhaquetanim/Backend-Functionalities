@@ -23,10 +23,25 @@ history.push(SystemMessage("You are a helpful Assistant. Answer the question in 
 //user input taken and pushed it to the history array using humanMessage method of langchain.
 const prompt = async () => {
     return new Promise((resolve) => {
-        rl.question("Tell me about RAG", (userInput) => {
+        rl.question("You: ", (userInput) => {
             history.push(HumanMessage(userInput));
             resolve(userInput);
         })
     })
 }
 
+async function infiniteChat() {
+    let userInput = '';
+    while (userInput.toLowerCase() !== 'exit') {
+        userInput = await prompt;
+        history.push(HumanMessage(userInput));
+
+        //creating a variable to store the response of the model.
+        const response = await model.invoke(history);
+        history.push(AIMessage(response.content));
+
+        console.log(`Assistant: ${response.content}`);
+    }
+}
+
+infiniteChat();
