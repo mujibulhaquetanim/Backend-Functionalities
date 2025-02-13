@@ -44,6 +44,14 @@ async function infiniteChat() {
     }
     console.log('Bye!');
     rl.close();
+    saveChatHistoryToJSONFile(history);
+}
+
+function saveChatHistoryToJSONFile(history){
+    const fs = require('fs');
+    const data = JSON.stringify(history);
+    fs.writeFileSync('chatHistory.json', data, 'utf8');
+    console.log('Chat history saved to chatHistory.json');
 }
 
 infiniteChat();
