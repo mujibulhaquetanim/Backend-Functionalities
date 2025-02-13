@@ -3,6 +3,7 @@ import { ChatGroq } from "@langchain/groq";
 import { HumanMessage, SystemMessage, AIMessage } from "@langchain/core/messages";
 import { createInterface } from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
+import fs from 'fs';
 
 configDotenv();
 
@@ -48,7 +49,6 @@ async function infiniteChat() {
 }
 
 function saveChatHistoryToJSONFile(history){
-    const fs = require('fs');
     const data = JSON.stringify(history);
     fs.writeFileSync('chatHistory.json', data, 'utf8');
     console.log('Chat history saved to chatHistory.json');
