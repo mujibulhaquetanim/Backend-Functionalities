@@ -1,7 +1,7 @@
 import { configDotenv } from "dotenv";
 import { ChatGroq } from "@langchain/groq";
 import { HumanMessage, SystemMessage, AIMessage } from "@langchain/core/messages";
-import { createInterface } from "node:readline/promises";
+import { createInterface } from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
 
 configDotenv();
@@ -9,7 +9,7 @@ configDotenv();
 //model created
 const model = new ChatGroq({
     apiKey: process.env.GROQ_API_KEY,
-    model: "deepseek-r1-distill-llama-70b",
+    model: "qwen-2.5-32b",
     temperature: 0.7
 })
 
