@@ -67,17 +67,29 @@ function saveHistoryToJson(historyArray) {
     const serializedHistory = historyArray.map((message) => {
         let type = '';
 
-        if (message instanceof SystemMessage){
+        if (message instanceof SystemMessage) {
             type = 'system';
-        }else if( message instanceof HumanMessage){
+        } else if (message instanceof HumanMessage) {
             type = 'human';
-        }else if( message instanceof AIMessage){
+        } else if (message instanceof AIMessage) {
             type = 'ai';
         }
 
         return {
             type,
             content: message.content
+        }
+    });
+
+    // Convert the serialized history to JSON
+    let data = JSON.stringify(serializedHistory, null, 2);
+    
+    // Write the serialized history to a file
+    fs.writeFile('chat_history.json', data, 'utf8', (err) => {
+        if (err) {
+            console.error('Error saving chat history:', err);
+        } else {
+            console.log('Chat history saved to chat_history.json');
         }
     });
 }
