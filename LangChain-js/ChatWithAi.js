@@ -3,8 +3,7 @@ import { ChatGroq } from "@langchain/groq";
 import { HumanMessage, SystemMessage, AIMessage } from "@langchain/core/messages";
 import { createInterface } from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
-import fs from 'fs'; // <-- Import the fs module
-import { isInstance } from "class-validator";
+import fs from 'fs';
 
 configDotenv();
 
@@ -65,18 +64,19 @@ async function infiniteChat() {
 function saveHistoryToJson(historyArray) {
     // Map over the history to extract relevant data
     const serializedHistory = historyArray.map((message) => {
-        let type = '';
+        // let type = '';
 
-        if (message instanceof SystemMessage) {
-            type = 'system';
-        } else if (message instanceof HumanMessage) {
-            type = 'human';
-        } else if (message instanceof AIMessage) {
-            type = 'ai';
-        }
+        // if (message instanceof SystemMessage) {
+        //     type = 'system';
+        // } else if (message instanceof HumanMessage) {
+        //     type = 'human';
+        // } else if (message instanceof AIMessage) {
+        //     type = 'ai';
+        // }
 
         return {
-            type,
+            //_getType() method returns the type of the message, is from the langchain package (langchain/core/base.js)
+            type: message._getType(),
             content: message.content,
             date: new Date().toDateString()
         }
