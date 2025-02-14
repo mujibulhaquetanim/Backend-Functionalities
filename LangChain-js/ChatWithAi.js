@@ -77,13 +77,14 @@ function saveHistoryToJson(historyArray) {
 
         return {
             type,
-            content: message.content
+            content: message.content,
+            date: new Date().toDateString()
         }
     });
 
     // Convert the serialized history to JSON
     let data = JSON.stringify(serializedHistory, null, 2);
-    
+
     // Write the serialized history to a file
     fs.writeFile('chat_history.json', data, 'utf8', (err) => {
         if (err) {
