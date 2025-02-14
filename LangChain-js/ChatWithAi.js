@@ -35,12 +35,6 @@ async function infiniteChat() {
     let userInput = '';
     while (userInput.toLowerCase() !== 'exit') {
         userInput = await prompt();
-
-        // Check for exit condition
-        if (userInput.toLowerCase() === 'exit') {
-            break;
-        }
-
         // Push the user's message to history
         history.push(new HumanMessage(userInput));
 
