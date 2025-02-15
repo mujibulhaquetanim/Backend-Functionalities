@@ -1,6 +1,7 @@
 import { configDotenv } from "dotenv";
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatGroq } from "@langchain/groq";
+import fs from 'fs';
 
 configDotenv();
 
@@ -36,3 +37,5 @@ console.log("Prompt:", prompt);
 
 const response = await model.invoke(prompt);
 console.log(response.content);
+
+fs.writeFile('promptTemplate.txt', response.content,(err) => {if (err) throw err;});
