@@ -15,16 +15,24 @@ const template = "Write a {tone} email to {company} expressing interest in the {
 
 const promptTemplate = ChatPromptTemplate.fromTemplate(template);
 
-// format returns a string
-const prompt = await promptTemplate.format({
+// invoke returns an object
+const prompt = await promptTemplate.invoke({
     tone: "formal",
     company: "Google",
     position: "Software Engineer",
     skill: "JavaScript"
-})
+});
+
+// format returns a string
+// const prompt = await promptTemplate.format({
+//     tone: "formal",
+//     company: "Google",
+//     position: "Software Engineer",
+//     skill: "JavaScript"
+// })
 
 console.log("Type of prompt:", typeof prompt);
 console.log("Prompt:", prompt);
 
 const response = await model.invoke(prompt);
-console.log(response);
+console.log(response.content);
