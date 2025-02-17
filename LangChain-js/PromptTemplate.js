@@ -2,12 +2,13 @@ import { configDotenv } from "dotenv";
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatGroq } from "@langchain/groq";
 import fs from 'fs';
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 configDotenv();
 
 const model = new ChatGroq({
     apiKey: process.env.GROQ_API_KEY,
-    model: "qwen-2.5-32b",
+    model: "deepseek-r1-distill-llama-70b",
     temperature: 0.7
 });
 
@@ -35,12 +36,22 @@ const model = new ChatGroq({
 // console.log("Type of prompt:", typeof prompt);
 // console.log("Prompt:", prompt);
 
-const message = [
-    {"system": "You are a senior AI Engineer who resolve {topic}"},
-    {"human": "Help me about {question}"}
-]
+const messages = [
+    new SystemMessage("You are a comedian who tells jokes about {topic}."),
+    new HumanMessage("Okay, now tell me {count}. mention the topics but no need for extra conversation."),
+];
+
+// Create the ChatPromptTemplate from the messages array
+const promptTemplate = ChatPromptTemplate.fromMessages(messages);
+
+// Format the prompt with the desired topic and joke_count
+const prompt = await promptTemplate.format({
+    "topic": "Software Engineer",
+    "count": 3
+});
 
 const response = await model.invoke(prompt);
 console.log(response.content);
 
-fs.writeFile('promptTemplate.txt', response.content,(err) => {if (err) throw err;});
+
+fs.writeFile('./GeneratedData/promptMessagesTemplate.txt', response.content,(err) => {if (err) throw err;});
