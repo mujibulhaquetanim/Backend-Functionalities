@@ -19,6 +19,8 @@ const messages = [
 
 const promptTemplate = ChatPromptTemplate.fromMessages(messages);
 
+// chaining in langchain is done for efficiency. with chaining we can create a single chain which can be used to invoke the model. invoke the chain. pipe returns a chain which can be further used to invoke the model.
+// in python this can be written with (|) operator.
 const chain = promptTemplate.pipe(model).pipe(new StringOutputParser());
 
 const result = await chain.invoke({ topic: 'history and religion', question: 'cat' });
