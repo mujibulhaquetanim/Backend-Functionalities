@@ -7,7 +7,7 @@ configDotenv();
 
 const model = new ChatGroq({
     apiKey: process.env.GROQ_API_KEY,
-    model: "qwen-2.5-32b",
+    model: "llama-3.3-70b-versatile",
     temperature: 0.7
 });
 
@@ -21,11 +21,11 @@ const formatPrompt = new RunnableLambda({
   });
   
   const invokeModel = new RunnableLambda({
-    func: (promptValue) => model.invoke(promptValue)
+    func: (promptValue) => model.invoke(promptValue.toChatMessages()) //convert to message Array.
   });
   
   const parseOutput = new RunnableLambda({
-    func: (response) => response.content
+    func: (response) => response.content //extract the content from AIMessage
   });
   
   // by passing the runnables as an array we can create a chain which can be used to invoke the model.
