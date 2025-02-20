@@ -28,7 +28,15 @@ const formatPrompt = new RunnableLambda({
     func: (response) => response.content
   });
   
-  const chain = RunnableSequence.from([formatPrompt, invokeModel, parseOutput]);
+  // by passing the runnables as an array we can create a chain which can be used to invoke the model.
+//   const chain = RunnableSequence.from([formatPrompt, invokeModel, parseOutput]);
+
+// by passing the runnables as an object with named keys we can create a chain which can be used to invoke the model.
+const chain = new RunnableSequence({
+    first: formatPrompt,
+    middle: [invokeModel],
+    last: parseOutput
+  });
   
   async function main() {
     const response = await chain.invoke({ animal: "cat", count: 2 });
