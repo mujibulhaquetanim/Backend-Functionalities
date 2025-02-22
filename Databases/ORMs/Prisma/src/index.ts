@@ -8,10 +8,8 @@ async function main(){
         data:{
             name: "mujibai",
             email: "mujibai@me.com",
-            gender: "MALE",
             password: "baigan",
-            role: "ADMIN",
-            jobId: 1,
+            joinedAt: new Date(),
         }
     })
 
