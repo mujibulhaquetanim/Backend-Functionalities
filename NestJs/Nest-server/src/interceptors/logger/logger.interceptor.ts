@@ -7,6 +7,8 @@ export class LoggerInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     console.log('LoggerInterceptor');
     const startTime = Date.now();
-    return next.handle().pipe(tap(() => console.log(`After... ${Date.now() - startTime}ms`)));
+    
+    //data in the tap operator is the data returned from the controller
+    return next.handle().pipe(tap((data) => console.log(`After... ${Date.now() - startTime}ms, data: ${JSON.stringify(data)}`)));
   }
 }
