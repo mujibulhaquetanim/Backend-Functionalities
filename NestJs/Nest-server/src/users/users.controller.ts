@@ -1,4 +1,5 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, UseGuards, UseInterceptors } from '@nestjs/common';
+import { AuthGuard } from 'src/guards/guard/auth.guard';
 import { LoggerInterceptor } from 'src/interceptors/logger/logger.interceptor';
 
 @Controller('users')
@@ -11,13 +12,14 @@ export class UsersController {
         return [{id: 1, name: 'mujibai'}];
     }
 
-    @Get('/:id')
+    @Get(':id')
     getUserByID(){
         console.log('inside the getUserByID route handler');
         return {id: 1, name: 'mujibai'};
     }
 
-    @Get('/profile')
+    @Get('profile')
+    @UseGuards(AuthGuard)
     getProfile(){
         console.log('inside the getProfile route handler');
         return {id: 1, name: 'mujibai'};
