@@ -10,4 +10,16 @@ export class UsersController {
         console.log('inside the getUsers route handler');
         return [{id: 1, name: 'mujibai'}];
     }
+
+    @Get('/:id')
+    getUserByID(){
+        console.log('inside the getUserByID route handler');
+        return {id: 1, name: 'mujibai'};
+    }
+
+    @Get('/profile')
+    getProfile(){
+        console.log('inside the getProfile route handler');
+        return {id: 1, name: 'mujibai'};
+    }
 }
