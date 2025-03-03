@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -11,6 +11,11 @@ export class AppService {
       observer.complete();
     });
     obs.subscribe((data)=> console.log(data));
-    return 'Hello World!';
+
+    // of is observable which takes any number of arguments and emits them one by one in sequence
+    // using tap function we can add a side effect to the observable without changing its value.
+    of(1,3,5).pipe(tap((data)=> console.log(`before ${data}`))).subscribe();
+
+    return 'Welcome to RxJS';
   }
 }
