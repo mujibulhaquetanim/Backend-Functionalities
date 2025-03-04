@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { filter, map, mergeMap, Observable, of, tap } from 'rxjs';
+import { concatMap, filter, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -16,7 +16,7 @@ export class AppService {
     // using tap function we can add a side effect to the observable without changing its value.
     //map function that transforms the value emitted by the observable
     //Maps each transformed number to a new observable that emits a string.
-    of(1,3,5,6,7).pipe(tap((data)=> console.log(`before ${data}`)), filter((data)=> data%2===0), map((data)=> data*2), mergeMap((id)=> of(`hello ${id}`)), tap((data)=> console.log(`after ${data}`))).subscribe();
+    of(1,3,5,6,7).pipe(tap((data)=> console.log(`before ${data}`)), filter((data)=> data%2===0), map((data)=> data*2), mergeMap((id)=> of(`hello ${id}`)), concatMap((id)=> of(`hello ${id}`)), switchMap((id)=> of(`hello ${id}`)), tap((data)=> console.log(`after ${data}`))).subscribe();
 
     return 'Welcome to RxJS';
   }
