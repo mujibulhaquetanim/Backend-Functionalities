@@ -8,13 +8,18 @@ export const groups = pgTable('groups', {
 
 
 //join table, here instead of primary key, we use composite key because one user can be in multiple groups.
-//many to many relationship, we need to create a join table between users and groups.
+//many to many relationship, we need to create a join table between users and groups
 export const groupsToUsers = pgTable('groupsToUsers', {
     userId: integer('userId').references(()=> users.id),
     groupId: integer('groupId').references(()=> groups.id)
 },
 
-(table)=>({
-    pk: primaryKey({columns: [table.userId, table.groupId]})
-})
+//this is for composite primary key signature is now deprecated
+// (table)=>({
+//     pk: primaryKey({columns: [table.userId, table.groupId]})
+// })
+
+(table)=>[
+    primaryKey({columns: [table.userId, table.groupId]})
+]
 )
