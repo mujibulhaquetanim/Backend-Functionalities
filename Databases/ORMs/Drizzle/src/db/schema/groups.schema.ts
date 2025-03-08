@@ -1,4 +1,4 @@
-import { integer, pgTable, primaryKey, serial, text } from "drizzle-orm/pg-core";
+import { index, integer, pgTable, primaryKey, serial, text } from "drizzle-orm/pg-core";
 import { users } from "./users.schema";
 
 export const groups = pgTable('groups', {
@@ -16,10 +16,12 @@ export const groupsToUsers = pgTable('groupsToUsers', {
 
 //this is for composite primary key signature is now deprecated
 // (table)=>({
-//     pk: primaryKey({columns: [table.userId, table.groupId]})
+//     pk: primaryKey({columns: [table.userId, table.groupId]}),
+//     userIdIndex: index('userIdIndex').on(table.userId)
 // })
 
-(table)=>[
-    primaryKey({columns: [table.userId, table.groupId]})
+(table)=>[{
+    pk: primaryKey({columns: [table.userId, table.groupId]}),
+    userIdIndex: index('userIdIndex').on(table.userId)},
 ]
 )

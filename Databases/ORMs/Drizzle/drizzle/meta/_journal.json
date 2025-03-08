@@ -15,6 +15,13 @@
       "when": 1741354813593,
       "tag": "0001_heavy_whiplash",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741456742427,
+      "tag": "0002_lowly_professor_monster",
+      "breakpoints": true
     }
   ]
 }
