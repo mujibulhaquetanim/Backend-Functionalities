@@ -19,6 +19,18 @@ model User {
   friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
   jobTitleId  Int?
   jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
+  profile     Profile?
+
+  @@unique([name, email])
+  @@index([id, email])
+  @@map("users")
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  userId String @unique //unique is needed for one to one relationship
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model JobTitle {
