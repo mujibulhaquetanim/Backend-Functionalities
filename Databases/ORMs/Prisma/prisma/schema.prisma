@@ -10,58 +10,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id          String       @id @default(uuid())
-//   name        String
-//   email       String       @unique
-//   password    String
-//   joinedAt    DateTime     @default(now())
-//   friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
-//   jobTitleId  Int?
-//   jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
-//   profile     Profile?
-
-//   @@unique([name, email])
-//   @@index([id, email])
-//   @@map("users")
-// }
-
-// model Profile {
-//   id     Int    @id @default(autoincrement())
-//   bio    String
-//   userId String @unique //unique is needed for one to one relationship
-//   user   User   @relation(fields: [userId], references: [id])
-// }
-
-// model JobTitle {
-//   id    Int    @id @default(autoincrement())
-//   name  String
-//   type  String
-//   users User[] @relation("UserJobTitles")
-// }
-
-// model Friendship {
-//   id       Int    @id @default(autoincrement())
-//   userId   String
-//   friendId String
-//   user     User   @relation("UserFriendships", fields: [userId], references: [id])
-// }
-
-
-//multi field relations
 model User {
-  firstName String
-  lastName  String
-  profile   Profile?
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  password    String
+  joinedAt    DateTime     @default(now())
+  friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
+  jobTitleId  Int?
+  jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
+  profile     Profile?
+  posts       Post[]
 
-  @@id([firstName, lastName]) // Composite primary key
+  @@unique([name, email])
+  @@index([id, email])
+  @@map("users")
 }
 
 model Profile {
-  id            Int    @id
-  userFirstName String
-  userLastName  String
-  user          User   @relation(fields: [userFirstName, userLastName], references: [firstName, lastName])
-
-  @@unique([userFirstName, userLastName]) // Unique constraint used for one-to-one relationship
+  id     Int    @id @default(autoincrement())
+  bio    String
+  userId String @unique //unique is needed for one to one relationship
+  user   User   @relation(fields: [userId], references: [id])
 }
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  authorId  String   @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model JobTitle {
+  id    Int    @id @default(autoincrement())
+  name  String
+  type  String
+  users User[] @relation("UserJobTitles")
+}
+
+model Friendship {
+  id       Int    @id @default(autoincrement())
+  userId   String
+  friendId String
+  user     User   @relation("UserFriendships", fields: [userId], references: [id])
+}
+
+//multi field relations
+// model User {
+//   firstName String
+//   lastName  String
+//   profile   Profile?
+
+//   @@id([firstName, lastName]) // Composite primary key
+// }
+
+// model Profile {
+//   id            Int    @id
+//   userFirstName String
+//   userLastName  String
+//   user          User   @relation(fields: [userFirstName, userLastName], references: [firstName, lastName])
+
+//   @@unique([userFirstName, userLastName]) // Unique constraint used for one-to-one relationship
+// }
