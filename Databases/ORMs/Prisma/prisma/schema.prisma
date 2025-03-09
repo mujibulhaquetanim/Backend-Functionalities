@@ -10,39 +10,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          String       @id @default(uuid())
-  name        String
-  email       String       @unique
-  password    String
-  joinedAt    DateTime     @default(now())
-  friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
-  jobTitleId  Int?
-  jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
-  profile     Profile?
+// model User {
+//   id          String       @id @default(uuid())
+//   name        String
+//   email       String       @unique
+//   password    String
+//   joinedAt    DateTime     @default(now())
+//   friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
+//   jobTitleId  Int?
+//   jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
+//   profile     Profile?
 
-  @@unique([name, email])
-  @@index([id, email])
-  @@map("users")
+//   @@unique([name, email])
+//   @@index([id, email])
+//   @@map("users")
+// }
+
+// model Profile {
+//   id     Int    @id @default(autoincrement())
+//   bio    String
+//   userId String @unique //unique is needed for one to one relationship
+//   user   User   @relation(fields: [userId], references: [id])
+// }
+
+// model JobTitle {
+//   id    Int    @id @default(autoincrement())
+//   name  String
+//   type  String
+//   users User[] @relation("UserJobTitles")
+// }
+
+// model Friendship {
+//   id       Int    @id @default(autoincrement())
+//   userId   String
+//   friendId String
+//   user     User   @relation("UserFriendships", fields: [userId], references: [id])
+// }
+
+
+//multi field relations
+model User {
+  firstName String
+  lastName  String
+  profile   Profile?
+
+  @@id([firstName, lastName]) // Composite primary key
 }
 
 model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  userId String @unique //unique is needed for one to one relationship
-  user   User   @relation(fields: [userId], references: [id])
-}
+  id            Int    @id
+  userFirstName String
+  userLastName  String
+  user          User   @relation(fields: [userFirstName, userLastName], references: [firstName, lastName])
 
-model JobTitle {
-  id    Int    @id @default(autoincrement())
-  name  String
-  type  String
-  users User[] @relation("UserJobTitles")
-}
-
-model Friendship {
-  id       Int    @id @default(autoincrement())
-  userId   String
-  friendId String
-  user     User   @relation("UserFriendships", fields: [userId], references: [id])
+  @@unique([userFirstName, userLastName]) // Unique constraint used for one-to-one relationship
 }
