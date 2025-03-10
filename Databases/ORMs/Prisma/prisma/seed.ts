@@ -63,11 +63,19 @@ async function main() {
         type: `Type ${i}`,
       },
     });
-  
+  }
 
+   // Seed Categories
+   for (let i = 1; i <= 10; i++) {
+    await prisma.category.create({
+      data: {
+        name: `Category ${i}`,
+      },
+    });
   }
 }
 
+// Run the seed script using pnpm dlx ts-node ./prisma/seed.ts
 
 main()
   .catch(e => {
