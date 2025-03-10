@@ -55,7 +55,18 @@ async function main() {
       }
     }
 
+      // Seed JobTitles
+  for (let i = 1; i <= 10; i++) {
+    await prisma.jobTitle.create({
+      data: {
+        name: `Job Title ${i}`,
+        type: `Type ${i}`,
+      },
+    });
+  
+
   }
+}
 
 
 main()
