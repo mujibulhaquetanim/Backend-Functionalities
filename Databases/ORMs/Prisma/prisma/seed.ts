@@ -3,23 +3,27 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-// Clear existing data to avoid unique constraint conflicts as the seed script is run multiple times
+  // Clear existing data and reset auto-increment sequences for SQLite
   await prisma.friendship.deleteMany({});
   await prisma.post.deleteMany({});
   await prisma.profile.deleteMany({});
   await prisma.user.deleteMany({});
   await prisma.jobTitle.deleteMany({});
-  await prisma.category.deleteMany
+  await prisma.category.deleteMany({});
+
   // Seed Users
+  const users = [];
   for (let i = 1; i <= 10; i++) {
     const user = await prisma.user.create({
       data: {
         name: `User ${i}`,
         email: `user${i}@example.com`,
-        password: 'password123',
+        password: `password1010-${i}`,
         joinedAt: new Date(),
       },
     });
+
+    users.push(user);
 
     // Seed Profile
     await prisma.profile.create({
@@ -38,24 +42,19 @@ async function main() {
         updatedAt: new Date(),
       },
     });
+  }
 
-    // Seed Friendships
-    //modulo operator for creating circular friendships i.e. Users 1 to 9 become friends with the next user (e.g., User 1 with User 2, User 2 with User 3, and so on). The last user (User 10) becomes friends with the first user (User 1), creating a circular friendship.
+  // Seed Friendships
+  for (let i = 0; i < users.length; i++) {
+    await prisma.friendship.create({
+      data: {
+        userId: users[i].id,
+        friendId: users[(i + 1) % users.length].id,
+      },
+    });
+  }
 
-    const friend = await prisma.user.findUnique({
-        where: { email: `user${(i % 10) + 1}@example.com` },
-      });
-      if (friend) {
-        await prisma.friendship.create({
-          data: {
-            userId: user.id,
-            friendId: friend.id,
-          },
-        });
-      }
-    }
-
-      // Seed JobTitles
+  // Seed JobTitles
   for (let i = 1; i <= 10; i++) {
     await prisma.jobTitle.create({
       data: {
@@ -65,8 +64,8 @@ async function main() {
     });
   }
 
-   // Seed Categories
-   for (let i = 1; i <= 10; i++) {
+  // Seed Categories
+  for (let i = 1; i <= 10; i++) {
     await prisma.category.create({
       data: {
         name: `Category ${i}`,
@@ -74,8 +73,6 @@ async function main() {
     });
   }
 }
-
-// Run the seed script using pnpm dlx ts-node ./prisma/seed.ts
 
 main()
   .catch(e => {
