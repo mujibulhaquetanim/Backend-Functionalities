@@ -3,15 +3,15 @@ import { database } from "./db";
 import * as schema from "./schema/schema";
 
 async function main() {
-    await Promise.all(
-        Array(50).fill("").map(async (_, index) => {
+    const users = await Promise.all(
+        Array(50).fill("").map(async () => {
             const user = await database.insert(schema.users).values({
                 email: faker.internet.email(),
-                firstName: faker.person.firstName(),   // Ensure correct property names
-                lastName: faker.person.lastName(),     // Ensure correct property names
-                password: faker.internet.password()    // Generate a random password
-            }).returning();
-            return user[0].id;
+                firstName: faker.person.firstName(),  
+                lastName: faker.person.lastName(),     
+                password: faker.internet.password()    
+            }).returning(); // returning() returns the inserted row in the db
+            return user[0].id; // return the id of the inserted user
         })
     );
 }
