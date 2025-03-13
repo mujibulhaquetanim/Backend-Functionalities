@@ -38,6 +38,17 @@ async function main() {
             return comment[0].id // it is not required though as it is not been using any of the schemas.
         })
     )
+
+    const insertedGroups= await database.insert(schema.groups).values([
+        {
+            name: "Group 1"
+        },
+        {
+            name: "Group 2"
+        }
+    ]).returning();
+
+    const groupIds = insertedGroups.map((group)=> group.id);
 }
 
 main().catch(console.error);
