@@ -49,6 +49,20 @@ async function main() {
     ]).returning();
 
     const groupIds = insertedGroups.map((group)=> group.id);
+
+    // loop through the userIds array and insert each userId into the groupsToUsers table.
+    await Promise.all(
+        userIds.map(async (userId)=>{
+            return await database.insert(schema.groupsToUsers).values({
+                userId,
+                groupId: faker.helpers.arrayElement(groupIds)
+            }).returning();
+        })
+    )
 }
 
-main().catch(console.error);
+main().catch((err)=> {
+    console.error(err)
+    // exit the process with failure
+    process.exit(0);
+});
