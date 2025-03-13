@@ -3,8 +3,9 @@ import { profileInfo } from "./profileInfo.schema";
 import { posts } from "./posts.schema";
 import { comments } from "./comments.schema";
 import { groups } from "./groups.schema";
+import { groupsToUsers} from "./groups.schema"
 
-export { users, profileInfo, posts, comments, groups };
+export { users, profileInfo, posts, comments, groups, groupsToUsers };
 
 /*
 import * as users from './users.schema'; 
