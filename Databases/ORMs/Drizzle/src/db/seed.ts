@@ -7,10 +7,10 @@ async function main() {
     const userIds = await Promise.all(
         Array(50).fill("").map(async () => {
             const user = await database.insert(schema.users).values({
-                email: faker.internet.email(),
-                firstName: faker.person.firstName(),  
-                lastName: faker.person.lastName(),     
-                password: faker.internet.password()    
+                email: faker.internet.email().slice(0, 32),
+                firstName: faker.person.firstName().slice(0, 32),
+                lastName: faker.person.lastName().slice(0, 32),
+                password: faker.internet.password().slice(0, 32)    
             }).returning(); // returning() returns the inserted row in the db
             return user[0].id; // return the id of the inserted user
         })
@@ -61,7 +61,10 @@ async function main() {
     )
 }
 
-main().catch((err)=> {
+main().then(()=> {
+    console.log("seeded successfully")
+    return process.exit(0);
+}).catch((err)=> {
     console.error(err)
     // exit the process with failure
     process.exit(0);
