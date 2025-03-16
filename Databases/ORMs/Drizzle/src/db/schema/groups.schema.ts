@@ -1,5 +1,6 @@
 import { index, integer, pgTable, primaryKey, serial, text } from "drizzle-orm/pg-core";
 import { users } from "./users.schema";
+import { relations } from "drizzle-orm";
 
 export const groups = pgTable('groups', {
     id: serial('id').primaryKey(),
@@ -9,7 +10,7 @@ export const groups = pgTable('groups', {
 
 //join table, here instead of primary key, we use composite key because one user can be in multiple groups.
 //many to many relationship, we need to create a join table between users and groups
-export const groupsToUsers = pgTable('groupsToUsers', {
+export const userToGroups = pgTable('usersToGroups', {
     userId: integer('userId').references(()=> users.id),
     groupId: integer('groupId').references(()=> groups.id)
 },
@@ -25,3 +26,14 @@ export const groupsToUsers = pgTable('groupsToUsers', {
     userIdIndex: index('userIdIndex').on(table.userId)},
 ]
 )
+
+export const usersToGroupRelations = relations(userToGroups, ({one})=>({
+    user: one(users, {
+        fields: [userToGroups.userId],
+        references: [users.id]
+    }),
+    group: one(groups, {
+        fields: [userToGroups.groupId],
+        references: [groups.id]
+    })
+}))

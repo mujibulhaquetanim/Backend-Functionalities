@@ -43,6 +43,13 @@
       "when": 1742063434329,
       "tag": "0005_blushing_banshee",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1742146213861,
+      "tag": "0006_normal_star_brand",
+      "breakpoints": true
     }
   ]
 }
