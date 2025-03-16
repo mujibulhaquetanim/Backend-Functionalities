@@ -1,11 +1,19 @@
-import { users } from "./users.schema";
-import { profileInfo } from "./profileInfo.schema";
-import { posts } from "./posts.schema";
-import { comments } from "./comments.schema";
-import { groups } from "./groups.schema";
-import { groupsToUsers} from "./groups.schema"
+//instead of exporting individual schema objects, you are exporting modules (i.e., objects that contain all exports from each schema file).
+export * from './users.schema';
+export * from './posts.schema';
+export * from './comments.schema';
+export * from './groups.schema';
+export * from './profileInfo.schema';
+export * from './notifications.schema';
 
-export { users, profileInfo, posts, comments, groups, groupsToUsers };
+// import { users } from "./users.schema";
+// import { profileInfo } from "./profileInfo.schema";
+// import { posts } from "./posts.schema";
+// import { comments } from "./comments.schema";
+// import { groups } from "./groups.schema";
+// import { groupsToUsers} from "./groups.schema"
+
+// export { users, profileInfo, posts, comments, groups, groupsToUsers };
 
 /*
 import * as users from './users.schema'; 
