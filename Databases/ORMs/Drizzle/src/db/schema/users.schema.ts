@@ -4,7 +4,7 @@ import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { comments } from "./comments.schema";
 import { posts } from "./posts.schema";
 import { profileInfo } from "./profileInfo.schema";  
-import { groupsToUsers } from "./groups.schema";  
+import { userToGroups } from "./groups.schema";  
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -19,7 +19,7 @@ export const userRelations = relations(users, ({ one, many }) => ({
   comments: many(comments),
   posts: many(posts),
   profile: one(profileInfo),
-  usersToGroups: many(groupsToUsers),
+  usersToGroups: many(userToGroups),
 }));
 
 /*
