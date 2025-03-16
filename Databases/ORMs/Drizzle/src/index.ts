@@ -1,6 +1,12 @@
 import { database } from "./db/db"
-import * as schema from "./db/schema/schema"
+// import * as schema from "./db/schema/schema"
 
-const users = database.select().from(schema.users)
+// const users = database.select().from(schema.users)
+const posts = database.query.posts.findMany({
+    limit: 2,
+    with: {
+        author: true
+    }
+})
 
-users.then(data => console.log(data)).catch(error => console.error(error));
+posts.then(data => console.log(data)).catch(error => console.error(error));
