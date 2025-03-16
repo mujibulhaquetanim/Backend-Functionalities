@@ -2,11 +2,21 @@ import { database } from "./db/db"
 // import * as schema from "./db/schema/schema"
 
 // const users = database.select().from(schema.users)
-const posts = database.query.posts.findMany({
+const post = database.query.posts.findMany({
+    // find authorId equal to 17
+    where: (posts, {eq})=> eq(posts.authorId, 17),
     limit: 2,
     with: {
-        author: true
+        author: {
+            with:{
+                usersToGroups: {
+                    with: {
+                        group: true
+                    }
+                }
+            }
+        }
     }
 })
 
-posts.then(data => console.log(data)).catch(error => console.error(error));
+post.then(data => console.log(data)).catch(error => console.error(error));
