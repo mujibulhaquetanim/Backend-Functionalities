@@ -6,8 +6,8 @@ import { relations } from "drizzle-orm";
 export const comments = pgTable('comments',{
     id: serial("id").primaryKey(),
     text: text("text").notNull(),
-    authorId: integer("authorId").references(()=> users.id),
-    postId: integer('postId').references(()=> posts.id)
+    authorId: integer("authorId").references(()=> users.id, {onDelete: 'cascade'}),
+    postId: integer('postId').references(()=> posts.id, {onDelete: 'cascade'})
 })
 
 export const commentRelations = relations(comments, ({one})=>({
