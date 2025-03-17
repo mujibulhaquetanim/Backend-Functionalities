@@ -50,4 +50,16 @@ import { users } from "./db/schema/users.schema"
 // const afterDeleteUser = database.select().from(users).where(eq(users.id, 10))
 // afterDeleteUser.then(data => console.log(`after: ${data}`)).catch(error => console.error(error));
 
+const deleteUser = database
+  .delete(users)
+  .where(eq(users.id, 18))
+  .returning();
+
+deleteUser.then(data =>{
+    if(data.length>0){
+        console.log(`deleted ${JSON.stringify(data[0],null,2)}`);
+    }else{
+        console.log(`no user found`);
+    }
+}).catch(error => console.error(error));
 
