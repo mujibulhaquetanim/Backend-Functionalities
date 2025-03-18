@@ -47,9 +47,9 @@ model Friendship {
   userId   String
   friendId String
   //user who sent the friend request
-  user     User   @relation("UserAsFriendshipCreator", fields: [userId], references: [id])
+  user     User   @relation("UserAsFriendshipCreator", fields: [userId], references: [id], onDelete: Cascade)
   //user who received the friend request
-  friend   User   @relation("UserAsFriend", fields: [friendId], references: [id])
+  friend   User   @relation("UserAsFriend", fields: [friendId], references: [id], onDelete: Cascade)
 
   @@unique([userId, friendId]) // Ensures a user cannot be friends with the same person multiple times
 }
@@ -60,7 +60,7 @@ model Profile {
   id     Int    @id @default(autoincrement())
   bio    String
   userId String @unique //unique is needed for one to one relationship
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Post {
@@ -70,7 +70,7 @@ model Post {
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   published  Boolean    @default(false)
-  author     User       @relation(fields: [authorId], references: [id])
+  author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   categories Category[]
 }
 
