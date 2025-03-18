@@ -10,13 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/*
+Why We Need friendships and friends in User?
+friendships → Friendships where the user is the one who added the friend.
+friends → Friendships where the user was added as a friend by someone else.
+This ensures bidirectional querying.
+*/
 model User {
   id          String       @id @default(uuid())
   name        String
   email       String       @unique
   password    String
   joinedAt    DateTime     @default(now())
-  friendships Friendship[] @relation("UserFriendships") // Changed from friends to friendships and added relation name
+  // Friendships where this user is the one who sent the friend request
+  friendships Friendship[] @relation("UserAsFriendshipCreator")
+  // Friendships where this user is the one who received the friend request
+  friends     Friendship[] @relation("UserAsFriend")
   jobTitleId  Int?
   jobTitle    JobTitle?    @relation("UserJobTitles", fields: [jobTitleId], references: [id])
   profile     Profile?
@@ -26,6 +35,26 @@ model User {
   @@index([id, email])
   @@map("users")
 }
+
+/*
+In a friendship system, every relationship is between two users. In Prisma, we represent this using a Friendship model that links two User records.
+Now, the main issue is that a friendship is always bidirectional:
+If Alice adds Bob, Bob is also Alice’s friend.
+However, in a database, this has to be stored as one row to avoid duplicates.
+*/
+model Friendship {
+  id       Int    @id @default(autoincrement())
+  userId   String
+  friendId String
+  //user who sent the friend request
+  user     User   @relation("UserAsFriendshipCreator", fields: [userId], references: [id])
+  //user who received the friend request
+  friend   User   @relation("UserAsFriend", fields: [friendId], references: [id])
+
+  @@unique([userId, friendId]) // Ensures a user cannot be friends with the same person multiple times
+}
+
+
 
 model Profile {
   id     Int    @id @default(autoincrement())
@@ -42,10 +71,10 @@ model Post {
   updatedAt  DateTime   @updatedAt
   published  Boolean    @default(false)
   author     User       @relation(fields: [authorId], references: [id])
-  categories category[]
+  categories Category[]
 }
 
-model category {
+model Category {
   id    Int    @id @default(autoincrement())
   name  String
   posts Post[]
@@ -58,12 +87,7 @@ model JobTitle {
   users User[] @relation("UserJobTitles")
 }
 
-model Friendship {
-  id       Int    @id @default(autoincrement())
-  userId   String
-  friendId String
-  user     User   @relation("UserFriendships", fields: [userId], references: [id])
-}
+
 
 //multi field relations
 // model User {
