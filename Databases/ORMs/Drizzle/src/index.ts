@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm"
+import { eq, inArray } from "drizzle-orm"
 import { database } from "./db/db"
 import { posts } from "./db/schema/posts.schema"
 import { users } from "./db/schema/users.schema"
@@ -22,6 +22,19 @@ import { users } from "./db/schema/users.schema"
 //     }
 // })
 // post.then(data => console.log(data)).catch(error => console.error(error));
+
+async function getUsersPost() {
+    // The combined query essentially retrieves user details for a subset of authors (limited to 2) who have posts in the posts table. This query fetches all rows from the users table where the id matches any of the authorIds returned by the subquery
+
+    // it is returned multiple rows of authorId
+    //The subquery selects distinct authorId values from the posts table by grouping the rows based on authorId. It limits the result to a maximum of 2 rows.
+    const subQuery = database.select({userId: posts.authorId}).from(posts).groupBy(posts.authorId).limit(2);
+
+    // for multiple users or Array of users use inArray instead of `eq` which is for single user.
+    const result = await database.select().from(users).where(inArray(users.id, subQuery));
+    return result;
+}
+getUsersPost().then(data => console.log(data)).catch(error => console.error(error));
 
 // const updatePost = database.update(posts).set({
 //     title: "Updated Title"
@@ -50,16 +63,15 @@ import { users } from "./db/schema/users.schema"
 // const afterDeleteUser = database.select().from(users).where(eq(users.id, 10))
 // afterDeleteUser.then(data => console.log(`after: ${data}`)).catch(error => console.error(error));
 
-const deleteUser = database
-  .delete(users)
-  .where(eq(users.id, 18))
-  .returning();
+// const deleteUser = database
+//   .delete(users)
+//   .where(eq(users.id, 18))
+//   .returning();
 
-deleteUser.then(data =>{
-    if(data.length>0){
-        console.log(`deleted ${JSON.stringify(data[0],null,2)}`);
-    }else{
-        console.log(`no user found`);
-    }
-}).catch(error => console.error(error));
+// deleteUser.then(data =>{
+//     if(data.length>0){
+//         console.log(`deleted ${JSON.stringify(data[0],null,2)}`);
+//     }else{
+//         console.log(`no user found`);
+//     }
 
