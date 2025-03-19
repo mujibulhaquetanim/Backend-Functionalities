@@ -28,10 +28,20 @@ async function getUsersPost() {
 
     // it is returned multiple rows of authorId
     //The subquery selects distinct authorId values from the posts table by grouping the rows based on authorId. It limits the result to a maximum of 2 rows.
-    const subQuery = database.select({userId: posts.authorId}).from(posts).groupBy(posts.authorId).limit(2);
+    // const subQuery = database.select({userId: posts.authorId}).from(posts).groupBy(posts.authorId).limit(2);
+
+    const subQuery = await database.select({userId: posts.authorId}).from(posts).groupBy(posts.authorId).limit(2).execute();
+    
+    // using string literal calls toString() method to this array of objects and returns a string. The default .toString() implementation for non-primitive objects like arrays or complex query objects returns [object Object].This happens because the object isn't being serialized or explicitly converted into a human-readable format.
+    console.log(`subQuery: ${subQuery}`);
+    // using JSON.stringify() formats the object into a JSON string.
+    //Using string literals (${}) works fine for primitive types (numbers, strings, etc.), but for complex objects like arrays or query results, direct logging or JSON serialization is necessary for meaningful and human-readable output.
+    console.log(`subQuery: ${JSON.stringify(subQuery)}`);
+
+    const userIds = (await subQuery).map((row)=> row.userId);
 
     // for multiple users or Array of users use inArray instead of `eq` which is for single user.
-    const result = await database.select().from(users).where(inArray(users.id, subQuery));
+    const result = await database.select().from(users).where(inArray(users.id, userIds));
     return result;
 }
 getUsersPost().then(data => console.log(data)).catch(error => console.error(error));
