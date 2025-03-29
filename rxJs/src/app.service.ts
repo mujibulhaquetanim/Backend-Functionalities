@@ -4,7 +4,16 @@ import { concatMap, filter, map, mergeMap, Observable, of, switchMap, tap } from
 @Injectable()
 export class AppService {
   getReflectMetaData(): string {
-    throw new Error('Method not implemented.');
+    class User{
+      getName(): string{
+        return 'returning name';
+      }
+    }
+    const user = new User();
+    // Reflect.defineMetadata('name', 'user', User.prototype);
+    Reflect.defineMetadata('name', 'user', user);
+    // Reflect.getMetadata('name', User.prototype);
+    return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
