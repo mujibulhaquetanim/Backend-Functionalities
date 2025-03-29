@@ -5,15 +5,18 @@ import { concatMap, filter, map, mergeMap, Observable, of, switchMap, tap } from
 export class AppService {
   getReflectMetaData(): string {
     class User{
+      @Reflect.metadata('name', 'user')
       getName(): string{
         return 'returning name';
       }
     }
     const user = new User();
     // Reflect.defineMetadata('name', 'user', User.prototype);
-    Reflect.defineMetadata('name', 'user', user);
+    // Reflect.defineMetadata('name', 'user', user);
+    // Reflect.defineMetadata('name', 'user', user, 'getName'); //used for method
     // Reflect.getMetadata('name', User.prototype);
-    return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
+    // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
+    return 'Welcome to NestJS ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
