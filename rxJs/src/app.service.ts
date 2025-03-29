@@ -5,12 +5,16 @@ import { concatMap, filter, map, mergeMap, Observable, of, switchMap, tap } from
 export class AppService {
   getReflectMetaData(): string {
     class User{
+      private name: string;
+      constructor(name: string){
+        this.name = name
+      }
       @Reflect.metadata('name', 'user')
       getName(): string{
-        return 'returning name';
+        return this.name;
       }
     }
-    const user = new User();
+    const user = new User('');
     // Reflect.defineMetadata('name', 'user', User.prototype);
     // Reflect.defineMetadata('name', 'user', user);
     // Reflect.defineMetadata('name', 'user', user, 'getName'); //used for method
