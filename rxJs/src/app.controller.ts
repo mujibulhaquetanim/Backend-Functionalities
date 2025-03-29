@@ -6,7 +6,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getRxJs(): string {
+    return this.appService.getRxJs();
+  }
+
+  @Get('reflect-metadata')
+  getReflectMe(): string {
+    return this.appService.getReflectMetaData();
   }
 }
