@@ -3,7 +3,10 @@ import { concatMap, filter, map, mergeMap, Observable, of, switchMap, tap } from
 
 @Injectable()
 export class AppService {
-  getHello(): string {
+  getReflectMetaData(): string {
+    throw new Error('Method not implemented.');
+  }
+  getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
       observer.next(1);
       observer.next(2);
