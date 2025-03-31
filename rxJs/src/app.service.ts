@@ -18,6 +18,14 @@ export class AppService {
       getRole(): string{
         return Reflect.getMetadata('role', this)
       }
+
+      deleteMetaData(){
+        return Reflect.deleteMetadata('role', this)
+      }
+
+      hasMetaData(){
+        return Reflect.hasMetadata('role', this)
+      }
     }
 
     //dynamic metadata
@@ -43,7 +51,7 @@ export class AppService {
     // Reflect.getMetadata('name', User.prototype);
     // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
     // return 'Welcome to Reflect pkg practice session: ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
-    return `Welcome to Reflect pkg practice session: user: ${user.getName()} role: ${user.getRole()}`;
+    return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${user.hasMetaData()}, user: ${user.getName()} role: ${user.getRole()} delete: deleteMetaData: ${user.deleteMetaData()} isRolePresent: ${user.hasMetaData()}`;
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
