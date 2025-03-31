@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 async function main(){
     // //existing user check
@@ -90,6 +90,21 @@ async function main(){
 
     console.log(`allFriends count: ${allFriends.length}`);
     console.dir(allFriends, {depth: null})
+
+    const [user, user2, count] = await prisma.$transaction([
+      prisma.user.findUnique({
+        where: {id: '1134f861-2ec7-4496-bece-79f29785bb85'},
+        include: {friendships: {include: {friend: true}}}
+      }),
+      prisma.user.findUnique({
+        where: {
+          email: 'mujibai@me.com'
+        }
+      }),
+      prisma.user.count()
+    ])
+
+    console.log(`user: ${JSON.stringify(user)}, user2: ${JSON.stringify(user2)}, and count: ${count}`, {depth: null});
 }
 
 main().then(async ()=>await prisma.$disconnect()).catch(async (error)=> {
