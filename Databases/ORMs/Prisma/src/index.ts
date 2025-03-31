@@ -91,6 +91,7 @@ async function main(){
     console.log(`allFriends count: ${allFriends.length}`);
     console.dir(allFriends, {depth: null})
 
+    //using transaction we can execute multiple queries in a single transaction and it is similar to db transaction, if any of the query fails then whole transaction fails.
     const [user, user2, count] = await prisma.$transaction([
       prisma.user.findUnique({
         where: {id: '1134f861-2ec7-4496-bece-79f29785bb85'},
