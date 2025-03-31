@@ -9,18 +9,37 @@ export class AppService {
       constructor(name: string){
         this.name = name
       }
-      @Reflect.metadata('name', 'user')
+      //hardcoded metadata
+      // @Reflect.metadata('name', 'user')
       getName(): string{
         return this.name;
       }
     }
-    const user = new User('');
+
+    //dynamic metadata
+    class UserFactory{
+      static create(name: string, role: string){
+        const user = new User(name);
+        Reflect.defineMetadata('role', role, user)
+        return user;
+      }
+    }
+
+    function getMetaData(usr: User){
+      return Reflect.getMetadata('role', usr)
+    }
+
+    const user = UserFactory.create('mujibai', 'admin');
+    console.log(user.getName(), getMetaData(user));
+
+    // const user = new User('');
     // Reflect.defineMetadata('name', 'user', User.prototype);
     // Reflect.defineMetadata('name', 'user', user);
     // Reflect.defineMetadata('name', 'user', user, 'getName'); //used for method
     // Reflect.getMetadata('name', User.prototype);
     // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
-    return 'Welcome to NestJS ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
+    // return 'Welcome to Reflect pkg practice session: ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
+    return `Welcome to Reflect pkg practice session: user: ${user.getName()} role: ${getMetaData(user)}`;
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
