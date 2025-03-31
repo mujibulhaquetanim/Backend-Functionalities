@@ -14,6 +14,10 @@ export class AppService {
       getName(): string{
         return this.name;
       }
+
+      getRole(): string{
+        return Reflect.getMetadata('role', this)
+      }
     }
 
     //dynamic metadata
@@ -25,12 +29,12 @@ export class AppService {
       }
     }
 
-    function getMetaData(usr: User){
-      return Reflect.getMetadata('role', usr)
-    }
+    // function getMetaData(usr: User){
+    //   return Reflect.getMetadata('role', usr)
+    // }
 
     const user = UserFactory.create('mujibai', 'admin');
-    console.log(user.getName(), getMetaData(user));
+    console.log(user.getName(), user.getRole());
 
     // const user = new User('');
     // Reflect.defineMetadata('name', 'user', User.prototype);
@@ -39,7 +43,7 @@ export class AppService {
     // Reflect.getMetadata('name', User.prototype);
     // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
     // return 'Welcome to Reflect pkg practice session: ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
-    return `Welcome to Reflect pkg practice session: user: ${user.getName()} role: ${getMetaData(user)}`;
+    return `Welcome to Reflect pkg practice session: user: ${user.getName()} role: ${user.getRole()}`;
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
