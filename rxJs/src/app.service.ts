@@ -51,6 +51,23 @@ export class AppService {
     // Reflect.getMetadata('name', User.prototype);
     // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
     // return 'Welcome to Reflect pkg practice session: ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
+
+    function Role(role: string): ClassDecorator{
+      //class decorator must return a function and the parameter of that function would be the class provided by the decorator, here Admin class is provided by the decorator automatically as target
+      return (target: any)=>{
+        Reflect.defineMetadata('role', role, target)
+      }
+    }
+
+    @Role('admin')
+    class Admin{
+      getSettings(){
+        return {
+          sendMail: true
+        }
+      }
+    }
+
     return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${user.hasMetaData()}, user: ${user.getName()} role: ${user.getRole()} delete: deleteMetaData: ${user.deleteMetaData()} isRolePresent: ${user.hasMetaData()}`;
   }
   getRxJs(): string {
