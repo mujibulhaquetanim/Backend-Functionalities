@@ -52,6 +52,8 @@ export class AppService {
     // Reflect.getMetadata('name', User.prototype);
     // return 'Welcome to NestJS ' + Reflect.getMetadata('name', user);
     // return 'Welcome to Reflect pkg practice session: ' + Reflect.getMetadata('name', user, 'getName'); //without method name it will return undefined
+    
+    // return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${admin.hasMetaData()}, user: ${admin.getName()} role: ${admin.getRole()} delete: deleteMetaData: ${admin.deleteMetaData()} isRolePresent: ${admin.hasMetaData()}`;
 
     function Role(role: string): ClassDecorator{
       //class decorator must return a function and the parameter of that function would be the class provided by the decorator, here Admin class is provided by the decorator automatically as target
@@ -76,11 +78,9 @@ export class AppService {
       return role === adminPanelRole
     }
 
-    console.log(`canAccessAdminPanel: ${canAccessAdminPanel(admin)}`);
-    console.log(`canAccessAdminPanel: ${canAccessAdminPanel(tanim)}`);
-
-    return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${admin.hasMetaData()}, user: ${admin.getName()} role: ${admin.getRole()} delete: deleteMetaData: ${admin.deleteMetaData()} isRolePresent: ${admin.hasMetaData()}`;
+    return `Welcome to Reflect pkg practice session: can admin access admin panel: ${canAccessAdminPanel(admin) ? 'canAccessAdminPanel' : 'cannotAccessAdminPanel'} can tanim access admin panel: ${canAccessAdminPanel(tanim) ? 'canAccessAdminPanel' : 'cannotAccessAdminPanel'}`
   }
+
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
       observer.next(1);
