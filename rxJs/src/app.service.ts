@@ -41,8 +41,9 @@ export class AppService {
     //   return Reflect.getMetadata('role', usr)
     // }
 
-    const user = UserFactory.create('mujibai', 'admin');
-    console.log(user.getName(), user.getRole());
+    const admin = UserFactory.create('mujibai', 'admin');
+    const tanim = UserFactory.create('tanim', 'moderator');
+    console.log(admin.getName(), admin.getRole());
 
     // const user = new User('');
     // Reflect.defineMetadata('name', 'user', User.prototype);
@@ -68,7 +69,7 @@ export class AppService {
       }
     }
 
-    return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${user.hasMetaData()}, user: ${user.getName()} role: ${user.getRole()} delete: deleteMetaData: ${user.deleteMetaData()} isRolePresent: ${user.hasMetaData()}`;
+    return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${admin.hasMetaData()}, user: ${admin.getName()} role: ${admin.getRole()} delete: deleteMetaData: ${admin.deleteMetaData()} isRolePresent: ${admin.hasMetaData()}`;
   }
   getRxJs(): string {
     const obs = new Observable<number>((observer)=>{
