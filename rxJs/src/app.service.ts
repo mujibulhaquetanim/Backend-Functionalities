@@ -69,6 +69,16 @@ export class AppService {
       }
     }
 
+    function canAccessAdminPanel(usr: User){
+      const role = Reflect.getMetadata('role', usr);
+      const adminPanelRole = Reflect.getMetadata('role', Admin.prototype);
+      // would return boolean value upon comparison
+      return role === adminPanelRole
+    }
+
+    console.log(`canAccessAdminPanel: ${canAccessAdminPanel(admin)}`);
+    console.log(`canAccessAdminPanel: ${canAccessAdminPanel(tanim)}`);
+
     return `Welcome to Reflect pkg practice session: Before Delete: isRolePresent: ${admin.hasMetaData()}, user: ${admin.getName()} role: ${admin.getRole()} delete: deleteMetaData: ${admin.deleteMetaData()} isRolePresent: ${admin.hasMetaData()}`;
   }
   getRxJs(): string {
