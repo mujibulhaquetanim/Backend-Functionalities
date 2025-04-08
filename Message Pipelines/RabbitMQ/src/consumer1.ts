@@ -9,7 +9,7 @@ async function consumer1() {
     
         channel.consume('email-queue1', (msg) => {
             if (msg !== null) {
-                console.log("Message Received:", msg.content.toString());
+                console.log("Message Received:", JSON.parse(msg.content.toString()));
                 channel.ack(msg);
             }
         });
