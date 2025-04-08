@@ -17,9 +17,12 @@ async function sendMail(){
     // declare exchange
     await channel.assertExchange(exchange, 'direct', {durable: true});
     // declare queue
-    await channel.assertQueue(routingKey1, {durable: true});
-    await channel.assertQueue(routingKey2, {durable: true});
+    await channel.assertQueue('email-queue1', {durable: true});
+    await channel.assertQueue('email-queue2', {durable: true});
     // bind queue to exchange
+    await channel.bindQueue('email-queue1', exchange, routingKey1);
+    await channel.bindQueue('email-queue2', exchange, routingKey2);
+    // send message
     await channel.publish(exchange, routingKey1, Buffer.from(JSON.stringify(mail)));
     await channel.publish(exchange, routingKey2, Buffer.from(JSON.stringify(mail)));
 }
