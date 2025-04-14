@@ -24,4 +24,15 @@ echo "Number of Crushes ${#listOfCrushes[*]}"
 # slicing the array
 echo "Slicing of Crushes ${listOfCrushes[@]:1:2}"
 # adding an element to the array
-listOfCrushes+=("Millie Bobby Brown")
+listOfCrushes+=("LaLisa")
+echo "Updated List of Crushes ${listOfCrushes[*]}"
+
+# key value pair in array
+declare -A crushesDetails
+crushesDetails["perfectGirl"]=${listOfCrushes[0]}
+crushesDetails["hottest"]=${listOfCrushes[1]}
+crushesDetails["bestLook"]=${listOfCrushes[2]}
+echo "Best feature of each crush is: perfectGirl ${crushesDetails["perfectGirl"]} 😍, hottest ${crushesDetails["hottest"]} 🔥, bestLook ${crushesDetails["bestLook"]} 😘"
+# another way of declaring an array
+crushesDetails=(["perfectGirl"]=${listOfCrushes[0]} ["hottest"]=${listOfCrushes[1]} ["bestLook"]=${listOfCrushes[2]})
+echo "Best feature of each crush is: perfectGirl ${crushesDetails["perfectGirl"]} 😍, hottest ${crushesDetails["hottest"]} 🔥, bestLook ${crushesDetails["bestLook"]} 😘"
