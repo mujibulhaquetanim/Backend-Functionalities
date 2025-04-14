@@ -17,3 +17,11 @@ echo "She is my crush, i rate her $rating/10 😊"
 # declare -a names=("Emma" "Emma" "Emma")
 listOfCrushes=("EmmaWatsom" "SabilaNur" "ShraddhaKapoor")
 echo "My Crushes are ${listOfCrushes[0]}, ${listOfCrushes[1]}, ${listOfCrushes[2]}"
+# printing the whole array
+echo "Load of Crushes ${listOfCrushes[*]}"
+# length of the array
+echo "Number of Crushes ${#listOfCrushes[*]}"
+# slicing the array
+echo "Slicing of Crushes ${listOfCrushes[@]:1:2}"
+# adding an element to the array
+listOfCrushes+=("Millie Bobby Brown")
