@@ -51,3 +51,20 @@ echo "We can get another beauty if we replace the Last Name: ${name/Watson/Myers
 <<comment
 replace substring of the string, first one is variable name and second one is what we want to replace and third one is what we want to replace it with
 comment
+
+# arithmetic operations
+# use of $(()) for arithmetic operations
+echo "Addition of 2 and 3 is $((2+3))"
+echo "Subtraction of 2 and 3 is $((2-3))"
+echo "Multiplication of 2 and 3 is $((2*3))"
+echo "Division of 2 and 3 is $((2/3))"
+# another way of arithmetic operations
+# let is used to declare a variable without it arithmetic operations will not work
+let add=2+3
+let sub=2-3
+let mul=2*3
+let div=2/3
+echo "Addition of 2 and 3 is $add"
+echo "Subtraction of 2 and 3 is $sub"
+echo "Multiplication of 2 and 3 is $mul"
+echo "Division of 2 and 3 is $div"
