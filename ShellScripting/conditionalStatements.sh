@@ -11,3 +11,13 @@ elif [[ $crushName == "Shraddha Kapoor" ]];then
 else
     echo "You are wrong"
 fi
+
+# greater than, less than, greater than or equal to, less than or equal to
+
+# -eq -ne -gt -ge -lt -le
+
+# -a -o
+
+# [[ $crushName == "Emma Watson" ]] || [[ $crushName == "Sabila Nur" ]]
+
+# [[ $crushName == "Emma Watson" ]] && [[ $crushName == "Sabila Nur" ]]
