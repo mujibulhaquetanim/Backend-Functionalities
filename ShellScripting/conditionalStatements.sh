@@ -12,12 +12,19 @@ else
     echo "You are wrong"
 fi
 
-# greater than, less than, greater than or equal to, less than or equal to
+# logical operators
+read -p "Guess her country: " country
+# or operators
+if [[ $crushName == "Emma Watson" || $country == "England" ]];then
+    echo "You are goddamn right"
+else
+    echo "You are wrong"
+fi
 
-# -eq -ne -gt -ge -lt -le
+# and operators
+if [[ $crushName == "Emma Watson" && $country == "England" ]];then
+    echo "You are goddamn right"
+else
+    echo "You are wrong"
+fi
 
-# -a -o
-
-# [[ $crushName == "Emma Watson" ]] || [[ $crushName == "Sabila Nur" ]]
-
-# [[ $crushName == "Emma Watson" ]] && [[ $crushName == "Sabila Nur" ]]
