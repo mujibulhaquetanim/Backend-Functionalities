@@ -29,10 +29,22 @@ else
 fi
 
 
-# arithmetic operators like eq, gt
+# Ask for age input
 read -p "Guess her age: " age
 
-if [[ $crushName -eq "Emma Watson" && $country -eq "England" && $age -gt 30 ]];then
+# Set variables
+crushName="Emma Watson"
+country="England"
+
+# First condition
+if [[ $crushName == "Emma Watson" && $country == "England" && $age -gt 30 ]];then
+    echo "You are goddamn right"
+else
+    echo "You are wrong"
+fi
+
+# Second condition
+if [[ $age -eq 34 ]] && [[ $crushName == "Emma Watson" ]] && [[ $country == "England" ]];then
     echo "You are goddamn right"
 else
     echo "You are wrong"
