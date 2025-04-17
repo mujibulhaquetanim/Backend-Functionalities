@@ -28,3 +28,12 @@ else
     echo "You are wrong"
 fi
 
+
+# arithmetic operators like eq, gt
+read -p "Guess her age: " age
+
+if [[ $crushName -eq "Emma Watson" && $country -eq "England" && $age -gt 30 ]];then
+    echo "You are goddamn right"
+else
+    echo "You are wrong"
+fi
