@@ -49,3 +49,8 @@ if [[ $age -eq 34 ]] && [[ $crushName == "Emma Watson" ]] && [[ $country == "Eng
 else
     echo "You are wrong"
 fi
+
+# conditional expression with && and || it is called short circuit evaluation
+read -p "Guess another crush name: " crushName3
+
+[[ $crushName3 == "Shraddha Kapoor" ]] && echo "You are goddamn right" || echo "You are wrong"
