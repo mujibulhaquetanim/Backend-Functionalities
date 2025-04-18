@@ -21,3 +21,11 @@ for i in {0..2}
 do
     echo "My Crush is ${listOfCrushes[$i]}"
 done
+
+# while loop with arithmetic operations
+i=0
+while [ $i -lt ${#listOfCrushes[*]} ]
+do
+    echo "My Crush is ${listOfCrushes[$i]}"
+    i=$((i+1))
+done
