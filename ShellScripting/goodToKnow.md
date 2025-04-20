@@ -20,6 +20,7 @@
 
 - `#` for number operations or comments. i.e. `${#arr[*]}`
 - `<<` for multiline comments.
+- `-e` for escape sequences
 
 ### Difference between `<` and `>`
 
