@@ -1,3 +1,3 @@
-Emma Watson
-Shraddha Kapoor
-Sabila Nur
+"Emma Watson"
+"Sabila Nur"
+"Shraddha Kapoor"
