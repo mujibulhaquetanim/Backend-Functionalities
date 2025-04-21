@@ -29,3 +29,11 @@ do
     echo "My Crush is ${listOfCrushes[$i]}"
     i=$((i+1))
 done
+
+# until loop
+a=12
+until [[ $a -eq 7 ]]; do
+    echo "count is $a"
+    a=$((a-1))
+    # let a--
+done
