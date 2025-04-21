@@ -38,10 +38,17 @@ until [[ $a -eq 7 ]]; do
     # let a--
 done
 
-# infinite loop, useful for constantly running process like backup process, monitoring process etc
-time=0
-while true
+# # infinite loop, useful for constantly running process like backup process, monitoring process etc
+# time=0
+# while true
+# do
+#     echo "Infinite Loop Running for $((++time)) seconds"
+#     sleep 1s
+# done
+
+# infinite loop using for loop
+for (( ; ; ))
 do
-    echo "Infinite Loop Running for $((++time)) seconds"
+    echo "Infinite Loop Running using for loop"
     sleep 1s
 done
