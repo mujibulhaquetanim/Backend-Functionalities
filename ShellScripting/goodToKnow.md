@@ -2,21 +2,30 @@
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
 
+- Both `$(( ))` (arithmetic expansion) and the `let` keyword in Bash handle exit statuses similarly, determining their success or failure based on the result of the arithmetic expression. If the result is non-zero, the exit status is `0` (indicating success), and if the result is zero, the exit status is `1` (indicating failure). For example, in `$((5 > 3))`, the expression evaluates to true, so the exit status is `0`, while `$((3 > 5))` results in an exit status of `1`. The same logic applies to `let`. While `let` is functional, `$(( ))` is generally preferred for modern scripting due to its cleaner syntax, easier integration within scripts, and overall readability, making it the go-to choice for arithmetic operations in Bash.
+
 ## Difference between
 
 - `$`and `@` in a bash script
+
   - The `$` character is used to represent a variable in a bash script, while the `@` character is used to represent an array in a bash script or a positional parameter in a bash script.
 
 - `$()` and `${}` in a bash script
+
   - Use $() when you want to execute a command and use its result.
 
   - Use ${} to manipulate variables or access values in a shell script.
 
 ## Syntax
 
-- (()) for arithmetic operations
+- `(())` for arithmetic operations
 
-- `[[ ]]` for string operations
+- `[[ ]]` for string operations and conditionals. it is better than using [] because it supports regex and logical operators if we had to do this with [] then additional tooling would be required like grep for regex.
+  [[]] prevents word splitting and pathname expansion, meaning it handles spaces and special characters in variables more safely: `file="my file.txt"
+if [[ -f $file ]]; then
+    echo "File exists!"
+fi`
+  With `[ ]`, you'd need to explicitly quote the variable ("$file") to avoid syntax errors.
 
 - `#` for number operations or comments. i.e. `${#arr[*]}`
 - `<<` for multiline comments.
@@ -54,6 +63,6 @@ This will add "Hello world" to the end of file.txt without erasing its current c
 - The redirection `(< "$FILE")` ensures that each of the lines above is read one at a time. Without `done < "$FILE"`, the loop wouldn't know what to process because it wouldn't have the file content as input.
 
 - `Input Redirection (<)`: The `<` operator is used in bash to redirect the contents of a file as input for a command or script. In this case, it redirects the contents of `$FILE (your file path)` to the while loop.
-`$FILE`: This is a variable that holds the path to your file, which contains the data you want to process line by line.
+  `$FILE`: This is a variable that holds the path to your file, which contains the data you want to process line by line.
 
 - `done`: Marks the end of the while loop. At this point, all the instructions inside the loop block `(do ...)` have been executed for each line in the file. So, `done < "$FILE"` tells the shell: "Run this loop, and feed it the contents of the file specified by $FILE line by line as input."
