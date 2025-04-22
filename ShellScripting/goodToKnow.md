@@ -16,16 +16,16 @@
 
 - `$()` and `${}` in a bash script
 
-  - Use $() when you want to execute a command and use its result.
+  - Use `$()` when you want to execute a command and use its result.
 
-  - Use ${} to manipulate variables or access values in a shell script.
+  - Use `${}` to manipulate variables or access values in a shell script.
 
 ## Syntax
 
 - `(())` for arithmetic operations
 
-- `[[ ]]` for string operations and conditionals. it is better than using [] because it supports regex and logical operators if we had to do this with [] then additional tooling would be required like grep for regex.
-  [[]] prevents word splitting and pathname expansion, meaning it handles spaces and special characters in variables more safely: `file="my file.txt"
+- `[[ ]]` for string operations and conditionals. it is better than using `[]` because it supports regex and logical operators if we had to do this with `[]` then additional tooling would be required like grep for regex.
+  `[[]]` prevents word splitting and pathname expansion, meaning it handles spaces and special characters in variables more safely: `file="my file.txt"
 if [[ -f $file ]]; then
     echo "File exists!"
 fi`
