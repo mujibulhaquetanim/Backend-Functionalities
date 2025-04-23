@@ -21,4 +21,14 @@ grep -in "sa" "${CSV_FILE}"
 
 # to get match from different given files
 echo "---This command will give match from different given files---"
-grep -i "emma" "${TXT_FILE}" "${CSV_FILE}"
+# grep -i "emma" "${TXT_FILE}" "${CSV_FILE}"
+# hiding the file name, useful for data fetching
+grep -ih "emma" "${TXT_FILE}" "${CSV_FILE}"
+
+# finding multiple words in a file
+echo -e "\n\n---This command will find multiple words in a file---"
+grep -ie "emma" -e "sabila" -e "shraddha" "${TXT_FILE}"
+
+# alternate way of finding multiple words in a file
+egrep -i "sabila|shraddha" "$TXT_FILE" "$CSV_FILE"
+
