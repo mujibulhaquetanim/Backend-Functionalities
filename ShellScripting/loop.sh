@@ -47,8 +47,20 @@ done
 # done
 
 # infinite loop using for loop
-for (( ; ; ))
-do
-    echo "Infinite Loop Running using for loop"
-    sleep 1s
+# for (( ; ; ))
+# do
+#     echo "Infinite Loop Running using for loop"
+#     sleep 1s
+# done
+
+# break and continue
+for i in {1..10}; do
+    if [ $i -eq 7 ]; then
+        echo "Breaking at $i"
+        break
+    elif [ $i -eq 5 ]; then
+        echo "Skipping $i"
+        continue
+    fi
+    echo $i
 done
