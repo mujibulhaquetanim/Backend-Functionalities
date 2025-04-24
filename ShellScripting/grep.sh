@@ -19,6 +19,11 @@ grep -iw "s" "${CSV_FILE}"
 echo "---This command will give the line number of the match---"
 grep -in "sa" "${CSV_FILE}"
 
+# only print the file name
+echo -e "\n\n---This command will only print the file name---"
+grep -il "sa" "${CSV_FILE}"
+
+
 # to get match from different given files
 echo "---This command will give match from different given files---"
 # grep -i "emma" "${TXT_FILE}" "${CSV_FILE}"
