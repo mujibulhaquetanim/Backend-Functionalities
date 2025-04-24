@@ -4,3 +4,6 @@
 read -p "Enter your Crush Name: " crushName
 
 echo "So your crush is $crushName"
+
+# arguments are passed to the script using $1, $2, $3, $4 from the command line while executing the script
+echo "Your Crush Name is: $1 $2 $3 $4"
