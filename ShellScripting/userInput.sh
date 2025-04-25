@@ -1,5 +1,11 @@
 #!bin/bash
 
+# check if no arguments are provided, exit 1 is for error and exit 0 is for success. $# is the number of arguments
+if [[ $# -eq 0 ]]; then
+    echo "No arguments provided"
+    exit 1
+fi
+
 # read is a command that is used to take input from the user and store it in a var, here crushName is the var and -p is for prompt.
 read -p "Enter your Crush Name: " crushName
 
