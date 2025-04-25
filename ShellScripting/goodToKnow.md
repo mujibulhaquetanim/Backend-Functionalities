@@ -2,11 +2,15 @@
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
 
+- $# is the number of arguments passed to the script.
+
 - Both `$(( ))` (arithmetic expansion) and the `let` keyword in Bash handle exit statuses similarly, determining their success or failure based on the result of the arithmetic expression. If the result is non-zero, the exit status is `0` (indicating success), and if the result is zero, the exit status is `1` (indicating failure). For example, in `$((5 > 3))`, the expression evaluates to true, so the exit status is `0`, while `$((3 > 5))` results in an exit status of `1`. The same logic applies to `let`. While `let` is functional, `$(( ))` is generally preferred for modern scripting due to its cleaner syntax, easier integration within scripts, and overall readability, making it the go-to choice for arithmetic operations in Bash.
 
 - Use `>` when you want to start fresh and replace the file's contents. Use `>>` when you want to keep the existing content and add new data to the file.
 
 - `;` separates commands, allowing multiple commands on one line. The `;;` terminates a block in a case statement, signaling its end.
+
+- The shift command in shell scripting is used to shift the positional parameters of a script to the left, effectively discarding the first parameter ($1) and reassigning the rest. After using shift, the second parameter ($2) becomes $1, the third parameter ($3) becomes $2, and so on. If no arguments are left, $@ (all arguments) and $* (all arguments as a single string) become empty.
 
 ## Difference between
 
