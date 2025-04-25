@@ -37,3 +37,22 @@ grep -ie "emma" -e "sabila" -e "shraddha" "${TXT_FILE}"
 # alternate way of finding multiple words in a file
 egrep -i "sabila|shraddha" "$TXT_FILE" "$CSV_FILE"
 
+# ^ and $ are used to match the start and end of the line
+echo -e "\n\n---This command will match the start and end of the line---"
+grep -i ^S "$CSV_FILE"
+grep -i a$ "$CSV_FILE"
+
+# search a name in a directory
+echo -e "\n\n---This command will search a name in a directory---"
+grep -iR "Sabila" "./useCases/readFileUsingLoop"
+
+# using grep with ls. ls will list all the files in the current directory and then grep will search for the word "grep"
+echo -e "\n\n---This command will use grep with ls---"
+ls | grep -i "grep"
+
+# if i want to search but not print on the terminal. wc -l will count the number of lines
+echo -e "\n\n---This command will search but not print on the terminal---"
+# grep -i "Sabila" "$TXT_FILE" | wc -l
+grep -iq "Sabila" "$TXT_FILE"
+echo $? # to check the previous command is success or not, 0 is success and 1 is failure
+
