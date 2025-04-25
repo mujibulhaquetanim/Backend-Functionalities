@@ -12,3 +12,9 @@ echo "Your Crush Name is: $1"
 shift
 # Print all remaining arguments after the shift
 echo "Remaining arguments are: $@"
+
+# use shift keyword in a while loop for displaying the arguments
+while [[ $1 != "" ]]; do
+    echo "Your Crush Name is: $1"
+    shift # discard the first argument and move to the next
+done
