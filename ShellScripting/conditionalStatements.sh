@@ -54,3 +54,22 @@ fi
 read -p "Guess another crush name: " crushName3
 
 [[ $crushName3 == "Shraddha Kapoor" ]] && echo "You are goddamn right" || echo "You are wrong"
+
+# file exists or not
+FILE="${PWD}/useCases/readFileUsingLoop/readFile.txt"
+DIR="${PWD}/useCases/readFileUsingLoop"
+
+if [[ -f $FILE ]];then
+    echo "File exists"
+else
+    echo "File does not exist"
+    exit 1
+fi
+
+# directory exists or not
+if [[ -d $DIR ]];then
+    echo "Directory exists"
+else
+    echo "Directory does not exist"
+    exit 1
+fi
