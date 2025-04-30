@@ -1,0 +1,11 @@
+Hello World (overwritten)
+Listing all of the content of the a directory:
+basic.sh
+caseStatement.sh
+conditionalStatements.sh
+functions.sh
+goodToKnow.md
+grep.sh
+loop.sh
+useCases
+userInput.sh

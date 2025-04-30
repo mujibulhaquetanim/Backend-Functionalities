@@ -7,6 +7,8 @@
 - `$#` is the number of arguments passed to the script.
 - echo `$?`# to check the previous command is success or not, 0 is success and 1 is failure
 
+- The parentheses create a subshell, allowing multiple commands (echo and ls) to execute together as a single unit. The semicolon ; separates the two commands inside the subshell, ensuring they both run before redirecting output to the file. i.e. `(echo "Hello" ; ls) >> fileName`. without `()` then the two commands would be executed separately.
+
 - Both `$(( ))` (arithmetic expansion) and the `let` keyword in Bash handle exit statuses similarly, determining their success or failure based on the result of the arithmetic expression. If the result is non-zero, the exit status is `0` (indicating success), and if the result is zero, the exit status is `1` (indicating failure). For example, in `$((5 > 3))`, the expression evaluates to true, so the exit status is `0`, while `$((3 > 5))` results in an exit status of `1`. The same logic applies to `let`. While `let` is functional, `$(( ))` is generally preferred for modern scripting due to its cleaner syntax, easier integration within scripts, and overall readability, making it the go-to choice for arithmetic operations in Bash.
 
 - Use `>` when you want to start fresh and replace the file's contents. Use `>>` when you want to keep the existing content and add new data to the file.
