@@ -1,5 +1,7 @@
 # Good to know
 
+- use `set -x` to see the commands that are executed
+
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
