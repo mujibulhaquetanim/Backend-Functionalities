@@ -6,6 +6,8 @@
 
 - To execute a script (script.sh) using at, you must specify when it should run. For example, at -f script.sh now + 10 minutes schedules it to execute in 10 minutes, while at -f script.sh 14:30 runs it at 2:30 PM. After scheduling, you can view pending jobs using atq, which lists scheduled tasks, and remove a job with atrm <job-number>.
 
+- The crontab command in Linux is used for scheduling automated tasks at fixed intervals. It allows users to define commands or scripts that run periodically without manual execution. To create or edit a crontab, use crontab -e, which opens the cron scheduler in an editor where you can define jobs using a specific syntax. Each line follows the format: minute hour day month day-of-week command, allowing precise scheduling, such as 0 9 * * 1 myscript.sh to run myscript.sh every Monday at 9 AM. You can view scheduled tasks with crontab -l and remove them using crontab -r.
+
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
