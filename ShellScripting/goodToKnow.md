@@ -1,6 +1,6 @@
 # Good to know
 
-- use `set -x` to see the commands that are executed
+- use `set -x` to see the commands that are executed. `set -e` to stop the script if any command fails.
 
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
