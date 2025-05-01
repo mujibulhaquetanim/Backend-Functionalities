@@ -2,6 +2,8 @@
 
 - use `set -x` to see the commands that are executed. `set -e` to stop the script if any command fails.
 
+- To run the script in the background use `nohup ./script.sh &` for detached mode and `nohup ./script.sh` for foreground mode. this will run the script in the background and will continue running even if the terminal is closed and it will create a file called nohup.out in the current directory.
+
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
