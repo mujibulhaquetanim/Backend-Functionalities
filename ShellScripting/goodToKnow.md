@@ -4,6 +4,8 @@
 
 - To run the script in the background use `nohup ./script.sh &` for detached mode and `nohup ./script.sh` for foreground mode. this will run the script in the background and will continue running even if the terminal is closed and it will create a file called nohup.out in the current directory.
 
+- To execute a script (script.sh) using at, you must specify when it should run. For example, at -f script.sh now + 10 minutes schedules it to execute in 10 minutes, while at -f script.sh 14:30 runs it at 2:30 PM. After scheduling, you can view pending jobs using atq, which lists scheduled tasks, and remove a job with atrm <job-number>.
+
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
