@@ -17,5 +17,14 @@ echo "emma watson" | tr 'a-z' 'A-Z'
 # compress multiple repeated spaces or letters.
 echo "Emma Watson!!!" | tr -s 'a  !'
 
+# filter out non-alphabetic characters
+echo "Emma Watson483784718" | tr -cd 'a-zA-Z'
+
+echo -e "\n"
+
 # convert spaces into new line
 echo "Emma Watson" | tr ' ' '\n'
+
+
+# make lowercase to uppercase and uppercase to lowercase
+echo "Emma Watson" | tr 'a-zA-Z' 'A-Za-z'
