@@ -8,6 +8,8 @@
 
 - The crontab command in Linux is used for scheduling automated tasks at fixed intervals. It allows users to define commands or scripts that run periodically without manual execution. To create or edit a crontab, use crontab -e, which opens the cron scheduler in an editor where you can define jobs using a specific syntax. Each line follows the format: minute hour day month day-of-week command, allowing precise scheduling, such as 0 9 * * 1 myscript.sh to run myscript.sh every Monday at 9 AM. You can view scheduled tasks with crontab -l and remove them using crontab -r.
 
+- The `sed` command in Linux is a powerful stream editor used for text processing, allowing users to search, replace, insert, delete, and manipulate text efficiently. Some of its key functions include `p` for printing specific lines, `d` for deleting lines, `s` for substituting text, `i` for inserting new lines, `a` for appending content, and `c` for changing entire lines. Advanced features include `r` for reading from another file, `w` for writing matched lines to a new file, `e` for executing shell commands within `sed`, and `=` for printing line numbers. The `!` operator negates commands, executing them on all lines except those specified, while `z` clears the pattern space. Commands can be combined using `-e` or grouped within `{}` to apply multiple transformations at once. These features make `sed` an indispensable tool for automation and efficient text manipulation in Linux. What are you planning to do with `sed`?
+
 - to setup root password, use `sudo passwd root`. type `exit` to exit from root user. for temporarily switch to user, use su - <username>.
 
 - for loop splits the file content into space not new line where as while loop splits the file content into new line
