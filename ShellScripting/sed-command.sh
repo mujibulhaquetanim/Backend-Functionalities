@@ -20,3 +20,14 @@ sed -n '/Bangladesh/p' "./useCases/readFileUsingLoop/readFile.csv"
 echo -e "\n---replace a word in a file---"
 sed 's/Bangladesh/Chattogram/' "./useCases/readFileUsingLoop/readFile.csv"
 
+# writing multiple expressions using sed
+echo -e "\n---writing multiple expressions using sed---"
+sed -ne "/Bangladesh/p" -e "/India/p" "./useCases/readFileUsingLoop/readFile.csv"
+
+# read more two lines after a given line number
+echo -e "\n---read more two lines after a given line number---"
+sed -n '2,+2p' "./useCases/readFileUsingLoop/readFile.csv"
+
+# read every second line from a file
+echo -e "\n---read every second line from a file---"
+sed -n '2~2p' "./useCases/readFileUsingLoop/readFile.csv"
