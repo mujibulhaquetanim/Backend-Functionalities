@@ -42,4 +42,58 @@ SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND TABLE_
 -- Select specific columns from a table named 'products' in the public schema
 SELECT "text", "authorId" FROM public.comments;
 
+-- find the indexes in the database excluding the system indexes
+SELECT
+    t.relname AS table_name,
+    i.relname AS index_name,
+    array_agg(a.attname) AS column_names,
+    idx.indisunique AS is_unique,
+    idx.indisprimary AS is_primary
+FROM
+    pg_catalog.pg_statio_all_tables AS st
+JOIN
+    pg_catalog.pg_index AS idx ON st.relid = idx.indrelid
+JOIN
+    pg_catalog.pg_class AS i ON idx.indexrelid = i.oid
+JOIN
+    pg_catalog.pg_class AS t ON st.relid = t.oid
+JOIN
+    pg_catalog.pg_attribute AS a ON a.attrelid = t.oid AND a.attnum = ANY(idx.indkey)
+WHERE
+    st.schemaname NOT IN ('pg_catalog', 'information_schema')
+GROUP BY
+    t.relname,
+    i.relname,
+    idx.indisunique,
+    idx.indisprimary
+ORDER BY
+    t.relname,
+    i.relname;
 
+-- indexes in public
+SELECT
+    t.relname AS table_name,
+    i.relname AS index_name,
+    array_agg(a.attname) AS column_names,
+    idx.indisunique AS is_unique,
+    idx.indisprimary AS is_primary
+FROM
+    pg_catalog.pg_statio_all_tables AS st
+JOIN
+    pg_catalog.pg_index AS idx ON st.relid = idx.indrelid
+JOIN
+    pg_catalog.pg_class AS i ON idx.indexrelid = i.oid
+JOIN
+    pg_catalog.pg_class AS t ON st.relid = t.oid
+JOIN
+    pg_catalog.pg_attribute AS a ON a.attrelid = t.oid AND a.attnum = ANY(idx.indkey)
+WHERE
+    st.schemaname = 'public' -- Filter to the public schema
+GROUP BY
+    t.relname,
+    i.relname,
+    idx.indisunique,
+    idx.indisprimary
+ORDER BY
+    t.relname,
+    i.relname;
