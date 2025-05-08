@@ -55,3 +55,7 @@ sed '$d' "../useCases/readFileUsingLoop/readFile.csv"
 # delete the line in a given range
 echo -e "\n---delete the line in a given range---"
 sed '2,3d' "../useCases/readFileUsingLoop/readFile.csv"
+
+# add certain word from a file in a different file, w is for write
+echo -e "\n---add certain word from a file in a different file---"
+sed '/England/ w EnglandCrushes.csv' "../useCases/readFileUsingLoop/readFile.csv"
