@@ -22,6 +22,8 @@ sed 's/Bangladesh/Chattogram/' "../useCases/readFileUsingLoop/readFile.csv"
 sed 's/Bangladesh/Chattogram/g' "../useCases/readFileUsingLoop/readFile.csv"
 # to make change on file use -i flag
 sed -i 's/Bangladesh/Chattogram/g' "../useCases/readFileUsingLoop/readFile.csv"
+# to substitute a word (GB) that related to a word(Emma) in a file.
+sed '/Emma/ s/England/GB/g' "../useCases/readFileUsingLoop/readFile.csv"
 
 # writing multiple expressions using sed
 echo -e "\n---writing multiple expressions using sed---"
