@@ -55,7 +55,22 @@ sed '$d' "../useCases/readFileUsingLoop/readFile.csv"
 # delete the line in a given range
 echo -e "\n---delete the line in a given range---"
 sed '2,3d' "../useCases/readFileUsingLoop/readFile.csv"
+# delete white spaces
+echo -e "\n---delete white spaces---"
+sed -i '/^$/d' "../useCases/readFileUsingLoop/readFile.csv"
 
 # add certain word from a file in a different file, w is for write
 echo -e "\n---add certain word from a file in a different file---"
 sed '/England/ w EnglandCrushes.csv' "../useCases/readFileUsingLoop/readFile.csv"
+
+# add line after a given line number, a is for append, we can use any pattern like name instead of line number.
+echo -e "\n---add line after a given line number---"
+# sed -i '3 a La Lisa, 28, Thailand' "../useCases/readFileUsingLoop/readFile.csv"
+# add line after a given name
+sed '/Sabila Nur/ a La Lisa, 28, Thailand' "../useCases/readFileUsingLoop/readFile.csv"
+# change line, c is for change
+echo -e "\n---change line---"
+sed -i '/lolita/ c Alyla Browne, 15, Australia' "../useCases/readFileUsingLoop/readFile.csv"
+# insert line at the beginning, i is for insert
+echo -e "\n---insert line---"
+sed '1 i Crush Names' "../useCases/readFileUsingLoop/readFile.csv"
