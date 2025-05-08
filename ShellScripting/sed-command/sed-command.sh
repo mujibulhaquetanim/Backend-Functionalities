@@ -16,9 +16,12 @@ sed -n '2,3p' "../useCases/readFileUsingLoop/readFile.txt"
 echo -e "\n---read certain word from a file---"
 sed -n '/Bangladesh/p' "../useCases/readFileUsingLoop/readFile.csv"
 
-# replace a word in a file
+# replace a word in a file, s is for substitute and g is for global.
 echo -e "\n---replace a word in a file---"
 sed 's/Bangladesh/Chattogram/' "../useCases/readFileUsingLoop/readFile.csv"
+sed 's/Bangladesh/Chattogram/g' "../useCases/readFileUsingLoop/readFile.csv"
+# to make change on file use -i flag
+sed -i 's/Bangladesh/Chattogram/g' "../useCases/readFileUsingLoop/readFile.csv"
 
 # writing multiple expressions using sed
 echo -e "\n---writing multiple expressions using sed---"
