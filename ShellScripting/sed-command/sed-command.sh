@@ -40,3 +40,18 @@ sed -n '2~2p' "../useCases/readFileUsingLoop/readFile.csv"
 # read expression from a file
 echo -e "\n---read expression from a file---"
 sed -n -f "./file-expression.txt" "../useCases/readFileUsingLoop/readFile.csv"
+
+# delete a line from a file
+echo -e "\n---delete a line from a file---"
+# delete the line that contains Emma
+echo -e "\n---delete the line that contains Emma---"
+sed '/Emma/d' "../useCases/readFileUsingLoop/readFile.csv"
+# delete the first line
+echo -e "\n---delete the first line---"
+sed '1d' "../useCases/readFileUsingLoop/readFile.csv"
+# delete the last line
+echo -e "\n---delete the last line---"
+sed '$d' "../useCases/readFileUsingLoop/readFile.csv"
+# delete the line in a given range
+echo -e "\n---delete the line in a given range---"
+sed '2,3d' "../useCases/readFileUsingLoop/readFile.csv"
