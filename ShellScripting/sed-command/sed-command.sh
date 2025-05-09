@@ -1,5 +1,13 @@
 #!bin/bash
 
+# to see hidden character in a file, -n ensures only explicitly specified output is printed ans l is to list unambiguous representation of line meaning hidden characters.
+echo "---to see hidden character in a file---"
+sed -n 'l' "../useCases/readFileUsingLoop/readFile.txt" 
+
+# wrap line, after every 12 characters new line will be added
+echo -e "\n---wrap line---"
+sed -n 'l 12' "../useCases/readFileUsingLoop/readFile.txt"
+
 # read a specific line (1st line) from a file
 echo "---read a specific line (1st line) from a file---"
 sed -n '1p' "../useCases/readFileUsingLoop/readFile.txt"
