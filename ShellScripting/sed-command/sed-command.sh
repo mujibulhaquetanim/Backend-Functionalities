@@ -86,3 +86,20 @@ sed '1 i Crush Names' "../useCases/readFileUsingLoop/readFile.csv"
 # insert another file data after a given line number of another file using r is for read
 echo -e "\n---insert another file data after a given line number of another file---"
 sed -i '3r EnglandCrushes.csv' "../useCases/readFileUsingLoop/readFile.txt"
+
+# stop upon getting first match
+echo -e "\n---stop upon getting first match---"
+sed '/England/ q' "./EnglandCrushes.csv"
+
+# stop upon getting all matches
+echo -e "\n---stop upon getting all matches---"
+sed '/England/ Q' "./EnglandCrushes.csv"
+
+# adding system command after a given line number in a file, e is for expression
+echo -e "\n---adding system command after a given line number in a file---"
+sed '3 e date' "EnglandCrushes.csv"
+sed '3 e pwd' "EnglandCrushes.csv"
+
+# show line number of a file
+echo -e "\n---show line number of a file---"
+sed '=' "EnglandCrushes.csv"
