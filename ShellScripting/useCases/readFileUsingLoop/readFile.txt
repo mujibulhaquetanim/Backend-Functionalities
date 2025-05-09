@@ -1,3 +1,6 @@
 "Emma Watson"
 "Sabila Nur"
 "Shraddha Kapoor"
+Emma Watson, 35, England
+Keira Knightley, 40, England
+Sophie Turner, 30, England

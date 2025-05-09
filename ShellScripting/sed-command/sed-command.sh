@@ -82,3 +82,7 @@ sed -i '/lolita/ c Alyla Browne, 15, Australia' "../useCases/readFileUsingLoop/r
 # insert line at the beginning, i is for insert
 echo -e "\n---insert line---"
 sed '1 i Crush Names' "../useCases/readFileUsingLoop/readFile.csv"
+
+# insert another file data after a given line number of another file using r is for read
+echo -e "\n---insert another file data after a given line number of another file---"
+sed -i '3r EnglandCrushes.csv' "../useCases/readFileUsingLoop/readFile.txt"
