@@ -120,3 +120,14 @@ sed -n '/[SsKk]/p' "./EnglandCrushes.csv"
 # started in a range, ^ is for start
 echo -e "\n---show names that started in a range in a file---"
 sed -n '/^[E-K]/p' "./EnglandCrushes.csv"
+
+# find digits in a file
+echo -e "\n---find digits in a file---"
+sed -n '/[[:digit:]]/p' ./postfix.txt
+
+# find only upper case letters in a file, it can be used with space, lower, punct (punctuation), alpha (alphabetic)
+echo -e "\n---find only upper case letters in a file---"
+sed -n '/[[:upper:]]/p' ./postfix.txt
+# find punctuation in a file
+echo -e "\n---find punctuation in a file---"
+sed -n '/[[:punct:]]/p' ./postfix.txt
