@@ -131,3 +131,10 @@ sed -n '/[[:upper:]]/p' ./postfix.txt
 # find punctuation in a file
 echo -e "\n---find punctuation in a file---"
 sed -n '/[[:punct:]]/p' ./postfix.txt
+
+# find only .txt files in a directory
+echo -e "\n---find only .txt files in a directory---"
+ls -ltr *.txt
+# find all files with 'p'
+echo -e "\n---find all files with 'p'---"
+ls -ltr *p*
