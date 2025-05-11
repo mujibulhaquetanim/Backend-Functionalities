@@ -14,3 +14,8 @@ find . -type f -name "tr-output.txt" | xargs wc
 
 # executing a command with limited number of arguments at a time
 echo "${FILE1} ${FILE2} ${FILE3}" | xargs -n 2 echo
+
+# find all files and remove
+find . -type f -name "*.csv" | xargs rm
+# using -print0 flag Outputs filenames separated by a null character (\0) instead of a newline and xargs -0 reads null-separated filenames to avoid errors with spaces.
+find . -type f -name "*.ts" -print0 | xargs -0 rm
