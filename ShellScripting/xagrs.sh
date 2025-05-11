@@ -16,6 +16,13 @@ find . -type f -name "tr-output.txt" | xargs wc
 echo "${FILE1} ${FILE2} ${FILE3}" | xargs -n 2 echo
 
 # find all files and remove
-find . -type f -name "*.csv" | xargs rm
+# find . -type f -name "*.csv" | xargs rm
 # using -print0 flag Outputs filenames separated by a null character (\0) instead of a newline and xargs -0 reads null-separated filenames to avoid errors with spaces.
 find . -type f -name "*.ts" -print0 | xargs -0 rm
+# this will print rm before executing, it will help in debugging whether filename are passed or not
+find . -type f -name "*.ts" -print0 | xargs -0 rm
+
+# Fetches each URL listed in urls.txt using curl.
+cat urls.txt | xargs -n 1 curl -O
+# Downloads files in parallel with 4 simultaneous processes (-P 4).
+cat list.txt | xargs -n 1 -P 4 curl -O
