@@ -26,3 +26,19 @@ find . -type f -name "*.ts" -print0 | xargs -0 rm
 cat urls.txt | xargs -n 1 curl -O
 # Downloads files in parallel with 4 simultaneous processes (-P 4).
 cat list.txt | xargs -n 1 -P 4 curl -O
+
+# find all .sh files and make them executable
+find . -name "*.sh" | xargs chmod +x
+
+# find all .txt files and compress them as backup.tar.gz
+find . -name "*.txt" | xargs tar -czf backup.tar.gz
+
+# find all .jpg files and move them to Pictures/; here {} acts as a placeholder for each found file and -I {} replaces {} with each filename found, ensuring correct handling of spaces and special characters. Without -I, xargs might struggle with filenames containing spaces or special characters
+find . -name "*.jpg" | xargs -I {} mv {} ~/Pictures/
+
+# This command copies all .txt files in the current directory and creates backup versions with a .bak extension.
+# cp {} {}.bak copies each file and appends .bak to the filename.
+# -maxdepth 1 ensures it only looks in the current directory (not subdirectories).
+# -print0 outputs filenames separated by null characters (\0), preventing issues with spaces or special characters.
+find . -maxdepth 1 -name "*.txt" -print0 | xargs -0 -I {} cp {} {}.bak
+
