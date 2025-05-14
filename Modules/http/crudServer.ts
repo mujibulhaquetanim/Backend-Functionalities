@@ -8,6 +8,15 @@ const sendResponse = (res:ServerResponse ,statusCode: number, message: object | 
     res.end(contentType === 'application/json' ? JSON.stringify(message): message);
 }
 
+// helper function to parse request body
+const parseBody = (req: IncomingMessage)=>{
+    return new Promise((resolve)=>{
+        let body = '';
+        req.on('data', chunk=> body+=chunk);
+        req.on('end', ()=> resolve(JSON.stringify(body || {})))
+    })
+}
+
 const app = http.createServer(async(req: IncomingMessage, res: ServerResponse)=>{
     if(!req.url){
         sendResponse(res, 400, {error: "No URL found"})
@@ -21,6 +30,11 @@ const app = http.createServer(async(req: IncomingMessage, res: ServerResponse)=>
     if(method === 'GET' && pathname=== '/'){
         sendResponse(res, 200, "Welcome to Node-CRUD")
         return;
+    }
+
+    // POST method
+    if(method === 'POST' && pathname === '/user'){
+        sendResponse(res, 200, { message: "user found"})
     }
 })
 
