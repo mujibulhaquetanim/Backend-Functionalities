@@ -36,6 +36,16 @@ const app = http.createServer(async(req: IncomingMessage, res: ServerResponse)=>
     if(method === 'POST' && pathname === '/user'){
         sendResponse(res, 200, { message: "user found"})
     }
+
+    // PUT method
+    // regular expression added to extract the digit from the url, in expressjs this is done by req.params
+    if(method === 'PUT' && pathname.match(/^\/user\/\d+$/)){
+        // took second part of the url as id because first part is /user
+        const id = pathname.split("/")[2];
+        // parse request body to get the data.
+        const body = await parseBody(req);
+        sendResponse(res, 200, { message: `user with id: ${id} updated successfully`, body })
+    }
 })
 
 app.listen(3001, ()=>{
