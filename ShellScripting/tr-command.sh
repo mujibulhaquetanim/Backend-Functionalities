@@ -1,6 +1,7 @@
 #!bin/bash
 
 # `tr` command is used to translate, modify, or delete characters in a string.
+# tr [options] SET1 [SET2]
 
 # remove , from string
 echo "Emma, Watson" | tr -d ','
@@ -30,4 +31,13 @@ echo "Emma Watson" | tr ' ' '\n'
 echo "Emma Watson" | tr 'a-zA-Z' 'A-Za-z'
 
 # use tr command with files
-tr 'a-zA-Z' 'A-Za-z' < ./useCases/readFileUsingLoop/readFile.txt > tr-output.txt
+# tr 'a-zA-Z' 'A-Za-z' < ./useCases/readFileUsingLoop/readFile.txt > tr-output.txt
+
+# replace ',' with ' ' in csv file
+# tr ',' ' ' < ./useCases/readFileUsingLoop/readFile.csv > tr-output.txt
+# remove double quotes
+cat tr-output.txt | tr -d '"'
+# remove extra spaces
+cat tr-output.txt | tr -s ' '
+# stripping numbers, -c flag is a complement 
+echo "Phone: +880-1234-5678" | tr -cd '0-9'
