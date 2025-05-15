@@ -50,6 +50,16 @@ const app = http.createServer(async(req: IncomingMessage, res: ServerResponse)=>
         const body = await parseBody(req);
         sendResponse(res, 200, { message: `user with id: ${id} updated successfully`, body })
     }
+
+    // DELETE method
+    if(method === 'DELETE' && pathname.match(/^\/user\/\d+$/)){
+        const id = pathname.split("/")[2];
+        if(!id || isNaN(Number(id))){
+            sendResponse(res, 400, {error: "No id found"})
+            return;
+        }
+        sendResponse(res, 200, { message: `user with id: ${id} deleted successfully` })
+    }
 })
 
 app.listen(3001, ()=>{
