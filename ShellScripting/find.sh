@@ -25,3 +25,25 @@ echo -e "\n---find and delete files---"
 find /home/haq -type f -name "*.tmp"
 # another way it will show prompt, The -i flag prompts before deleting each file.
 find /home/haq -type f -name "*.tmp" -exec rm -i {} \;
+
+# find files that modified in last 7 days
+echo -e "\n---find files that modified in last 7 days---"
+find . -type f -mtime -7
+# older than 30 days
+echo -e "\n---find files that modified in last 30 days---"
+find . -type f -mtime +30
+
+# search file with specific permission
+echo -e "\n---search file with specific permission---"
+find . -type f -perm 644
+
+# find empty directories
+echo -e "\n---find empty directories---"
+find . -type d -empty
+find . -type f -empty # find empty files
+
+# search at least two level depth
+echo -e "\n---search at least two level depth---"
+find . -mindepth 2 -type f
+
+#
