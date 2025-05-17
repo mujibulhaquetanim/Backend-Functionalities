@@ -46,4 +46,10 @@ find . -type f -empty # find empty files
 echo -e "\n---search at least two level depth---"
 find . -mindepth 2 -type f
 
-#
+# find and tar, The -T option tells tar to take the list of files from standard input (- refers to input from the pipe).
+echo -e "\n---find and tar---"
+find . -type f -name "*.txt" | tar -cvf archive.tar -T -
+
+# search all the hidden files in a directory
+echo -e "\n---search all the hidden files in a directory---"
+find . -type f -name ".*"
