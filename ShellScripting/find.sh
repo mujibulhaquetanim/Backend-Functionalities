@@ -33,6 +33,18 @@ find . -type f -mtime -7
 echo -e "\n---find files that modified in last 30 days---"
 find . -type f -mtime +30
 
+# find files that created in last 7 days
+echo -e "\n---find files that created in last 7 days---"
+find . -type f -ctime -7
+
+# find and list all recently accessed files
+echo -e "\n---find and list all recently accessed files---"
+find . -type f -atime -7
+
+# delete file interactively with yes/no prompt
+echo -e "\n---delete file interactively with yes/no prompt---"
+find . -type f -name "*.txt" -exec rm -i {} \;
+
 # search file with specific permission
 echo -e "\n---search file with specific permission---"
 find . -type f -perm 644
@@ -53,3 +65,16 @@ find . -type f -name "*.txt" | tar -cvf archive.tar -T -
 # search all the hidden files in a directory
 echo -e "\n---search all the hidden files in a directory---"
 find . -type f -name ".*"
+
+# find all the files owned by a specific user
+echo -e "\n---find all the files owned by a specific user---"
+find . -type f -user haq
+
+# Finding & Running a Command for Each File
+echo -e "\n---Finding & Running a Command for Each File---"
+find . -type f -name "*.png" -exec convert {} -resize 800x600 {} \;
+
+# find all .sh files and make them executable
+echo -e "\n---find all .sh files and make them executable---"
+find . -type f -name "*.sh" -exec chmod +x {} \;
+
