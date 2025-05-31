@@ -2,7 +2,7 @@ import net from "node:net";
 
 const clients: net.Socket[] = [];
 
-const server = net.createServer((socket) => {
+net.createServer((socket) => {
     socket.write("Welcome to the real time TCP chatroom\n");
 
 
@@ -20,14 +20,25 @@ const server = net.createServer((socket) => {
         });
     });
 
-    socket.on("close", () => {
-        console.log(`Client ${socket.remoteAddress}:${socket.remotePort} disconnected`);
-        // remove the clients from the list and close the connection
-        clients.splice(clients.indexOf(socket), 1);
+    socket.on("end", () => {
+        const index = clients.indexOf(socket);
+        // if the client is in the list
+        if( index !== -1){
+            // remove the clients from the list and close the connection
+            console.log(`Client ${socket.remoteAddress}:${socket.remotePort} disconnected`);
+            clients.splice(index, 1);
+        }
     });
 
     socket.on("error", (error) => {
         console.error(`Client ${socket.remoteAddress}:${socket.remotePort} error: ${error}`);
+
+        const index = clients.indexOf(socket);
+        if( index !== -1){
+            clients.splice(index, 1);
+        }
+        // safely remove problematic clients
+        socket.destroy();
     });
 
 }).listen(3000, () => {
