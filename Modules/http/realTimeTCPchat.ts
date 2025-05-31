@@ -12,9 +12,12 @@ const server = net.createServer((socket) => {
     });
 
     socket.on("data", (data) => {
+        // send data to all connected clients with their IP and port
         client.forEach((client) => {
-            // send data to all connected clients with their IP and port
-            client.write(`${socket.remoteAddress}:${socket.remotePort}: ${data}\n\n`);
+            // don't send data back to the sender
+            if(client !== socket){
+                client.write(`${socket.remoteAddress}:${socket.remotePort}: ${data}\n\n`);
+            }
         });
     });
 
