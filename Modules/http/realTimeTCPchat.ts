@@ -6,7 +6,8 @@ const server = net.createServer((socket) => {
     const client: net.Socket[] = [];
 
     socket.on("connect", () => {
-        console.log("Client connected");
+        console.log(`Client ${socket.remoteAddress}:${socket.remotePort} connected`);
+        console.log(`Client count: ${client.length}`);
         client.push(socket);
     });
 
@@ -15,6 +16,12 @@ const server = net.createServer((socket) => {
             // send data to all connected clients with their IP and port
             client.write(`${socket.remoteAddress}:${socket.remotePort}: ${data}\n\n`);
         });
+    });
+
+    socket.on("close", () => {
+        console.log(`Client ${socket.remoteAddress}:${socket.remotePort} disconnected`);
+        // remove the client from the list and close the connection
+        client.splice(client.indexOf(socket), 1);
     });
 
 }).listen(3000);
