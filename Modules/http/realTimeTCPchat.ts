@@ -10,15 +10,19 @@ net.createServer((socket) => {
     console.log(`Client count: ${clients.length}`);
     clients.push(socket);
 
-    socket.on("data", (data) => {
-        // send data to all connected clients with their IP and port
-        clients.forEach((client) => {
-            // don't send data back to the sender
-            if(client !== socket){
-                client.write(`${socket.remoteAddress}:${socket.remotePort}: ${data}\n\n`);
-            }
-        });
+socket.on("data", (data) => {
+    const message = data.toString().trim();
+
+    // Show "me:" for your own messages in the terminal before logging them
+    console.log(`me: ${message}`);
+
+    // Send data to all connected clients with sender IP and port
+    clients.forEach((client) => {
+        if (client !== socket) {
+            client.write(`${socket.remoteAddress}:${socket.remotePort}: ${message}\n\n`);
+        }
     });
+});
 
     socket.on("end", () => {
         const index = clients.indexOf(socket);
