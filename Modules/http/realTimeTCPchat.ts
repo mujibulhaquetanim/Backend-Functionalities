@@ -3,7 +3,7 @@ import net from "node:net";
 const server = net.createServer((socket) => {
     socket.write("Welcome to the real time TCP chatroom\n");
 
-    const client = [];
+    const client: net.Socket[] = [];
 
     socket.on("connect", () => {
         console.log("Client connected");
