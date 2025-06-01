@@ -9,6 +9,11 @@ server.on('message', (msg, rinfo) => {
     // 'msg' is the actual data received (a Buffer)
     // 'rinfo' contains the sender's address and port
     console.log(`Server got: ${msg.toString()} from ${rinfo.address}:${rinfo.port}`);
+
+    // Optional: Send a response back to the sender
+    server.send(`Got your message: "${msg.toString().trim()}"`, rinfo.port, rinfo.address, (err) => {
+        if (err) console.error(`Error sending response: ${err}`);
+    });
 });
 
 // Handle errors
