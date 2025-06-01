@@ -2,18 +2,29 @@ import dgram from 'dgram';
 
 const server = dgram.createSocket('udp4');
 
+const clients: { address: string; port: number }[] = [];
+
 // as UDP is connectionless, we need to listen for messages and we can't use the 'connection' event.
 
 // Listen for incoming messages
 server.on('message', (msg, rinfo) => {
     // 'msg' is the actual data received (a Buffer)
     // 'rinfo' contains the sender's address and port
-    console.log(`Server got: ${msg.toString()} from ${rinfo.address}:${rinfo.port}`);
+    
+    // console.log(`Server got: ${msg.toString()} from ${rinfo.address}:${rinfo.port}`);
 
-    // Optional: Send a response back to the sender
-    server.send(`Got your message: "${msg.toString().trim()}"`, rinfo.port, rinfo.address, (err) => {
-        if (err) console.error(`Error sending response: ${err}`);
-    });
+    // Optional: Send a response back to the sender. this is basically an acknowledgement.
+    // server.send(`Got your message: "${msg.toString().trim()}"`, rinfo.port, rinfo.address, (err) => {
+    //     if (err) console.error(`Error sending response: ${err}`);
+    // });
+
+    console.log(`Client ${rinfo.address}:${rinfo.port} sent: ${msg.toString().trim()}`);
+    
+    const clientExists = clients.some((client)=> client.address === rinfo.address && client.port === rinfo.port);
+    if(!clientExists){
+        clients.push(rinfo);
+    }
+
 });
 
 // Handle errors
