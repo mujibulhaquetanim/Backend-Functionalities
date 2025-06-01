@@ -10,7 +10,7 @@ const clients: { address: string; port: number }[] = [];
 server.on('message', (msg, rinfo) => {
     // 'msg' is the actual data received (a Buffer)
     // 'rinfo' contains the sender's address and port
-    
+
     // console.log(`Server got: ${msg.toString()} from ${rinfo.address}:${rinfo.port}`);
 
     // Optional: Send a response back to the sender. this is basically an acknowledgement.
@@ -25,6 +25,15 @@ server.on('message', (msg, rinfo) => {
         clients.push(rinfo);
     }
 
+    // send data to all connected clients with their IP and port
+    clients.forEach((client) => {
+        // don't send data back to the sender
+        if(client.address !== rinfo.address || client.port !== rinfo.port){
+            server.send(`${rinfo.address}:${rinfo.port}: ${msg.toString().trim()}\n\n`, client.port, client.address, (err) => {
+                if (err) console.error(`Error sending response: ${err}`);
+            });
+        }
+    });
 });
 
 // Handle errors
