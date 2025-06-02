@@ -2,12 +2,13 @@ import dgram from 'dgram';
 
 const server = dgram.createSocket('udp4');
 
-const clients: { address: string; port: number }[] = [];
+const clients: { address: string; port: number, lastActive: number }[] = [];
+const timeOut= 1000*60*3;
 
 // as UDP is connectionless, we need to listen for messages and we can't use the 'connection' event.
 
 // Listen for incoming messages
-server.on('message', (msg, rinfo) => {
+server.on('message', (msg: Buffer, rinfo: dgram.RemoteInfo) => {
     // 'msg' is the actual data received (a Buffer)
     // 'rinfo' contains the sender's address and port
 
@@ -22,19 +23,35 @@ server.on('message', (msg, rinfo) => {
     
     const clientExists = clients.some((client)=> client.address === rinfo.address && client.port === rinfo.port);
     if(!clientExists){
-        clients.push(rinfo);
+        clients.push({address: rinfo.address, port: rinfo.port, lastActive: Date.now()});
     }
 
     // send data to all connected clients with their IP and port
     clients.forEach((client) => {
         // don't send data back to the sender
         if(client.address !== rinfo.address || client.port !== rinfo.port){
+            // For connectionless sockets, the destination port and address must be specified.
             server.send(`${rinfo.address}:${rinfo.port}: ${msg.toString().trim()}\n\n`, client.port, client.address, (err) => {
                 if (err) console.error(`Error sending response: ${err}`);
             });
         }
     });
+
 });
+
+setInterval(()=>{
+    clients.forEach((client) => {
+        if(Date.now() - client.lastActive > timeOut){
+            const index = clients.indexOf(client);
+            // if the client is in the list
+            if( index !== -1){
+                // remove the clients from the list and close the connection
+                console.log(`Client ${client.address}:${client.port} disconnected`);
+                clients.splice(index, 1);
+            }
+        }
+    });
+},timeOut);
 
 // Handle errors
 server.on('error', (err) => {
