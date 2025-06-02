@@ -14,14 +14,18 @@ server.on('message', (msg: Buffer, rinfo: dgram.RemoteInfo) => {
     const clientKey= `${rinfo.address}:${rinfo.port}`;
 
     if(!clients.has(clientKey)){
-        clients.set(clientKey, {port: rinfo.port, lastActive: Date.now()})
         console.log(`New Client added: ${clientKey}`)
     }
+    // for each new msg of a user, update their recent time. without this client would be removed automatically after the interval time regardless of activity.
+    clients.set(clientKey, {port: rinfo.port, lastActive: Date.now()})
+
     // Broadcast the message to the connected clients
     clients.forEach((value,key)=>{
         if (key !== clientKey) {
             server.send(`${rinfo.address}:${rinfo.port} sent: ${msg.toString().trim()}`,rinfo.port, key.split(':')[0],(error: Error | null)=>{
-                console.log(`Error sending message to ${key} : ${error}`)
+                if (error) {
+                    console.log(`Error sending message to ${key} : ${error}`)
+                }
             })
         }
     })
