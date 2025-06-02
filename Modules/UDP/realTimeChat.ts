@@ -12,7 +12,7 @@ const timeOut= 1000*60*3;
 server.on('message', (msg: Buffer, rinfo: dgram.RemoteInfo) => {
     // made combo of add & port a key, redis style 😊
     const clientKey= `${rinfo.address}:${rinfo.port}`;
-    
+
     if(!clients.has(clientKey)){
         clients.set(clientKey, {port: rinfo.port, lastActive: Date.now()})
         console.log(`New Client added: ${clientKey}`)
@@ -26,6 +26,16 @@ server.on('message', (msg: Buffer, rinfo: dgram.RemoteInfo) => {
         }
     })
 });
+
+setInterval(() => {
+    const now = Date.now();
+    clients.forEach((value, key)=>{
+        if(now - value.lastActive > timeOut){
+            console.log(`${key}: is disconnected due to inactivity`);
+            clients.delete(key);
+        }
+    })
+}, timeOut);
 
 
 // Handle errors
