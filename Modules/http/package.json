@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p .",
+    "tcpChat": "node dist/realTimeTCPchat.js",
+    "crudServer": "node dist/crudServer.js",
+    "NodeServer": "node dist/createNodeServer.js"
   },
   "keywords": [],
   "author": "",
