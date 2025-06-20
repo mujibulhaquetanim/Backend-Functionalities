@@ -32,3 +32,7 @@ resource "aws_s3_object" "terraData" {
   source = "./index.html"
   key    = "index.html"
 }
+
+output "terraBucket" {
+  value = aws_s3_bucket.terraBucket.id
+}
