@@ -107,3 +107,45 @@ Outputs:
 
 terraBucket = "demo-bucket-a314658e4e1d0af9"
 ```
+
+## change public block access on s3 bucket policy off
+
+```bash
+╰─ terraform apply
+random_id.rand_id: Refreshing state... [id=oxRljk4dCvk]
+aws_s3_bucket.terraBucket: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_object.terraData: Refreshing state... [id=index.html]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_s3_bucket_public_access_block.demoBlock will be created
+  + resource "aws_s3_bucket_public_access_block" "demoBlock" {
+      + block_public_acls       = false
+      + block_public_policy     = false
+      + bucket                  = "demo-bucket-a314658e4e1d0af9"
+      + id                      = (known after apply)
+      + ignore_public_acls      = false
+      + region                  = "ap-south-1"
+      + restrict_public_buckets = false
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_s3_bucket_public_access_block.demoBlock: Creating...
+aws_s3_bucket_public_access_block.demoBlock: Creation complete after 0s [id=demo-bucket-a314658e4e1d0af9]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+terraBucket = "demo-bucket-a314658e4e1d0af9"
+```
