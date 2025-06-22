@@ -1,5 +1,9 @@
 # S3 Logs
 
+This is a log file for S3. It contains information about the operations performed by S3. From adding policies to creating buckets and uploading files to s3.
+
+## terraform apply of s3 bucket creation
+
 ```ts
 ╰─ terraform apply
 
@@ -201,6 +205,115 @@ aws_s3_bucket_policy.terraBucketPolicy: Creating...
 aws_s3_bucket_policy.terraBucketPolicy: Creation complete after 1s [id=demo-bucket-a314658e4e1d0af9]
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+terraBucket = "demo-bucket-a314658e4e1d0af9"
+```
+
+## rename index.html resource and add error.html resource
+
+```bash
+╰─ terraform apply
+random_id.rand_id: Refreshing state... [id=oxRljk4dCvk]
+aws_s3_object.terraData: Refreshing state... [id=index.html]
+aws_s3_bucket.terraBucket: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_public_access_block.demoBlock: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_policy.terraBucketPolicy: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_s3_object.errorFile will be created
+  + resource "aws_s3_object" "errorFile" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "demo-bucket-a314658e4e1d0af9"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = (known after apply)
+      + etag                   = (known after apply)
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "error.html"
+      + kms_key_id             = (known after apply)
+      + region                 = "ap-south-1"
+      + server_side_encryption = (known after apply)
+      + source                 = "./error.html"
+      + storage_class          = (known after apply)
+      + tags_all               = (known after apply)
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.indexFile will be created
+  + resource "aws_s3_object" "indexFile" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "demo-bucket-a314658e4e1d0af9"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = (known after apply)
+      + etag                   = (known after apply)
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "index.html"
+      + kms_key_id             = (known after apply)
+      + region                 = "ap-south-1"
+      + server_side_encryption = (known after apply)
+      + source                 = "./index.html"
+      + storage_class          = (known after apply)
+      + tags_all               = (known after apply)
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.terraData will be destroyed
+  # (because aws_s3_object.terraData is not in configuration)
+  - resource "aws_s3_object" "terraData" {
+      - arn                           = "arn:aws:s3:::demo-bucket-a314658e4e1d0af9/index.html" -> null
+      - bucket                        = "demo-bucket-a314658e4e1d0af9" -> null
+      - bucket_key_enabled            = false -> null
+      - content_type                  = "application/octet-stream" -> null
+      - etag                          = "4f71798bd71dcc5c7d1ca96f61915226" -> null
+      - force_destroy                 = false -> null
+      - id                            = "index.html" -> null
+      - key                           = "index.html" -> null
+      - metadata                      = {} -> null
+      - region                        = "ap-south-1" -> null
+      - server_side_encryption        = "AES256" -> null
+      - source                        = "./index.html" -> null
+      - storage_class                 = "STANDARD" -> null
+      - tags                          = {} -> null
+      - tags_all                      = {} -> null
+        # (14 unchanged attributes hidden)
+    }
+
+Plan: 2 to add, 0 to change, 1 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_s3_object.terraData: Destroying... [id=index.html]
+aws_s3_object.errorFile: Creating...
+aws_s3_object.indexFile: Creating...
+aws_s3_object.terraData: Destruction complete after 1s
+aws_s3_object.errorFile: Creation complete after 1s [id=error.html]
+aws_s3_object.indexFile: Creation complete after 1s [id=index.html]
+
+Apply complete! Resources: 2 added, 0 changed, 1 destroyed.
 
 Outputs:
 
