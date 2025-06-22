@@ -72,16 +72,18 @@ resource "aws_s3_bucket_website_configuration" "terraBucketWebConfig" {
 
 # uploading file
 resource "aws_s3_object" "indexFile" {
-  bucket = aws_s3_bucket.terraBucket.bucket
-  source = "./index.html"
-  key    = "index.html"
+  bucket       = aws_s3_bucket.terraBucket.bucket
+  source       = "./index.html"
+  key          = "index.html"
+  content_type = "text/html"
 }
 
 # repeat it for other files
 resource "aws_s3_object" "errorFile" {
-  bucket = aws_s3_bucket.terraBucket.bucket
-  source = "./error.html"
-  key    = "error.html"
+  bucket       = aws_s3_bucket.terraBucket.bucket
+  source       = "./error.html"
+  key          = "error.html"
+  content_type = "text/html"
 }
 
 

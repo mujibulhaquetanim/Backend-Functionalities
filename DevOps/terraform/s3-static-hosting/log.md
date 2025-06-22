@@ -373,3 +373,58 @@ Outputs:
 
 terraBucket = "demo-bucket-a314658e4e1d0af9.s3-website.ap-south-1.amazonaws.com"
 ```
+
+## add content-type to resource upload
+
+```bash
+╰─ terraform apply
+random_id.rand_id: Refreshing state... [id=oxRljk4dCvk]
+aws_s3_bucket.terraBucket: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_policy.terraBucketPolicy: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_public_access_block.demoBlock: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_website_configuration.terraBucketWebConfig: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_object.errorFile: Refreshing state... [id=error.html]
+aws_s3_object.indexFile: Refreshing state... [id=index.html]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_s3_object.errorFile will be updated in-place
+  ~ resource "aws_s3_object" "errorFile" {
+      ~ content_type                  = "application/octet-stream" -> "text/css"
+        id                            = "error.html"
+        tags                          = {}
+      + version_id                    = (known after apply)
+        # (25 unchanged attributes hidden)
+    }
+
+  # aws_s3_object.indexFile will be updated in-place
+  ~ resource "aws_s3_object" "indexFile" {
+      ~ content_type                  = "application/octet-stream" -> "text/html"
+        id                            = "index.html"
+        tags                          = {}
+      + version_id                    = (known after apply)
+        # (25 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 2 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_s3_object.errorFile: Modifying... [id=error.html]
+aws_s3_object.indexFile: Modifying... [id=index.html]
+aws_s3_object.errorFile: Modifications complete after 1s [id=error.html]
+aws_s3_object.indexFile: Modifications complete after 1s [id=index.html]
+
+Apply complete! Resources: 0 added, 2 changed, 0 destroyed.
+
+Outputs:
+
+terraBucket = "demo-bucket-a314658e4e1d0af9.s3-website.ap-south-1.amazonaws.com"
+```
