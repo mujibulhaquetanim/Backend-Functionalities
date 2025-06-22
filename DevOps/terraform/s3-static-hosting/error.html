@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error Page</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      .fullscreen-gif {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .overlay-content {
+        position: relative;
+        z-index: 1;
+        color: black;
+        text-align: center;
+        top: 30%;
+        font-family: sans-serif;
+        font-size: 40px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      class="fullscreen-gif"
+      src="https://giphy.com/embed/1RkDDoIVs3ntm"
+      allowfullscreen
+    ></iframe>
+    <div class="overlay-content">
+      <h1>404 Page Not Found</h1>
+      <p>Sorry, the page you are looking for does not exist.</p>
+    </div>
+  </body>
+</html>
