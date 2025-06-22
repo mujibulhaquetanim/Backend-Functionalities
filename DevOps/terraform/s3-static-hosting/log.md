@@ -319,3 +319,57 @@ Outputs:
 
 terraBucket = "demo-bucket-a314658e4e1d0af9"
 ```
+
+## s3 web hosting configuration done
+
+```bash
+╰─ terraform apply
+random_id.rand_id: Refreshing state... [id=oxRljk4dCvk]
+aws_s3_bucket.terraBucket: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_public_access_block.demoBlock: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_policy.terraBucketPolicy: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_object.indexFile: Refreshing state... [id=index.html]
+aws_s3_object.errorFile: Refreshing state... [id=error.html]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_s3_bucket_website_configuration.terraBucketWebConfig will be created
+  + resource "aws_s3_bucket_website_configuration" "terraBucketWebConfig" {
+      + bucket           = "demo-bucket-a314658e4e1d0af9"
+      + id               = (known after apply)
+      + region           = "ap-south-1"
+      + routing_rules    = (known after apply)
+      + website_domain   = (known after apply)
+      + website_endpoint = (known after apply)
+
+      + error_document {
+          + key = "error.html"
+        }
+
+      + index_document {
+          + suffix = "index.html"
+        }
+
+      + routing_rule (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_s3_bucket_website_configuration.terraBucketWebConfig: Creating...
+aws_s3_bucket_website_configuration.terraBucketWebConfig: Creation complete after 1s [id=demo-bucket-a314658e4e1d0af9]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+terraBucket = "demo-bucket-a314658e4e1d0af9.s3-website.ap-south-1.amazonaws.com"
+```

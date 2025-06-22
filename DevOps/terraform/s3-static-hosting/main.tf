@@ -58,6 +58,18 @@ resource "aws_s3_bucket_policy" "terraBucketPolicy" {
   )
 }
 
+resource "aws_s3_bucket_website_configuration" "terraBucketWebConfig" {
+  bucket = aws_s3_bucket.terraBucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
 # uploading file
 resource "aws_s3_object" "indexFile" {
   bucket = aws_s3_bucket.terraBucket.bucket
@@ -74,5 +86,6 @@ resource "aws_s3_object" "errorFile" {
 
 
 output "terraBucket" {
-  value = aws_s3_bucket.terraBucket.id
+  # value = aws_s3_bucket.terraBucket.id
+  value = aws_s3_bucket_website_configuration.terraBucketWebConfig.website_endpoint
 }
