@@ -36,6 +36,28 @@ resource "aws_s3_bucket_public_access_block" "demoBlock" {
   restrict_public_buckets = false
 }
 
+resource "aws_s3_bucket_policy" "terraBucketPolicy" {
+  bucket = aws_s3_bucket.terraBucket.id
+  policy = jsonencode(
+    {
+      Version = "2012-10-17",
+      Statement = [
+        {
+          Sid       = "PublicReadGetObject",
+          Effect    = "Allow",
+          Principal = "*",
+          Action = [
+            "s3:GetObject"
+          ],
+          Resource = [
+            "arn:aws:s3:::${aws_s3_bucket.terraBucket.id}/*"
+          ]
+        }
+      ]
+    }
+  )
+}
+
 # uploading file
 resource "aws_s3_object" "terraData" {
   bucket = aws_s3_bucket.terraBucket.bucket
