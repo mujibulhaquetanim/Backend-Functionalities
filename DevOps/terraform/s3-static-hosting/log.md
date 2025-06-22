@@ -149,3 +149,60 @@ Outputs:
 
 terraBucket = "demo-bucket-a314658e4e1d0af9"
 ```
+
+## add s3 bucket policy
+
+```bash
+╰─ terraform apply
+random_id.rand_id: Refreshing state... [id=oxRljk4dCvk]
+aws_s3_bucket.terraBucket: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_bucket_public_access_block.demoBlock: Refreshing state... [id=demo-bucket-a314658e4e1d0af9]
+aws_s3_object.terraData: Refreshing state... [id=index.html]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_s3_bucket_policy.terraBucketPolicy will be created
+  + resource "aws_s3_bucket_policy" "terraBucketPolicy" {
+      + bucket = "demo-bucket-a314658e4e1d0af9"
+      + id     = (known after apply)
+      + policy = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = [
+                          + "s3:GetObject",
+                        ]
+                      + Effect    = "Allow"
+                      + Principal = "*"
+                      + Resource  = [
+                          + "arn:aws:s3:::demo-bucket-a314658e4e1d0af9/*",
+                        ]
+                      + Sid       = "PublicReadGetObject"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + region = "ap-south-1"
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_s3_bucket_policy.terraBucketPolicy: Creating...
+aws_s3_bucket_policy.terraBucketPolicy: Creation complete after 1s [id=demo-bucket-a314658e4e1d0af9]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+terraBucket = "demo-bucket-a314658e4e1d0af9"
+```
