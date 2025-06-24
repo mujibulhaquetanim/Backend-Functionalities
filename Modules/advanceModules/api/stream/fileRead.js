@@ -30,6 +30,10 @@ const stream = ((_, res) => {
 
 // Compresses and writes the file using streams
 const gzip = (_, res) => {
+    // the flow is, readStream, reads the chunks of data -> gzipStream, compresses the data on the fly -> writeStream, writes the compressed data immediately to the disk path.
+
+    // fs.createReadStream("./public/file.txt").pipe(zlib.createGzip().pipe(fs.createWriteStream(GZIPPED_PATH)));
+
     const readStream = fs.createReadStream(FILE_PATH);
     const zipStream = fs.createWriteStream(GZIPPED_PATH);
     const gzipper = zlib.createGzip();
