@@ -1,36 +1,35 @@
 const { exec, execFile } = require('child_process');
 
+// Executes 'ls' and returns the result
 const exe = (_, res) => {
     exec('ls', (error, stdout, stderr) => {
         if (error) {
-            console.log(`error: ${error.message}`);
-            return;
+            console.error(`exec error: ${error.message}`);
+            res.statusCode = 500;
+            return res.end(`Error: ${error.message}`);
         }
         if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
+            console.error(`stderr: ${stderr}`);
         }
-        res.end(`${stderr}`);
         console.log(`stdout: ${stdout}`);
+        res.end(stdout);
     });
-}
+};
 
-const exeFile = (_, res) =>{
+// Runs a shell script using execFile safely
+const exeFile = (_, res) => {
     execFile('../public/script.sh', (error, stdout, stderr) => {
         if (error) {
-            console.log(`error: ${error.message}`);
-            return;
+            console.error(`execFile error: ${error.message}`);
+            res.statusCode = 500;
+            return res.end(`Error: ${error.message}`);
         }
         if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
+            console.error(`stderr: ${stderr}`);
         }
-        res.end(`${stderr}`);
         console.log(`stdout: ${stdout}`);
-})
-}
+        res.end(stdout);
+    });
+};
 
-
-    console.log(exe)
-
-module.exports = { exe, exeFile }
+module.exports = { exe, exeFile };
