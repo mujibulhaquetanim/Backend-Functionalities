@@ -23,8 +23,9 @@ const stream = ((_, res) => {
         res.statusCode = 500;
         res.end(`Error reading file: ${err}`);
     })
-    stream.on("data", (chunk) => res.write(chunk));
-    stream.on("end", () => res.end());
+    stream.pipe(res);
+    // stream.on("data", (chunk) => res.write(chunk));
+    // stream.on("end", () => res.end());
 })
 
 const gzip = ((_, res) => {
