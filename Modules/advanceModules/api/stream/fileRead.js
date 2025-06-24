@@ -28,11 +28,29 @@ const stream = ((_, res) => {
     // stream.on("end", () => res.end());
 })
 
-const gzip = ((_, res) => {
-    fs.createReadStream("./public/file.txt").pipe(zlib.createGzip().pipe(fs.createWriteStream(GZIPPED_PATH)));
-    res.end("gzip completed with the name of 'file.zip'");
-})
+// Compresses and writes the file using streams
+const gzip = (_, res) => {
+    const readStream = fs.createReadStream(FILE_PATH);
+    const zipStream = fs.createWriteStream(GZIPPED_PATH);
+    const gzipper = zlib.createGzip();
 
+    readStream
+        .on("error", (err) => {
+            console.error("Read error:", err);
+            res.statusCode = 500;
+            res.end("Failed to read input file.");
+        })
+        .pipe(gzipper)
+        .on("error", (err) => {
+            console.error("Gzip error:", err);
+            res.statusCode = 500;
+            res.end("Compression failed.");
+        })
+        .pipe(zipStream)
+        .on("finish", () => {
+            res.end("Gzip completed: 'file.zip'");
+        });
+};
 
 
 module.exports = { normalRead, stream, gzip };
