@@ -82,6 +82,15 @@ resource "aws_security_group" "mhtServer-sg" {
     description = "Allow SSH access from anywhere"
   }
 
+  # Inbound Rules for HTTP access from anywhere
+  ingress {
+    from_port   = 80 # default port for HTTP
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTP access from anywhere"
+  }
+
   # Outbound Rules for all traffic
   egress {
     from_port   = 0
