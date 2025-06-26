@@ -229,3 +229,116 @@ aws_instance.mhtServer: Creation complete after 13s [id=i-0d2129ff8200e74fb]
 
 Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
 ```
+
+## add security group
+
+added security group and refreshed state of resources. now ec2 instance can be reached from internet using public ip and ssh and http can be reached from outside.
+
+```bash
+╰─ terraform apply
+aws_vpc.my-vpc: Refreshing state... [id=vpc-0d7c0109a14034ca1]
+aws_subnet.private-subnet: Refreshing state... [id=subnet-043be0c8b6373ce8b]
+aws_internet_gateway.my-igw: Refreshing state... [id=igw-0a90f8bd0e63e3746]
+aws_subnet.public-subnet: Refreshing state... [id=subnet-016e626ce31aadde4]
+aws_instance.mhtServer: Refreshing state... [id=i-0d2129ff8200e74fb]
+aws_route_table.my-rt: Refreshing state... [id=rtb-054917ff1d8a841cc]
+aws_route_table_association.public-rt-association: Refreshing state... [id=rtbassoc-0daa9cab6022b1c15]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_instance.mhtServer will be updated in-place
+  ~ resource "aws_instance" "mhtServer" {
+        id                                   = "i-0d2129ff8200e74fb"
+        tags                                 = {
+            "Name" = "VPCServer"
+        }
+      ~ vpc_security_group_ids               = [
+          - "sg-0d0ad8d990550b5e1",
+        ] -> (known after apply)
+        # (37 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+  # aws_security_group.mhtServer-sg will be created
+  + resource "aws_security_group" "mhtServer-sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for the EC2 instance"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow all outbound traffic"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow HTTP access from anywhere"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow SSH access from anywhere"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + name                   = "mhtServer-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-south-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "mhtServer-sg"
+        }
+      + tags_all               = {
+          + "Name" = "mhtServer-sg"
+        }
+      + vpc_id                 = "vpc-0d7c0109a14034ca1"
+    }
+
+Plan: 1 to add, 1 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_security_group.mhtServer-sg: Creating...
+aws_security_group.mhtServer-sg: Creation complete after 3s [id=sg-034037d0effc17190]
+aws_instance.mhtServer: Modifying... [id=i-0d2129ff8200e74fb]
+aws_instance.mhtServer: Modifications complete after 3s [id=i-0d2129ff8200e74fb]
+
+Apply complete! Resources: 1 added, 1 changed, 0 destroyed.
+
+```
