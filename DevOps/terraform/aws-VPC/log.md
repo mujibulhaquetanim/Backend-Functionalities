@@ -340,5 +340,20 @@ aws_instance.mhtServer: Modifying... [id=i-0d2129ff8200e74fb]
 aws_instance.mhtServer: Modifications complete after 3s [id=i-0d2129ff8200e74fb]
 
 Apply complete! Resources: 1 added, 1 changed, 0 destroyed.
-
 ```
+
+## Missing required argument
+
+```bash
+╰─ terraform apply
+╷
+│ Error: Missing required argument
+│ 
+│   with aws_subnet.public-subnet1,
+│   on main.tf line 56, in resource "aws_subnet" "public-subnet1":
+│   56:   map_customer_owned_ip_on_launch = true
+│ 
+│ "map_customer_owned_ip_on_launch": all of `customer_owned_ipv4_pool,map_customer_owned_ip_on_launch,outpost_arn` must be specified
+```
+
+
