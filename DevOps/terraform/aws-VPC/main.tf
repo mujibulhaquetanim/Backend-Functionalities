@@ -86,6 +86,12 @@ resource "aws_route_table" "my-rt" {
     cidr_block = "0.0.0.0/0" # route all outbound traffic to the internet gateway
     gateway_id = aws_internet_gateway.my-igw.id
   }
+
+  # Add peering route to my-vpc1
+  route {
+    cidr_block                = aws_vpc.my-vpc1.cidr_block
+    vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
+  }
 }
 
 # Create a route table for my-vpc1
@@ -95,6 +101,12 @@ resource "aws_route_table" "my-rt1" {
   route {
     cidr_block = "0.0.0.0/0" # route all outbound traffic to the internet gateway
     gateway_id = aws_internet_gateway.my-igw1.id
+  }
+
+  # Add peering route to my-vpc1
+  route {
+    cidr_block                = aws_vpc.my-vpc.cidr_block
+    vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
   }
 }
 
