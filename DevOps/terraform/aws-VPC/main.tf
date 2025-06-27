@@ -51,8 +51,8 @@ resource "aws_subnet" "private-subnet" {
 
 # Create a public subnet for my-vpc1
 resource "aws_subnet" "public-subnet1" {
-  cidr_block                      = "192.0.1.0/24"
-  vpc_id                          = aws_vpc.my-vpc1.id
+  cidr_block              = "192.0.1.0/24"
+  vpc_id                  = aws_vpc.my-vpc1.id
   map_public_ip_on_launch = true
 
   tags = {
@@ -145,6 +145,16 @@ resource "aws_security_group" "mhtServer-sg" {
 
   tags = {
     Name = "mhtServer-sg"
+  }
+}
+
+# Create peerings
+resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
+  peer_vpc_id = aws_vpc.my-vpc1.id
+  vpc_id      = aws_vpc.my-vpc.id
+
+  tags = {
+    Name = "pingMyVPCtoMyVPC1"
   }
 }
 
