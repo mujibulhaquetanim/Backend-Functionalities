@@ -159,8 +159,45 @@ resource "aws_security_group" "mhtServer-sg" {
     Name = "mhtServer-sg"
   }
 }
+# Create a security group for the EC2 instance
+resource "aws_security_group" "mhtServer-sg1" {
+  name        = "mhtServer-sg"
+  description = "Security group for the EC2 instance"
+  vpc_id      = aws_vpc.my-vpc1.id
 
-# Create peerings
+  # Inbound Rules for SSH access from anywhere
+  ingress {
+    from_port   = 22 # default port for SSH
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow SSH access from anywhere"
+  }
+
+  # Inbound Rules for HTTP access from anywhere
+  ingress {
+    from_port   = 80 # default port for HTTP
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTP access from anywhere"
+  }
+
+  # Outbound Rules for all traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # all protocols
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow all outbound traffic"
+  }
+
+  tags = {
+    Name = "mhtServer-sg1"
+  }
+}
+
+# Create peering connection
 resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
   peer_vpc_id = aws_vpc.my-vpc1.id
   vpc_id      = aws_vpc.my-vpc.id
@@ -170,14 +207,25 @@ resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
   }
 }
 
-# # Create a EC2 instance
-# resource "aws_instance" "mhtServer" {
-#   ami                    = "ami-0f918f7e67a3323f0"
-#   instance_type          = "t2.micro"
-#   subnet_id              = aws_subnet.public-subnet.id
-#   vpc_security_group_ids = [aws_security_group.mhtServer-sg.id]
-#   tags = {
-#     Name = "VPCServer"
-#   }
-# }
+# Create a EC2 instance
+resource "aws_instance" "mhtServer" {
+  ami                    = "ami-0f918f7e67a3323f0"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.public-subnet.id
+  vpc_security_group_ids = [aws_security_group.mhtServer-sg.id]
+  tags = {
+    Name = "VPCServer"
+  }
+}
+
+# Create a EC2 instance
+resource "aws_instance" "mhtServer" {
+  ami                    = "ami-0f918f7e67a3323f0"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.public-subnet1.id
+  vpc_security_group_ids = [aws_security_group.mhtServer-sg1.id]
+  tags = {
+    Name = "VPCServer1"
+  }
+}
 
