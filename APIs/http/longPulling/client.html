@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Polling Client</title>
+</head>
+<body>
+    <h1>Long Polling Demo</h1>
+    <div id="messages"></div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const serverUrl = 'http://localhost:3000/poll';
+        const sendDataUrl = 'http://localhost:3000/send-data'; // For manual testing
+
+        function startLongPolling() {
+            fetch(serverUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Received:', data);
+                    const p = document.createElement('p');
+                    p.textContent = `[${new Date().toLocaleTimeString()}] Server said: ${JSON.stringify(data)}`;
+                    messagesDiv.prepend(p); // Add to top
+
+                    // After receiving a response, immediately start a new poll
+                    startLongPolling();
+                })
+                .catch(error => {
+                    console.error('Long polling error:', error);
+                    const p = document.createElement('p');
+                    p.textContent = `[${new Date().toLocaleTimeString()}] Error: ${error.message}. Retrying in 5 seconds...`;
+                    messagesDiv.prepend(p);
+                    // Implement a simple retry mechanism
+                    setTimeout(startLongPolling, 5000);
+                });
+        }
+
+        // Start polling when the page loads
+        document.addEventListener('DOMContentLoaded', startLongPolling);
+
+        // Optional: Button to manually trigger sending new data from the client side (for demo purposes)
+        const sendDataButton = document.createElement('button');
+        sendDataButton.textContent = 'Trigger New Data (Server)';
+        sendDataButton.onclick = () => {
+            fetch(sendDataUrl)
+                .then(response => response.json())
+                .then(data => console.log('Manual send data triggered:', data))
+                .catch(error => console.error('Error triggering data:', error));
+        };
+        document.body.appendChild(sendDataButton);
+    </script>
+</body>
+</html>
