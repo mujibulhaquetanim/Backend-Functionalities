@@ -491,4 +491,385 @@ aws_route_table_association.public-rt-association1: Creation complete after 1s [
 Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 ```
 
+## add ingres for peered vpc
+
+```bash
+╰─ terraform apply
+aws_vpc.my-vpc1: Refreshing state... [id=vpc-0a02201b892f113d9]
+aws_vpc.my-vpc: Refreshing state... [id=vpc-0d7c0109a14034ca1]
+aws_internet_gateway.my-igw: Refreshing state... [id=igw-0a90f8bd0e63e3746]
+aws_subnet.private-subnet: Refreshing state... [id=subnet-043be0c8b6373ce8b]
+aws_subnet.public-subnet: Refreshing state... [id=subnet-016e626ce31aadde4]
+aws_internet_gateway.my-igw1: Refreshing state... [id=igw-056c3492c7cc77042]
+aws_subnet.public-subnet1: Refreshing state... [id=subnet-01a5bf7cbfe3ecf9a]
+aws_security_group.mhtServer-sg: Refreshing state... [id=sg-034037d0effc17190]
+aws_route_table.my-rt: Refreshing state... [id=rtb-054917ff1d8a841cc]
+aws_route_table.my-rt1: Refreshing state... [id=rtb-00b23249d92a23504]
+aws_route_table_association.public-rt-association: Refreshing state... [id=rtbassoc-0daa9cab6022b1c15]
+aws_route_table_association.public-rt-association1: Refreshing state... [id=rtbassoc-03d695d60d508ebbc]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_instance.mhtServer will be created
+  + resource "aws_instance" "mhtServer" {
+      + ami                                  = "ami-0f918f7e67a3323f0"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + region                               = "ap-south-1"
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-016e626ce31aadde4"
+      + tags                                 = {
+          + "Name" = "VPCServer"
+        }
+      + tags_all                             = {
+          + "Name" = "VPCServer"
+        }
+      + tenancy                              = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = [
+          + "sg-034037d0effc17190",
+        ]
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # aws_instance.mhtServer1 will be created
+  + resource "aws_instance" "mhtServer1" {
+      + ami                                  = "ami-0f918f7e67a3323f0"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + region                               = "ap-south-1"
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-01a5bf7cbfe3ecf9a"
+      + tags                                 = {
+          + "Name" = "VPCServer1"
+        }
+      + tags_all                             = {
+          + "Name" = "VPCServer1"
+        }
+      + tenancy                              = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # aws_route_table.my-rt will be updated in-place
+  ~ resource "aws_route_table" "my-rt" {
+        id               = "rtb-054917ff1d8a841cc"
+      ~ route            = [
+          - {
+              - cidr_block                 = "0.0.0.0/0"
+              - gateway_id                 = "igw-0a90f8bd0e63e3746"
+                # (11 unchanged attributes hidden)
+            },
+          + {
+              + cidr_block                 = "192.0.0.0/16"
+              + vpc_peering_connection_id  = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+          + {
+              + cidr_block = "0.0.0.0/0"
+              + gateway_id = "igw-0a90f8bd0e63e3746"
+            },
+        ]
+        tags             = {}
+        # (6 unchanged attributes hidden)
+    }
+
+  # aws_route_table.my-rt1 will be updated in-place
+  ~ resource "aws_route_table" "my-rt1" {
+        id               = "rtb-00b23249d92a23504"
+      ~ route            = [
+          - {
+              - cidr_block                 = "0.0.0.0/0"
+              - gateway_id                 = "igw-056c3492c7cc77042"
+                # (11 unchanged attributes hidden)
+            },
+          + {
+              + cidr_block                 = "10.0.0.0/16"
+              + vpc_peering_connection_id  = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+          + {
+              + cidr_block = "0.0.0.0/0"
+              + gateway_id = "igw-056c3492c7cc77042"
+            },
+        ]
+        tags             = {}
+        # (6 unchanged attributes hidden)
+    }
+
+  # aws_security_group.mhtServer-sg will be updated in-place
+  ~ resource "aws_security_group" "mhtServer-sg" {
+        id                     = "sg-034037d0effc17190"
+      ~ ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "allow 3000 port req"
+              - from_port        = 3000
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 3000
+            },
+          + {
+              + cidr_blocks      = [
+                  + "192.0.0.0/16",
+                ]
+              + description      = "Allow traffic from the peered VPC (my-vpc1)"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+            # (2 unchanged elements hidden)
+        ]
+        name                   = "mhtServer-sg"
+        tags                   = {
+            "Name" = "mhtServer-sg"
+        }
+        # (9 unchanged attributes hidden)
+    }
+
+  # aws_security_group.mhtServer-sg1 will be created
+  + resource "aws_security_group" "mhtServer-sg1" {
+      + arn                    = (known after apply)
+      + description            = "Security group for the EC2 instance"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow all outbound traffic"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow HTTP access from anywhere"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow SSH access from anywhere"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+          + {
+              + cidr_blocks      = [
+                  + "10.0.0.0/16",
+                ]
+              + description      = "Allow traffic from the peered VPC (my-vpc)"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + name                   = "mhtServer-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-south-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "mhtServer-sg1"
+        }
+      + tags_all               = {
+          + "Name" = "mhtServer-sg1"
+        }
+      + vpc_id                 = "vpc-0a02201b892f113d9"
+    }
+
+  # aws_vpc_peering_connection.pingMyVPCtoMyVPC1 will be created
+  + resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
+      + accept_status = (known after apply)
+      + id            = (known after apply)
+      + peer_owner_id = (known after apply)
+      + peer_region   = (known after apply)
+      + peer_vpc_id   = "vpc-0a02201b892f113d9"
+      + region        = "ap-south-1"
+      + tags          = {
+          + "Name" = "pingMyVPCtoMyVPC1"
+        }
+      + tags_all      = {
+          + "Name" = "pingMyVPCtoMyVPC1"
+        }
+      + vpc_id        = "vpc-0d7c0109a14034ca1"
+
+      + accepter (known after apply)
+
+      + requester (known after apply)
+    }
+
+Plan: 4 to add, 3 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_vpc_peering_connection.pingMyVPCtoMyVPC1: Creating...
+aws_security_group.mhtServer-sg1: Creating...
+aws_security_group.mhtServer-sg: Modifying... [id=sg-034037d0effc17190]
+aws_vpc_peering_connection.pingMyVPCtoMyVPC1: Creation complete after 1s [id=pcx-043eea92231b6e322]
+aws_route_table.my-rt: Modifying... [id=rtb-054917ff1d8a841cc]
+aws_route_table.my-rt1: Modifying... [id=rtb-00b23249d92a23504]
+aws_security_group.mhtServer-sg: Modifications complete after 1s [id=sg-034037d0effc17190]
+aws_instance.mhtServer: Creating...
+aws_route_table.my-rt1: Modifications complete after 0s [id=rtb-00b23249d92a23504]
+aws_route_table.my-rt: Modifications complete after 0s [id=rtb-054917ff1d8a841cc]
+aws_security_group.mhtServer-sg1: Creation complete after 2s [id=sg-047e8e229893a779f]
+aws_instance.mhtServer1: Creating...
+aws_instance.mhtServer: Still creating... [00m13s elapsed]
+aws_instance.mhtServer1: Still creating... [00m13s elapsed]
+aws_instance.mhtServer: Still creating... [00m23s elapsed]
+aws_instance.mhtServer1: Still creating... [00m23s elapsed]
+aws_instance.mhtServer: Still creating... [00m33s elapsed]
+aws_instance.mhtServer1: Still creating... [00m33s elapsed]
+aws_instance.mhtServer: Creation complete after 35s [id=i-0227d24c2175da675]
+aws_instance.mhtServer1: Creation complete after 35s [id=i-0d912338ff1f97204]
+
+Apply complete! Resources: 4 added, 3 changed, 0 destroyed.
+```
 
