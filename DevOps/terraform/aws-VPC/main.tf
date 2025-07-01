@@ -146,6 +146,15 @@ resource "aws_security_group" "mhtServer-sg" {
     description = "Allow HTTP access from anywhere"
   }
 
+  # Inbound Rules to allow traffic from the peered VPC (my-vpc1)
+  ingress {
+    from_port   = 0 # default port for all protocols
+    to_port     = 0
+    protocol    = "-1" # all protocols
+    cidr_blocks = [aws_vpc.my-vpc1.cidr_block]
+    description = "Allow traffic from the peered VPC (my-vpc1)"
+  }
+
   # Outbound Rules for all traffic
   egress {
     from_port   = 0
@@ -181,6 +190,15 @@ resource "aws_security_group" "mhtServer-sg1" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow HTTP access from anywhere"
+  }
+
+  # Inbound Rules to allow traffic from the peered VPC (my-vpc)
+  ingress {
+    from_port   = 0 # default port for all protocols
+    to_port     = 0
+    protocol    = "-1" # all protocols
+    cidr_blocks = [aws_vpc.my-vpc.cidr_block]
+    description = "Allow traffic from the peered VPC (my-vpc)"
   }
 
   # Outbound Rules for all traffic
@@ -219,7 +237,7 @@ resource "aws_instance" "mhtServer" {
 }
 
 # Create a EC2 instance
-resource "aws_instance" "mhtServer" {
+resource "aws_instance" "mhtServer1" {
   ami                    = "ami-0f918f7e67a3323f0"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public-subnet1.id
