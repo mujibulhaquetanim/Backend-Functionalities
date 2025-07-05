@@ -159,6 +159,12 @@ resource "aws_route_table" "private-rt-my-vpc" {
     nat_gateway_id = aws_nat_gateway.my-vpc-nat-gateway.id
   }
 
+  # Add peering route to my-vpc1 from private subnet
+  route {
+    cidr_block                = aws_vpc.my-vpc1.cidr_block
+    vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
+  }
+
   tags = {
     Name = "private-rt-my-vpc"
   }
@@ -274,13 +280,24 @@ resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
 }
 
 # Create a EC2 instance
-resource "aws_instance" "mhtServer" {
+resource "aws_instance" "mhtServer-public-subnet" {
   ami                    = "ami-0f918f7e67a3323f0"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public-subnet.id
   vpc_security_group_ids = [aws_security_group.mhtServer-sg.id]
   tags = {
-    Name = "VPCServer"
+    Name = "VPCServer-public-subnet"
+  }
+}
+# Create a EC2 instance for private subnet
+resource "aws_instance" "mhtServer-private-subnet" {
+  ami                         = "ami-0f918f7e67a3323f0"
+  instance_type               = "t2.micro"
+  subnet_id                   = aws_subnet.private-subnet.id
+  vpc_security_group_ids      = [aws_security_group.mhtServer-sg.id]
+  associate_public_ip_address = false # private instance should not have public IP
+  tags = {
+    Name = "VPCServer-public-subnet"
   }
 }
 
