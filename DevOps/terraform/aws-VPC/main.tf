@@ -130,6 +130,25 @@ resource "aws_route_table_association" "public-rt-association1" {
   subnet_id      = aws_subnet.public-subnet1.id
 }
 
+# NAT Gateway
+
+# Allocate Elastic IP for the NAT Gateway
+resource "aws_eip" "nat-gateway-eip" {
+  tags = {
+    Name = "my-vpc-nat-gateway-eip"
+  }
+}
+
+# Create a NAT Gateway in the public subnet of my-vpc
+resource "aws_nat_gateway" "my-vpc-nat-gateway" {
+  allocation_id = aws_eip.nat-gateway-eip.id
+  subnet_id     = aws_subnet.public-subnet.id # NAT Gateway must be in a public subnet
+
+  tags = {
+    Name = "my-vpc-nat-gateway"
+  }
+}
+
 # Create a security group for the EC2 instance
 resource "aws_security_group" "mhtServer-sg" {
   name        = "mhtServer-sg"
