@@ -38,7 +38,7 @@ resource "aws_subnet" "public-subnet" {
   }
 }
 
-# Create a private subnet
+# Create a private subnet 
 resource "aws_subnet" "private-subnet" {
   cidr_block              = "10.0.2.0/24"
   vpc_id                  = aws_vpc.my-vpc.id
@@ -92,6 +92,10 @@ resource "aws_route_table" "my-rt" {
     cidr_block                = aws_vpc.my-vpc1.cidr_block
     vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
   }
+
+  tags = {
+    Name = "my-rt-my-vpc"
+  }
 }
 
 # Create a route table for my-vpc1
@@ -107,6 +111,10 @@ resource "aws_route_table" "my-rt1" {
   route {
     cidr_block                = aws_vpc.my-vpc.cidr_block
     vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
+  }
+
+  tags = {
+    Name = "my-rt1-my-vpc1"
   }
 }
 
