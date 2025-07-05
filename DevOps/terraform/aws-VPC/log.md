@@ -1039,3 +1039,78 @@ aws_nat_gateway.my-vpc-nat-gateway: Creation complete after 1m43s [id=nat-0b7f19
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 ```
 
+## Dedicated route table and association for private subnet of my-vpc
+
+```bash
+╰─ terraform apply
+aws_vpc.my-vpc: Refreshing state... [id=vpc-0d7c0109a14034ca1]
+aws_vpc.my-vpc1: Refreshing state... [id=vpc-0a02201b892f113d9]
+aws_eip.nat-gateway-eip: Refreshing state... [id=eipalloc-04fcabb5c6fd8e015]
+aws_internet_gateway.my-igw1: Refreshing state... [id=igw-056c3492c7cc77042]
+aws_subnet.public-subnet1: Refreshing state... [id=subnet-01a5bf7cbfe3ecf9a]
+aws_internet_gateway.my-igw: Refreshing state... [id=igw-0a90f8bd0e63e3746]
+aws_subnet.public-subnet: Refreshing state... [id=subnet-016e626ce31aadde4]
+aws_subnet.private-subnet: Refreshing state... [id=subnet-043be0c8b6373ce8b]
+aws_vpc_peering_connection.pingMyVPCtoMyVPC1: Refreshing state... [id=pcx-043eea92231b6e322]
+aws_security_group.mhtServer-sg1: Refreshing state... [id=sg-047e8e229893a779f]
+aws_security_group.mhtServer-sg: Refreshing state... [id=sg-034037d0effc17190]
+aws_nat_gateway.my-vpc-nat-gateway: Refreshing state... [id=nat-0b7f19746eb8d4061]
+aws_route_table.my-rt: Refreshing state... [id=rtb-054917ff1d8a841cc]
+aws_route_table.my-rt1: Refreshing state... [id=rtb-00b23249d92a23504]
+aws_instance.mhtServer1: Refreshing state... [id=i-0d912338ff1f97204]
+aws_instance.mhtServer: Refreshing state... [id=i-0227d24c2175da675]
+aws_route_table_association.public-rt-association1: Refreshing state... [id=rtbassoc-03d695d60d508ebbc]
+aws_route_table_association.public-rt-association: Refreshing state... [id=rtbassoc-0daa9cab6022b1c15]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_route_table.private-rt-my-vpc will be created
+  + resource "aws_route_table" "private-rt-my-vpc" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "ap-south-1"
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + nat_gateway_id             = "nat-0b7f19746eb8d4061"
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "private-rt-my-vpc"
+        }
+      + tags_all         = {
+          + "Name" = "private-rt-my-vpc"
+        }
+      + vpc_id           = "vpc-0d7c0109a14034ca1"
+    }
+
+  # aws_route_table_association.private-rt-association will be created
+  + resource "aws_route_table_association" "private-rt-association" {
+      + id             = (known after apply)
+      + region         = "ap-south-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = "subnet-043be0c8b6373ce8b"
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_route_table.private-rt-my-vpc: Creating...
+aws_route_table.private-rt-my-vpc: Creation complete after 1s [id=rtb-083a254645f98e239]
+aws_route_table_association.private-rt-association: Creating...
+aws_route_table_association.private-rt-association: Creation complete after 1s [id=rtbassoc-02ae8a14a329b5afb]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+```
+
