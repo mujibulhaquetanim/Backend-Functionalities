@@ -149,6 +149,27 @@ resource "aws_nat_gateway" "my-vpc-nat-gateway" {
   }
 }
 
+# Create a dedicated route table for the private subnet in my-vpc
+resource "aws_route_table" "private-rt-my-vpc" {
+  vpc_id = aws_vpc.my-vpc.id
+
+  # Route all outbound traffic through the NAT Gateway
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.my-vpc-nat-gateway.id
+  }
+
+  tags = {
+    Name = "private-rt-my-vpc"
+  }
+}
+
+# Associate the route table with the private subnet
+resource "aws_route_table_association" "private-rt-association" {
+  route_table_id = aws_route_table.private-rt-my-vpc.id
+  subnet_id      = aws_subnet.private-subnet.id
+}
+
 # Create a security group for the EC2 instance
 resource "aws_security_group" "mhtServer-sg" {
   name        = "mhtServer-sg"
