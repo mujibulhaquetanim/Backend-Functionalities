@@ -224,7 +224,7 @@ resource "aws_security_group" "mhtServer-sg" {
 }
 # Create a security group for the EC2 instance
 resource "aws_security_group" "mhtServer-sg1" {
-  name        = "mhtServer-sg"
+  name        = "mhtServer-sg1"
   description = "Security group for the EC2 instance"
   vpc_id      = aws_vpc.my-vpc1.id
 
@@ -280,7 +280,7 @@ resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
 }
 
 # Create a EC2 instance
-resource "aws_instance" "mhtServer-public-subnet" {
+resource "aws_instance" "mhtServer-public-vpc" {
   ami                    = "ami-0f918f7e67a3323f0"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public-subnet.id
@@ -290,19 +290,19 @@ resource "aws_instance" "mhtServer-public-subnet" {
   }
 }
 # Create a EC2 instance for private subnet
-resource "aws_instance" "mhtServer-private-subnet" {
+resource "aws_instance" "mhtServer-private-vpc" {
   ami                         = "ami-0f918f7e67a3323f0"
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.private-subnet.id
   vpc_security_group_ids      = [aws_security_group.mhtServer-sg.id]
   associate_public_ip_address = false # private instance should not have public IP
   tags = {
-    Name = "VPCServer-public-subnet"
+    Name = "VPCServer-private-subnet"
   }
 }
 
 # Create a EC2 instance
-resource "aws_instance" "mhtServer1" {
+resource "aws_instance" "mhtServer-public-vpc1" {
   ami                    = "ami-0f918f7e67a3323f0"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public-subnet1.id

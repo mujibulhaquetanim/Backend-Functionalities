@@ -1441,3 +1441,77 @@ aws_instance.mhtServer-public-subnet: Creation complete after 35s [id=i-0a17b823
 Apply complete! Resources: 2 added, 1 changed, 1 destroyed.
 ```
 
+## Fix naming issue
+
+```bash
+Plan: 6 to add, 1 to change, 4 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_instance.mhtServer-private-subnet: Destroying... [id=i-00b76b89aaaf55e2e]
+aws_instance.mhtServer1: Destroying... [id=i-0d912338ff1f97204]
+aws_instance.mhtServer-public-subnet: Destroying... [id=i-0a17b823fba139a25]
+aws_eip.nat-gateway-eip: Creating...
+aws_instance.mhtServer-public-vpc: Creating...
+aws_instance.mhtServer-private-vpc: Creating...
+aws_eip.nat-gateway-eip: Creation complete after 1s [id=eipalloc-0b1e902854dd2e27f]
+aws_nat_gateway.my-vpc-nat-gateway: Creating...
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 00m10s elapsed]
+aws_instance.mhtServer-public-subnet: Still destroying... [id=i-0a17b823fba139a25, 00m10s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 00m10s elapsed]
+aws_instance.mhtServer-private-vpc: Still creating... [00m10s elapsed]
+aws_instance.mhtServer-public-vpc: Still creating... [00m10s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [00m10s elapsed]
+aws_instance.mhtServer-public-subnet: Still destroying... [id=i-0a17b823fba139a25, 00m20s elapsed]
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 00m20s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 00m20s elapsed]
+aws_instance.mhtServer-public-vpc: Still creating... [00m20s elapsed]
+aws_instance.mhtServer-private-vpc: Still creating... [00m20s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [00m20s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 00m30s elapsed]
+aws_instance.mhtServer-public-subnet: Still destroying... [id=i-0a17b823fba139a25, 00m30s elapsed]
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 00m30s elapsed]
+aws_instance.mhtServer-private-vpc: Still creating... [00m30s elapsed]
+aws_instance.mhtServer-public-vpc: Still creating... [00m30s elapsed]
+aws_instance.mhtServer-public-subnet: Destruction complete after 31s
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [00m30s elapsed]
+aws_instance.mhtServer-public-vpc: Creation complete after 33s [id=i-0ef6c642d4b51d855]
+aws_instance.mhtServer-private-vpc: Creation complete after 33s [id=i-0e561c3f6d49525b5]
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 00m40s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 00m40s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [00m40s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 00m50s elapsed]
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 00m50s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [00m50s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 01m00s elapsed]
+aws_instance.mhtServer1: Still destroying... [id=i-0d912338ff1f97204, 01m00s elapsed]
+aws_instance.mhtServer1: Destruction complete after 1m1s
+aws_security_group.mhtServer-sg1: Destroying... [id=sg-047e8e229893a779f]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m00s elapsed]
+aws_security_group.mhtServer-sg1: Destruction complete after 1s
+aws_security_group.mhtServer-sg1: Creating...
+aws_security_group.mhtServer-sg1: Creation complete after 2s [id=sg-0d5dd9f45d187627c]
+aws_instance.mhtServer-public-vpc1: Creating...
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 01m10s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m10s elapsed]
+aws_instance.mhtServer-public-vpc1: Still creating... [00m10s elapsed]
+aws_instance.mhtServer-private-subnet: Still destroying... [id=i-00b76b89aaaf55e2e, 01m20s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m20s elapsed]
+aws_instance.mhtServer-private-subnet: Destruction complete after 1m22s
+aws_instance.mhtServer-public-vpc1: Still creating... [00m20s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m30s elapsed]
+aws_instance.mhtServer-public-vpc1: Still creating... [00m30s elapsed]
+aws_instance.mhtServer-public-vpc1: Creation complete after 33s [id=i-0a0cc31edc6ce24fc]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m40s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Still creating... [01m50s elapsed]
+aws_nat_gateway.my-vpc-nat-gateway: Creation complete after 1m55s [id=nat-02e095659250e7d61]
+aws_route_table.private-rt-my-vpc: Modifying... [id=rtb-083a254645f98e239]
+aws_route_table.private-rt-my-vpc: Modifications complete after 1s [id=rtb-083a254645f98e239]
+
+Apply complete! Resources: 6 added, 1 changed, 4 destroyed.
+```
+
