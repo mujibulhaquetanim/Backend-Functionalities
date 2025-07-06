@@ -209,6 +209,15 @@ resource "aws_security_group" "mhtServer-sg" {
     description = "Allow traffic from the peered VPC (my-vpc1)"
   }
 
+  # inbound rules to allow traffic from the associated with the same security group
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
+    description = "Allow traffic from the same security group"
+  }
+
   # Outbound Rules for all traffic
   egress {
     from_port   = 0
