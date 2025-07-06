@@ -1538,3 +1538,22 @@ aws_instance.mhtServer-public-vpc: Modifications complete after 2s [id=i-0ef6c64
 Apply complete! Resources: 1 added, 3 changed, 0 destroyed.
 ```
 
+## Update security group rules for nat gateway
+
+```bash
+Plan: 0 to add, 2 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_vpc_peering_connection.pingMyVPCtoMyVPC1: Modifying... [id=pcx-043eea92231b6e322]
+aws_security_group.mhtServer-sg: Modifying... [id=sg-034037d0effc17190]
+aws_vpc_peering_connection.pingMyVPCtoMyVPC1: Modifications complete after 1s [id=pcx-043eea92231b6e322]
+aws_security_group.mhtServer-sg: Modifications complete after 1s [id=sg-034037d0effc17190]
+
+Apply complete! Resources: 0 added, 2 changed, 0 destroyed.
+```
+
