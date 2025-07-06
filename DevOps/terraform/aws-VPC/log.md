@@ -1515,3 +1515,26 @@ aws_route_table.private-rt-my-vpc: Modifications complete after 1s [id=rtb-083a2
 Apply complete! Resources: 6 added, 1 changed, 4 destroyed.
 ```
 
+## Add peering_connection_accepter and update instance tags
+
+```bash
+Plan: 1 to add, 3 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_vpc_peering_connection_accepter.pingMyVPCtoMyVPC1-accepter: Creating...
+aws_instance.mhtServer-private-vpc: Modifying... [id=i-0e561c3f6d49525b5]
+aws_instance.mhtServer-public-vpc: Modifying... [id=i-0ef6c642d4b51d855]
+aws_instance.mhtServer-public-vpc1: Modifying... [id=i-0a0cc31edc6ce24fc]
+aws_vpc_peering_connection_accepter.pingMyVPCtoMyVPC1-accepter: Creation complete after 1s [id=pcx-043eea92231b6e322]
+aws_instance.mhtServer-public-vpc1: Modifications complete after 2s [id=i-0a0cc31edc6ce24fc]
+aws_instance.mhtServer-private-vpc: Modifications complete after 2s [id=i-0e561c3f6d49525b5]
+aws_instance.mhtServer-public-vpc: Modifications complete after 2s [id=i-0ef6c642d4b51d855]
+
+Apply complete! Resources: 1 added, 3 changed, 0 destroyed.
+```
+

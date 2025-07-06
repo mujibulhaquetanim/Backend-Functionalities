@@ -279,6 +279,16 @@ resource "aws_vpc_peering_connection" "pingMyVPCtoMyVPC1" {
   }
 }
 
+# Add peering accepter
+resource "aws_vpc_peering_connection_accepter" "pingMyVPCtoMyVPC1-accepter" {
+  vpc_peering_connection_id = aws_vpc_peering_connection.pingMyVPCtoMyVPC1.id
+  auto_accept               = true
+
+  tags = {
+    Name = "pingMyVPCtoMyVPC1-accepter"
+  }
+}
+
 # Create a EC2 instance
 resource "aws_instance" "mhtServer-public-vpc" {
   ami                    = "ami-0f918f7e67a3323f0"
@@ -286,7 +296,7 @@ resource "aws_instance" "mhtServer-public-vpc" {
   subnet_id              = aws_subnet.public-subnet.id
   vpc_security_group_ids = [aws_security_group.mhtServer-sg.id]
   tags = {
-    Name = "VPCServer-public-subnet"
+    Name = "VPCServer-public-vpc"
   }
 }
 # Create a EC2 instance for private subnet
@@ -297,7 +307,7 @@ resource "aws_instance" "mhtServer-private-vpc" {
   vpc_security_group_ids      = [aws_security_group.mhtServer-sg.id]
   associate_public_ip_address = false # private instance should not have public IP
   tags = {
-    Name = "VPCServer-private-subnet"
+    Name = "VPCServer-private-vpc"
   }
 }
 
@@ -308,7 +318,7 @@ resource "aws_instance" "mhtServer-public-vpc1" {
   subnet_id              = aws_subnet.public-subnet1.id
   vpc_security_group_ids = [aws_security_group.mhtServer-sg1.id]
   tags = {
-    Name = "VPCServer1"
+    Name = "VPCServer-public-vpc1"
   }
 }
 
