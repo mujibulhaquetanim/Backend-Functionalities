@@ -1,39 +1,17 @@
-import http, { IncomingMessage, ServerResponse } from "node:http";
-import { URL} from "node:url";
+import express from "express";
 
-// helper function to send response
-function sendResponse(res: ServerResponse, statusCode: number, message: string | object) {
-    res.statusCode = statusCode;
-    res.setHeader("Content-Type", "text/plain");
-    res.end(JSON.stringify(message));
-}
+const app = express();
 
-const server = http.createServer(async (req: IncomingMessage, res: ServerResponse) => {
-    // const {query, pathname} = url.parse(req.url || "", true); // deprecated
-    if(!req.url){
-        sendResponse(res, 400, "Bad Request: No URL");
-        return;
-    }
-    // fix: handle missing host in URL parsing for server requests
-    const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
-    const query = Object.fromEntries(parsedUrl.searchParams);
-    const pathname = parsedUrl.pathname;
+app.use(express.json());
 
-    console.log(`query: ${JSON.stringify(query)} | pathname: ${pathname}`);
+app.get("/", (_: express.Request, res: express.Response) => {
+    res.send("Hello from Express ECR!");
+});
 
-    switch (pathname) {
-        case "/":
-            sendResponse(res, 200, "Welcome to Node Server from ECR");
-            break;
-        case "/health":
-            sendResponse(res, 200, { message: "ECR is healthy" });
-            break;
-        default:
-            sendResponse(res, 404, "Not Found");
-            break;
-    }
-})
+app.get("/health", (_: express.Request, res: express.Response) => {
+    res.json({ status: "ok", time: new Date().toISOString() });
+}); 
 
-server.listen(3000, () => {
-    console.log("Listening on port 'http://localhost:3000'");
+app.listen(8000, () => {
+    console.log("Server is running on http://localhost:8000");
 });
