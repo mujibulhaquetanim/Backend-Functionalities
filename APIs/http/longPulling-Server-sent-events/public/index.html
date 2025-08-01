@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSE with TypeScript</title>
+</head>
+<body>
+  <h1>Live Messages</h1>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById('output');
+    const eventSource = new EventSource('/events');
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      output.textContent = `Message: ${data.message} at ${data.time}`;
+    };
+
+    eventSource.onerror = () => {
+      output.textContent = 'Connection lost. Retrying...';
+    };
+  </script>
+</body>
+</html>
