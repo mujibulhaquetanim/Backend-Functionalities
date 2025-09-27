@@ -39,6 +39,26 @@ try {
     })
     
     console.log(getValues.data.values)
+
+    console.log('appending values...')
+    const appendValues = await sheets.spreadsheets.values.append({
+        spreadsheetId: '1CcwyDqhpCZ8OOjF7fT3i9NhvlIPjgdwXgINmPUOeMFk',
+        range: 'Sheet1',
+        valueInputOption: 'raw',
+        requestBody: {
+            values: [
+                ['Hello', 'World', '!']
+            ]
+        }
+    })
+    console.log(appendValues.data)
+    console.log('successfully appended')
+
+    const resFetch = await sheets.spreadsheets.values.get({
+        spreadsheetId: '1CcwyDqhpCZ8OOjF7fT3i9NhvlIPjgdwXgINmPUOeMFk',
+        range: 'Sheet1'
+    })
+    console.log(resFetch.data.values)
 } catch (error) {
     console.error(error)
 }
