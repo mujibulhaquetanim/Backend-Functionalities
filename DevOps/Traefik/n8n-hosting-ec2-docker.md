@@ -6,6 +6,12 @@ Here is the excution history of N8N EC2 Hosting with Traefik and Docker Compose 
 
 The domain is: [Traefik-N8N-EC2](https://mujibulation.mujibulhaquetanim.dev)
 
+## Simple Automation Demo
+
+**user_input -> Gemini LLM -> Telegram**
+
+![user_input to Gemini to Telegram](./mujibulation-simple-telegram-automation.gif "Demo SS")
+
 ## Excution History
 
 ```bash
