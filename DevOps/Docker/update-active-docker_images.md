@@ -25,3 +25,19 @@ docker rmi <image_id>
 # start container
 docker run --name <container_name> -d <image_name>
 ```
+
+## Pull and run Docker images using Docker Compose
+
+```bash
+# Navigate to the directory containing your docker compose file
+cd </path/to/your/compose/file/directory>
+
+# Pull latest version
+docker compose pull
+
+# Stop and remove older version
+docker compose down
+
+# Start the container
+docker compose up -d
+```
