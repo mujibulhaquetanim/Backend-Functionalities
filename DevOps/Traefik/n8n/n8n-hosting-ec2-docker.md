@@ -12,6 +12,10 @@ The domain is: [Traefik-N8N-EC2](https://mujibulation.mujibulhaquetanim.dev)
 
 ![user_input to Gemini to Telegram](./mujibulation-simple-telegram-automation.gif "Demo SS")
 
+## Telegram trigger to Gemini LLM to whatsapp and telegram
+
+![Telegram to Gemini to Whatsapp and Telegram](./whatsapp-telegram-mujibulation.gif "Demo SS")
+
 ## Excution History
 
 ```bash
