@@ -1,0 +1,10 @@
+---
+Resources:
+  SimpleInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      InstanceType: "t3.micro"
+      ImageId: "ami-0aa78f446b4499266"
+      Tags:
+        - Key: "Name"
+          Value: "CloudFormationSimpleInstance"
