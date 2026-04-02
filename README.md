@@ -1,6 +1,7 @@
 # Full-Stack Development Repository
 
-Welcome to my All-in-One repository for Backend Functionalities! This repository serves as a collection of templates, projects, and utilities that I continuously work on, covering various aspects of web development, APIs, databases, DevOps, and more. Below is a breakdown of the key topics and subtopics within this repository.
+Welcome to my All-in-One repository for Backend Functionalities! This repository serves as a collection of templates, projects, and utilities that I continuously work on, covering various aspects of web development, APIs, databases, DevOps, and more. Below is a breakdown of the key topics and subtopics within this repository. Note that this is a work in progress, and I'll be adding more topics and subtopics as I continue to work on them.
+
 > **If you find this helpful, please consider giving it a star** 🙂
 
 - If you're solely interested in Golang,Python-based Backend or DSA, consider exploring the following: [GoLang](https://github.com/mujibulhaquetanim/GoLang.git), [Python](https://github.com/mujibulhaquetanim/Project-Py.git), [DSA](https://github.com/mujibulhaquetanim/thinkOutOfTheBox.git)
@@ -60,7 +61,7 @@ Authentication techniques include JWT (JSON Web Tokens), OAuth, and session-base
 
 This section dives deep into multiple database technologies and patterns.
 
-#### Subtopics
+### Subtopics
 
 - **[Cookies](#cookies)**: Server-side and client-side cookies handling for persistent user sessions.
 - **[JsonDB](#jsondb)**: Use cases and integration of lightweight, file-based JSON databases.
@@ -72,7 +73,7 @@ This section dives deep into multiple database technologies and patterns.
 
 ## DevOps
 
-Automation and infrastructure management tools for building, testing, and deploying applications, including Docker and Kubernetes-based deployments.
+Automation and infrastructure management tools for building, testing, and deploying applications, including aws, terraform, Docker and Kubernetes-based deployments.
 
 ## Express Backend Template
 
@@ -162,30 +163,38 @@ To get started with the repository:
 
    ```bash
    git clone https://github.com/mujibulhaquetanim/Backend-Functionalities.git
+   ```
+
 2. To run a Specific Project or Template, go to the directory:
 
-    ```bash
-    cd project-name
+   ```bash
+   cd project-name
+   ```
+
 3. Install Dependencies:
 
-    ```bash
-    pnpm install
+   ```bash
+   pnpm install
+   ```
+
 4. Run the project:
 
    ```bash
     pnpm run dev
+   ```
 
->Although most of the project script use `dev` or `start`, if that doesn't work, go to the package.json file of that project and see the script for running the project.
+> Although most of the project script use `dev` or `start`, if that doesn't work, go to the package.json file of that project and see the script for running the project.
 
 ---
 
 ## Contribution
 
-Feel free to contribute by submitting a pull request or opening an issue. Please follow the guidelines in CONTRIBUTING.md.
+Feel free to contribute by submitting a pull request or opening an issue if you find or have better suggestions. Please follow the guidelines in CONTRIBUTING.md.
 
 ## License
 
 This repository is licensed under the MIT License.
 
 ---
->Happy coding! If you have any questions or suggestions, feel free to reach out.
+
+> Happy coding! If you have any questions or suggestions, feel free to reach out.
